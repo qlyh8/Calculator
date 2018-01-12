@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#f0e2b1</color>
-    <color name="colorPrimaryDark">#d6c58a</color>
+    <!--<color name="colorPrimary">#f0e2b1</color>-->
+    <color name="colorPrimary">#1E91BD</color>
+    <!--<color name="colorPrimaryDark">#d6c58a</color>-->
+    <color name="colorPrimaryDark">#1E91BD</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorKeyPad">#f0e2b1</color>
+
+    <!-- <color name="colorKeyPad">#f0e2b1</color>-->
+    <color name="colorKeyPad">#FFF</color>
     <color name="colorKeyPadNum">#181818</color>
 
     <color name="colorLightGray1">#F5F7FA</color>
@@ -16,4 +20,6 @@
     <color name="colorAqua2">#3BAFDA</color>
     <color name="colorGrapeFruit1">#ED5565</color>
     <color name="colorGrapeFruit2">#DA4453</color>
+
+    <color name="ryan">#DF9926</color>
 </resources>
