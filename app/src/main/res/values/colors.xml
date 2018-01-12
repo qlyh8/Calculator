@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#f0e2b1</color>
+    <color name="colorPrimaryDark">#d6c58a</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorKeyPad">#f0e2b1</color>
+    <color name="colorKeyPadNum">#181818</color>
 
     <color name="colorLightGray1">#F5F7FA</color>
     <color name="colorLightGray2">#E6E9ED</color>
