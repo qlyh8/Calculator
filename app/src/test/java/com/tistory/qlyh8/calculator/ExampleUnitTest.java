@@ -1,4 +1,4 @@
-package qlyh8.tistory.com.calculator;
+package com.tistory.qlyh8.calculator;
 
 import org.junit.Test;
 

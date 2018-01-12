@@ -1,4 +1,4 @@
-package qlyh8.tistory.com.calculator;
+package com.tistory.qlyh8.calculator;
 
 import android.annotation.SuppressLint;
 import android.support.v4.content.ContextCompat;

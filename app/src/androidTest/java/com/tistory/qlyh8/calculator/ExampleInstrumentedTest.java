@@ -1,4 +1,4 @@
-package qlyh8.tistory.com.calculator;
+package com.tistory.qlyh8.calculator;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

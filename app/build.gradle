@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "qlyh8.tistory.com.calculator"
+        applicationId "com.tistory.qlyh8.calculator"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
