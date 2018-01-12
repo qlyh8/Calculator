@@ -9,26 +9,26 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText editText1, editText2;
-    private TextView textResult;
+    @BindView(R.id.editText1) public EditText editText1;
+    @BindView(R.id.editText2) public EditText editText2;
+    @BindView(R.id.textResult) public TextView textResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ButterKnife.bind(this);
         init();
     }
 
     // 초기화
     public void init(){
-        editText1 = findViewById(R.id.editText1);
-        editText2 = findViewById(R.id.editText2);
-        textResult = findViewById(R.id.textResult);
-
         // EditText 입력 키보드 감추기
         editText1.setInputType(InputType.TYPE_NULL);
         editText2.setInputType(InputType.TYPE_NULL);
