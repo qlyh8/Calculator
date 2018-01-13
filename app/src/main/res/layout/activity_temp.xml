@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/ryan"
     tools:context="com.tistory.qlyh8.calculator.MainActivity">
 
     <LinearLayout
@@ -34,15 +33,6 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@android:color/black" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -61,7 +51,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_keypad"
                 android:text="@string/one"
-                android:textSize="25sp"
+                android:textSize="@dimen/keypadTextSize"
                 android:textColor="@color/colorKeyPadNum"/>
 
             <Button
@@ -70,7 +60,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_keypad"
                 android:text="@string/two"
-                android:textSize="25sp"
+                android:textSize="@dimen/keypadTextSize"
                 android:textColor="@color/colorKeyPadNum" />
 
             <Button
@@ -79,8 +69,16 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_keypad"
                 android:text="@string/three"
-                android:textSize="25sp"
+                android:textSize="@dimen/keypadTextSize"
                 android:textColor="@color/colorKeyPadNum" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_keypad"
+                android:text="C"
+                android:textColor="@color/colorKeyPadNum"/>
 
         </LinearLayout>
 
@@ -96,7 +94,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_keypad"
                 android:text="@string/four"
-                android:textSize="25sp"
+                android:textSize="@dimen/keypadTextSize"
                 android:textColor="@color/colorKeyPadNum" />
 
             <Button
@@ -105,7 +103,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_keypad"
                 android:text="@string/five"
-                android:textSize="25sp"
+                android:textSize="@dimen/keypadTextSize"
                 android:textColor="@color/colorKeyPadNum" />
 
             <Button
@@ -114,7 +112,16 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_keypad"
                 android:text="@string/six"
-                android:textSize="25sp"
+                android:textSize="@dimen/keypadTextSize"
+                android:textColor="@color/colorKeyPadNum" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_keypad"
+                android:text=""
+                android:textSize="@dimen/keypadTextSize"
                 android:textColor="@color/colorKeyPadNum" />
 
         </LinearLayout>
@@ -131,7 +138,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_keypad"
                 android:text="@string/seven"
-                android:textSize="25sp"
+                android:textSize="@dimen/keypadTextSize"
                 android:textColor="@color/colorKeyPadNum" />
 
             <Button
@@ -140,7 +147,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_keypad"
                 android:text="@string/eight"
-                android:textSize="25sp"
+                android:textSize="@dimen/keypadTextSize"
                 android:textColor="@color/colorKeyPadNum" />
 
             <Button
@@ -149,7 +156,16 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_keypad"
                 android:text="@string/nine"
-                android:textSize="25sp"
+                android:textSize="@dimen/keypadTextSize"
+                android:textColor="@color/colorKeyPadNum" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_keypad"
+                android:text=""
+                android:textSize="@dimen/keypadTextSize"
                 android:textColor="@color/colorKeyPadNum" />
 
         </LinearLayout>
@@ -164,30 +180,27 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_clear" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/zero"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum" />
             </LinearLayout>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/zero"
-                android:textSize="25sp"
-                android:textColor="@color/colorKeyPadNum" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_equal" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="="
+                    android:textColor="@color/colorKeyPadNum"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:background="@drawable/ripple_keypad"/>
             </LinearLayout>
 
         </LinearLayout>

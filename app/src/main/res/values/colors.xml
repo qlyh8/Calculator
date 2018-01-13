@@ -7,9 +7,10 @@
     <color name="colorAccent">#FF4081</color>
 
     <!-- <color name="colorKeyPad">#f0e2b1</color>-->
-    <color name="colorKeyPad">#FFF</color>
-    <color name="colorKeyPadNum">#181818</color>
+    <color name="colorKeyPad">#3d3d3d</color>
+    <color name="colorKeyPadNum">#fff</color>
 
+    <color name="colorBlack">#000</color>
     <color name="colorLightGray1">#F5F7FA</color>
     <color name="colorLightGray2">#E6E9ED</color>
     <color name="colorMediumGray1">#CCD1D9</color>
