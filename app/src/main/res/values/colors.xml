@@ -8,7 +8,8 @@
 
     <!-- <color name="colorKeyPad">#f0e2b1</color>-->
     <color name="colorKeyPad">#3d3d3d</color>
-    <color name="colorKeyPadNum">#fff</color>
+    <color name="colorKeyPadNum">#7c7c7c</color>
+    <color name="colorKeyPadRed">#ff6f6f</color>
 
     <color name="colorBlack">#000</color>
     <color name="colorLightGray1">#F5F7FA</color>

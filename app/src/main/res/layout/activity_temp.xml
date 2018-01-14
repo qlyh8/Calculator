@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorKeyPad"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.tistory.qlyh8.calculator.MainActivity">
 
@@ -11,28 +13,133 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:background="@color/ryan">
-
+        android:background="@color/colorKeyPad">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
-            android:background="@color/ryan">
-
+            android:layout_weight="1.5"
+            android:gravity="end|bottom"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="35sp"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:text="1"/>
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/colorKeyPadNum"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="35sp"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:text="10"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorKeyPadRed"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:text="+"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="35sp"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:text="15"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorKeyPadRed"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="3dp"
+                    android:text="x"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="35sp"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:text="10"/>
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/colorKeyPadNum"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="35sp"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:text="123"/>
+            </LinearLayout>
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@android:color/white"
-            android:layout_margin="16dp"
-            android:gravity="end">
-
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#fff"
+                android:gravity="center|end"
+                android:textSize="80sp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:text="123"/>
         </LinearLayout>
 
-    </LinearLayout>
 
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorKeyPadNum"></View>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -72,13 +179,34 @@
                 android:textSize="@dimen/keypadTextSize"
                 android:textColor="@color/colorKeyPadNum" />
 
-            <Button
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="C"
-                android:textColor="@color/colorKeyPadNum"/>
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ripple_keypad" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
+                    android:tint="@color/colorKeyPadRed"
+                    android:src="@drawable/ic_erase"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+            </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>
 
@@ -120,9 +248,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/ripple_keypad"
-                android:text=""
+                android:text="C"
                 android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadNum" />
+                android:textColor="@color/colorKeyPadRed" />
 
         </LinearLayout>
 
@@ -192,16 +320,44 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:gravity="center">
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="="
-                    android:textColor="@color/colorKeyPadNum"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="."
                     android:textSize="@dimen/keypadTextSize"
-                    android:background="@drawable/ripple_keypad"/>
+                    android:textColor="@color/colorKeyPadNum" />
             </LinearLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ripple_keypad" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/result"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+            </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>
 
