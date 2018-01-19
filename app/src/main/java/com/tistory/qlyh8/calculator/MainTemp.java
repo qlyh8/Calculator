@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -135,7 +136,7 @@ public class MainTemp extends AppCompatActivity {
         if(!arrayList.isEmpty()){
             String lastValue = arrayList.get(arrayList.size()-1);   // 마지막 값
             // 마지막 값이 기호가 아니고 "."이 아니여야 한다.
-            if(!isSymbol(lastValue) && !lastValue.substring(lastValue.length()-1).equals(".")){
+            if(!isSymbol(lastValue) && !lastValue.substring(lastValue.length()-1).equals(".") && !lastValue.substring(lastValue.length()-1).equals("@")){
                 // 마지막 값이 분수일 때, 분수 안에는 기호가 들어가면 안된다.
                 if(lastValue.contains("@") && !lastValue.substring(lastValue.length()-1).equals("@")){
                     arrayList.add(String.valueOf(view.getTag()));
