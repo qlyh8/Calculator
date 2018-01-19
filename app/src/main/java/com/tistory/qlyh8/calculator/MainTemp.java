@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
 public class MainTemp extends AppCompatActivity {
 
     @BindView(R.id.layout_root_calc) public LinearLayout rootLayout;    // 수식 뷰
-
+    @BindView(R.id.resultView) TextView resultTextView;
     ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
 
     @Override
@@ -91,7 +92,7 @@ public class MainTemp extends AppCompatActivity {
         if(!arrayList.isEmpty()){
             String lastValue = arrayList.get(arrayList.size()-1);    // 마지막 값
             // 마지막 값이 기호와 "."이 아니여야 한다.
-            if(!isSymbol(lastValue) && !lastValue.substring(lastValue.length()-1).equals(".")){
+            if(!isSymbol(lastValue) && !lastValue.substring(lastValue.length()-1).equals(".") && !lastValue.substring(lastValue.length()-1).equals("@")){
                 arrayList.set(arrayList.size()-1, lastValue + String.valueOf(view.getTag()));
                 // 마지막 수식이 분수일 때
                 if(lastValue.contains("@")){
@@ -206,12 +207,54 @@ public class MainTemp extends AppCompatActivity {
     // "=" 버튼 클릭
     public void clickBtnResult(View view) {
         // 임시 토스트
+        List<String> calc = new ArrayList<>();
+        String temp;
         StringBuilder str = new StringBuilder();
         for (int i=0 ; i<arrayList.size() ; i++){
+            temp = arrayList.get(i);
+            if(temp.contains("@")){
+                calc.add("/");
+            } else if (temp.equals("÷")) {
+                calc.add("÷");
+            } else if (temp.equals("×")) {
+                calc.add("×");
+            } else if (temp.equals("＋")) {
+                calc.add("+");
+            } else if (temp.equals("－")) {
+                calc.add("-");
+            }
             str.append(arrayList.get(i));
         }
-        Toast.makeText(getBaseContext(), "Size: "+arrayList.size()+"\n"+str.toString(), Toast.LENGTH_SHORT).show();
+        String result[] = str.toString().split("[^0-9]");
+        int resultNum = 0;
+
+        for(int i=0; i<result.length; i++) {
+            if(i==0){
+                resultNum = Integer.valueOf(result[i]);
+            }else {
+                switch (calc.get(i-1)) {
+                    case "+":
+                        resultNum+=Integer.valueOf(result[i]);
+                        break;
+                    case "-":
+                        resultNum-=Integer.valueOf(result[i]);
+                        break;
+                    case "×":
+                        resultNum*=Integer.valueOf(result[i]);
+                        break;
+                    case "÷":
+                        resultNum/=Integer.valueOf(result[i]);
+                        break;
+                    case "@":
+                        resultNum/=Integer.valueOf(result[i]);
+                        break;
+                }
+            }
+        }
+        resultTextView.setText(String.valueOf(resultNum));
+
     }
+
 
     // 숫자 텍스트 생성
     public void setNumTextView (String number){
