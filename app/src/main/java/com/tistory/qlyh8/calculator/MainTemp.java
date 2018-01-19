@@ -184,6 +184,7 @@ public class MainTemp extends AppCompatActivity {
 
                         arrayList.set(arrayList.size()-1, lastValue.substring(0, lastValue.length()-1));
                         changeTextView("calcFractionTopTextView", topValue.substring(0, topValue.length()-1));
+                        changeFractionLine();
                     }
                 }
                 else {
@@ -334,7 +335,7 @@ public class MainTemp extends AppCompatActivity {
 
     // 분수 선 조정
     public void changeFractionLine(){
-        // 분자가 분모보다 너비가 커지면 라인을 조정한다.
+        // 분자와 분모 중 너비가 큰 것에 맞춰 라인을 조정한다.
         TextView topTextView = rootLayout.findViewWithTag("calcFractionTopTextView" + arrayList.size());
         topTextView.measure(0,0);
         int topValueWidth = topTextView.getMeasuredWidth();
@@ -342,12 +343,15 @@ public class MainTemp extends AppCompatActivity {
         bottomTextView.measure(0,0);
         int bottomValueWidth = bottomTextView.getMeasuredWidth();
 
-        if(topValueWidth > bottomValueWidth){
-            LinearLayout.LayoutParams newParams = new LinearLayout.LayoutParams(topValueWidth, 3);
-            newParams.setMargins(5, 0, 5, 0); // pass int values for left,top,right,bottom
-            View line = rootLayout.findViewWithTag("calcFractionLine" + arrayList.size());
-            line.setLayoutParams(newParams);
-        }
+        LinearLayout.LayoutParams newParams;
+        if(topValueWidth > bottomValueWidth)
+            newParams = new LinearLayout.LayoutParams(topValueWidth, 3);
+        else
+            newParams = new LinearLayout.LayoutParams(bottomValueWidth, 3);
+
+        newParams.setMargins(5, 0, 5, 0); // pass int values for left,top,right,bottom
+        View line = rootLayout.findViewWithTag("calcFractionLine" + arrayList.size());
+        line.setLayoutParams(newParams);
     }
 
     // 숫자인지 기호인지 판별
