@@ -71,6 +71,8 @@ public class MainTemp extends AppCompatActivity {
                         if(lastValue.contains("@")){
                             // 분자에 값을 넣는다.
                             appendTextView("calcFractionTopTextView", String.valueOf(view.getTag()));
+                            // 분자가 분모보다 너비가 커지면 라인을 조정한다.
+                            changeFractionLine();
                         }
                         else{
                             appendTextView("calcTextView", String.valueOf(view.getTag()));
@@ -95,10 +97,8 @@ public class MainTemp extends AppCompatActivity {
                     // 분자에 값을 넣을 때
                     if(lastValue.contains("@") && !lastValue.substring(lastValue.length()-1).equals("@")){
                         appendTextView("calcFractionTopTextView", String.valueOf(view.getTag()));
-                    }
-                   else {
-                        // 분모에 값을 넣을 때
-                        appendTextView("calcFractionBottomTextView", String.valueOf(view.getTag()));
+                        // 분자가 분모보다 너비가 커지면 라인을 조정한다.
+                        changeFractionLine();
                     }
                 }
                 else{
@@ -117,7 +117,7 @@ public class MainTemp extends AppCompatActivity {
                 String lastValue = arrayList.get(arrayList.size()-1);    // 마지막 값
 
                 if(!isSymbol(lastValue) && !lastValue.substring(lastValue.length()-1).equals(".")){
-                    if(!lastValue.equals("0")){
+                    if(!lastValue.equals("0") && !lastValue.contains("@")){
                         // 분수 뷰로 변경한다. (분모) @ (분자)
                         arrayList.set(arrayList.size()-1, lastValue+"@");
                         removeView("textView", "calcTextView");
@@ -291,6 +291,12 @@ public class MainTemp extends AppCompatActivity {
         BottomTextView.setGravity(Gravity.CENTER);
         BottomTextView.setTag("calcFractionBottomTextView"+arrayList.size());
         layout.addView(BottomTextView);
+
+        // 분모 텍스트 너비에 맞게 라인 길이 변경
+        BottomTextView.measure(0,0);
+        LinearLayout.LayoutParams newParams = new LinearLayout.LayoutParams(BottomTextView.getMeasuredWidth(), 3);
+        newParams.setMargins(5, 0, 5, 0); // pass int values for left,top,right,bottom
+        line.setLayoutParams(newParams);
     }
 
     // 텍스트 뷰 변경 (= str)
@@ -323,6 +329,24 @@ public class MainTemp extends AppCompatActivity {
                 break;
             default:
                 break;
+        }
+    }
+
+    // 분수 선 조정
+    public void changeFractionLine(){
+        // 분자가 분모보다 너비가 커지면 라인을 조정한다.
+        TextView topTextView = rootLayout.findViewWithTag("calcFractionTopTextView" + arrayList.size());
+        topTextView.measure(0,0);
+        int topValueWidth = topTextView.getMeasuredWidth();
+        TextView bottomTextView = rootLayout.findViewWithTag("calcFractionBottomTextView" + arrayList.size());
+        bottomTextView.measure(0,0);
+        int bottomValueWidth = bottomTextView.getMeasuredWidth();
+
+        if(topValueWidth > bottomValueWidth){
+            LinearLayout.LayoutParams newParams = new LinearLayout.LayoutParams(topValueWidth, 3);
+            newParams.setMargins(5, 0, 5, 0); // pass int values for left,top,right,bottom
+            View line = rootLayout.findViewWithTag("calcFractionLine" + arrayList.size());
+            line.setLayoutParams(newParams);
         }
     }
 
