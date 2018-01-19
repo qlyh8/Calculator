@@ -134,8 +134,8 @@ public class MainTemp extends AppCompatActivity {
         // 배열 값이 비어있을 때 기호가 들어가면 안된다.
         if(!arrayList.isEmpty()){
             String lastValue = arrayList.get(arrayList.size()-1);   // 마지막 값
-            // 마지막 값이 기호가 아니여야 한다.
-            if(!isSymbol(lastValue)){
+            // 마지막 값이 기호가 아니고 "."이 아니여야 한다.
+            if(!isSymbol(lastValue) && !lastValue.substring(lastValue.length()-1).equals(".")){
                 // 마지막 값이 분수일 때, 분수 안에는 기호가 들어가면 안된다.
                 if(lastValue.contains("@") && !lastValue.substring(lastValue.length()-1).equals("@")){
                     arrayList.add(String.valueOf(view.getTag()));
