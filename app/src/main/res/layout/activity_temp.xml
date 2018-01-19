@@ -16,6 +16,7 @@
         android:background="@color/colorKeyPad">
 
         <LinearLayout
+            android:id="@+id/layout_root_calc"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
@@ -23,7 +24,7 @@
             android:layout_marginStart="16dp"
             android:gravity="end|bottom"
             android:orientation="horizontal">
-
+<!--
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -116,24 +117,7 @@
                     android:textColor="@color/colorKeyPadNum"
                     android:text="123"/>
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_cal"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-                <!--
-               <TextView
-                   android:id="@+id/text_cal"
-                   android:layout_width="wrap_content"
-                   android:layout_height="match_parent"
-                   android:gravity="center"
-                   android:textSize="35sp"
-                   android:textColor="@color/colorKeyPadNum"
-                   android:text="2"/>-->
-            </LinearLayout>
-
+-->
         </LinearLayout>
 
         <LinearLayout
@@ -163,7 +147,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_plus"
+            android:tag="@string/plus"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -171,34 +155,40 @@
             android:text="@string/plus"
             android:textSize="@dimen/keypadTextSize"
             android:textColor="@color/colorKeyPadRed"
-            android:onClick="clickBtnPlus" />
+            android:onClick="clickBtnSymbol" />
 
         <Button
+            android:tag="@string/minus"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/ripple_keypad"
             android:text="@string/minus"
             android:textSize="@dimen/keypadTextSize"
-            android:textColor="@color/colorKeyPadRed"/>
+            android:textColor="@color/colorKeyPadRed"
+            android:onClick="clickBtnSymbol" />
 
         <Button
+            android:tag="@string/multiply"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/ripple_keypad"
             android:text="@string/multiply"
             android:textSize="@dimen/keypadTextSize"
-            android:textColor="@color/colorKeyPadRed"/>
+            android:textColor="@color/colorKeyPadRed"
+            android:onClick="clickBtnSymbol" />
 
         <Button
+            android:tag="@string/divide"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/ripple_keypad"
             android:text="@string/divide"
             android:textSize="@dimen/keypadTextSize"
-            android:textColor="@color/colorKeyPadRed"/>
+            android:textColor="@color/colorKeyPadRed"
+            android:onClick="clickBtnSymbol" />
 
     </LinearLayout>
 
@@ -227,14 +217,14 @@
                 android:layout_weight="1"
                 android:gravity="center">
                 <Button
-                    android:id="@+id/btn_num1"
+                    android:tag="@string/one"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ripple_keypad"
                     android:text="@string/one"
                     android:textSize="@dimen/keypadTextSize"
                     android:textColor="@color/colorKeyPadNum"
-                    android:onClick="clickBtnNum1"/>
+                    android:onClick="clickBtnNumber" />
             </LinearLayout>
 
             <LinearLayout
@@ -243,12 +233,14 @@
                 android:layout_weight="1"
                 android:gravity="center">
                 <Button
+                    android:tag="@string/two"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ripple_keypad"
                     android:text="@string/two"
                     android:textSize="@dimen/keypadTextSize"
-                    android:textColor="@color/colorKeyPadNum" />
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
             </LinearLayout>
 
             <LinearLayout
@@ -257,12 +249,14 @@
                 android:layout_weight="1"
                 android:gravity="center">
                 <Button
+                    android:tag="@string/three"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ripple_keypad"
                     android:text="@string/three"
                     android:textSize="@dimen/keypadTextSize"
-                    android:textColor="@color/colorKeyPadNum" />
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
             </LinearLayout>
 
             <android.support.constraint.ConstraintLayout
@@ -301,90 +295,70 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_weight="1">
 
-            <Button
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/four"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadNum" />
+                android:gravity="center">
+                <Button
+                    android:tag="@string/four"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/four"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
+            </LinearLayout>
 
-            <Button
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/five"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadNum" />
+                android:gravity="center">
+                <Button
+                    android:tag="@string/five"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/five"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
+            </LinearLayout>
 
-            <Button
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/six"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadNum" />
+                android:gravity="center">
+                <Button
+                    android:tag="@string/six"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/six"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_all_clear"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/clear"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadRed"
-                android:onClick="clickBtnAllClear"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/seven"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadNum" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/eight"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadNum" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/nine"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadNum" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text=""
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadNum" />
+                android:gravity="center">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/clear"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadRed"
+                    android:onClick="clickBtnAllClear" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -399,12 +373,46 @@
                 android:layout_weight="1"
                 android:gravity="center">
                 <Button
+                    android:tag="@string/seven"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ripple_keypad"
-                    android:text="@string/point"
+                    android:text="@string/seven"
                     android:textSize="@dimen/keypadTextSize"
-                    android:textColor="@color/colorKeyPadNum" />
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/eight"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/eight"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/nine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/nine"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
             </LinearLayout>
 
             <LinearLayout
@@ -416,9 +424,47 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ripple_keypad"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadRed" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/point"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/point"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnPoint"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/zero"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
                     android:text="@string/zero"
                     android:textSize="@dimen/keypadTextSize"
-                    android:textColor="@color/colorKeyPadNum" />
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber"/>
             </LinearLayout>
 
             <LinearLayout
@@ -432,7 +478,8 @@
                     android:background="@drawable/ripple_keypad"
                     android:text="@string/fraction"
                     android:textSize="@dimen/keypadTextSize"
-                    android:textColor="@color/colorKeyPadNum" />
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnFraction" />
             </LinearLayout>
 
             <android.support.constraint.ConstraintLayout
@@ -450,7 +497,8 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ripple_keypad" />
+                        android:background="@drawable/ripple_keypad"
+                        android:onClick="clickBtnResult" />
                 </LinearLayout>
 
                 <ImageView
@@ -458,9 +506,11 @@
                     android:layout_height="47dp"
                     android:src="@drawable/result"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.51"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.555" />
             </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>
