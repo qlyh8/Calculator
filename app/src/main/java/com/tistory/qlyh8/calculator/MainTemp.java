@@ -212,8 +212,9 @@ public class MainTemp extends AppCompatActivity {
         StringBuilder str = new StringBuilder();
         for (int i=0 ; i<arrayList.size() ; i++){
             temp = arrayList.get(i);
+
             if(temp.contains("@")){
-                calc.add("/");
+                calc.add("÷");
             } else if (temp.equals("÷")) {
                 calc.add("÷");
             } else if (temp.equals("×")) {
@@ -243,9 +244,6 @@ public class MainTemp extends AppCompatActivity {
                         resultNum*=Integer.valueOf(result[i]);
                         break;
                     case "÷":
-                        resultNum/=Integer.valueOf(result[i]);
-                        break;
-                    case "@":
                         resultNum/=Integer.valueOf(result[i]);
                         break;
                 }
