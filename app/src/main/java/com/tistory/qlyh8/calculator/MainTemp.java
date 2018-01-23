@@ -18,6 +18,7 @@ import java.util.StringTokenizer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.grantland.widget.AutofitHelper;
 
 /*
  * Created by cmtyx on 2018-01-12.
@@ -38,6 +39,7 @@ public class MainTemp extends AppCompatActivity {
         setContentView(R.layout.activity_temp);
         ButterKnife.bind(this);
 
+        AutofitHelper.create(resultTextView);   // 텍스트 길이 자동 조정
         resultTextView.setText("0");
         arrayList = new ArrayList<>();
         result = 0d;
@@ -295,8 +297,8 @@ public class MainTemp extends AppCompatActivity {
                 result += stack.pop();
             }
 
-            // 소수점 이하 숫지를 0을 채우지않으며, 15자리까지만 나오게 한다.
-            DecimalFormat newFormat = new DecimalFormat("#.###############");
+            // 소수점 이하 숫지를 0을 채우지않으며, 14자리까지만 나오게 한다.
+            DecimalFormat newFormat = new DecimalFormat("#.##############");
             result =  Double.valueOf(newFormat.format(result));
 
             // 결과가 정수일 경우 정수형으로 변환
