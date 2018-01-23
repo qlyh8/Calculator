@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -28,9 +30,15 @@ public class MainTemp extends AppCompatActivity {
 
     @BindView(R.id.layout_root_calc) public LinearLayout rootLayout;    // 수식 뷰
     @BindView(R.id.resultView) public TextView resultTextView;  // 결과값 뷰
+    @BindView(R.id.fraction_layout) public LinearLayout fractionLayout; // 분수 레이아웃
+    @BindView(R.id.text_denominator) public TextView denominatorTextView;   // 분모 결괴값 뷰
+    @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
+    //@BindView(R.id.fraction_view) public  LinearLayout fractionLine;    // 분수 선 뷰
+
     ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
     double result;  // 결과값
     int intResult;  // 정수형 결과값
+    int[] fraction; // 분수값
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +46,21 @@ public class MainTemp extends AppCompatActivity {
         //setContentView(R.layout.activity_calc);
         setContentView(R.layout.activity_temp);
         ButterKnife.bind(this);
-
         AutofitHelper.create(resultTextView);   // 텍스트 길이 자동 조정
-        resultTextView.setText("0");
+
         arrayList = new ArrayList<>();
+        fraction = new int[2];
+        resultTextView.setText("0");    // 0으로 초기화
+        init();
+    }
+
+    // 초기화
+    public void init(){
         result = 0d;
         intResult = 0;
+        fraction[0] = 0;
+        fraction[1] = 0;
+        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 값 숨김
     }
 
    //"0~9" 버튼 클릭
@@ -208,11 +225,11 @@ public class MainTemp extends AppCompatActivity {
 
     // "C" 버튼 클릭
     public void clickBtnAllClear(View view) {
-        arrayList.clear();  // 리스트의 모든 내용 삭제
         rootLayout.removeAllViews();    // 수식 뷰 안의 모든 뷰 삭제
         resultTextView.setText("0");    // 결과 값을 0으로 초기화
-        result = 0d;    // 결과값 초기화
-        intResult = 0;  // 결과값 초기화
+
+        arrayList.clear();  // 리스트의 모든 내용 삭제
+        init(); // 결과값 초기화
     }
 
     // "=" 버튼 클릭
@@ -225,77 +242,13 @@ public class MainTemp extends AppCompatActivity {
         if(!isSymbol(lastValue) && !lastStrOfLastVal.equals(".") && !lastStrOfLastVal.equals("@")){
 
             // 초기화 ("="을 입력한 후 "C" 버튼을 누르지 않고 계속 수식을 입력할 경우를 위해)
-            result = 0;
-            intResult = 0;
+            init();
 
-            /* String str = "";
-            for (int i=0 ; i<arrayList.size() ; i++) {str += arrayList.get(i);}
-            Log.d("asd", "1.원래수식: "+ str); */
+            // "@"를 "÷"으로 변환
+            String strList = convertToDivide(arrayList);
 
-            // 분수를 나눗셈으로 변환
-            for(int i = 0 ; i < arrayList.size() ; i++){
-                if(arrayList.get(i).contains("@")){
-                    String splitStr[] = arrayList.get(i).split("@");
-                    arrayList.set(i, splitStr[1] + "÷" + splitStr[0]);
-                }
-            }
-
-            // arrayList 를 String 으로 변환
-             String strList = "";
-             for(int i=0 ; i<arrayList.size() ; i++)
-                 strList += arrayList.get(i);
-            // Log.d("asd", "2.변환한수식: " + strList);
-
-            // 숫자만 골라낸다.
-            StringTokenizer tokenNumber = new StringTokenizer(strList, "＋－×÷");
-            /*String strNum = "";
-            while (tokenNumber.hasMoreTokens()){strNum += tokenNumber.nextToken() + " ";}
-            Log.d("asd", "3.숫자: " + strNum);*/
-
-            // 연산자만 골라낸다.
-            StringTokenizer tokenOperator = new StringTokenizer(strList, "1234567890.");
-            /*String strOper = "";
-            while (tokenOperator.hasMoreTokens()){strOper += tokenOperator.nextToken() + " ";}\
-            Log.d("asd", "4.수식: " + strOper);*/
-
-            // 숫자를 담을 스택
-            Stack<Double> stack = new Stack<>();
-            // 첫 번째 숫자를 스택에 넣는다.
-            stack.push(Double.parseDouble(tokenNumber.nextToken()));
-            // 곱셈과 나눗셈이 있으면 스택의 마지막 숫자를 꺼내 계산한 후 계산한 값으로 다시 스택에 넣는다.
-            // 뺄셈은 해당 숫자를 -1과 곱셈하여 다시 스택에 넣는다.
-            // 최종 스택에는 곱셈과 나눗셈, 뺄셈을 처리한 값만 존재한다.
-            while (tokenNumber.hasMoreTokens()){
-                String number = tokenNumber.nextToken();    // 피연산자
-                String operator = tokenOperator.nextToken();    // 연산자
-                Double value;   // 스택에 마지막으로 들어간 숫자
-
-                switch (operator){
-                    case "×":
-                        value = stack.pop();
-                        value *= Double.parseDouble(number);
-                        stack.push(value);
-                        break;
-                    case "÷":
-                        value = stack.pop();
-                        value /= Double.parseDouble(number);
-                        stack.push(value);
-                        break;
-                    case "＋":
-                        stack.push(Double.parseDouble(number));
-                        break;
-                    case "－":
-                        stack.push(-1 * (Double.parseDouble(number)));
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            // 뺄셈, 곱셈, 나눗셈을 수행한 값들을 모두 더한다.
-            while(!stack.isEmpty()){
-                result += stack.pop();
-            }
+             // 사칙연산
+            result = calculate(strList);
 
             // 소수점 이하 숫지를 0을 채우지않으며, 14자리까지만 나오게 한다.
             DecimalFormat newFormat = new DecimalFormat("#.##############");
@@ -307,6 +260,12 @@ public class MainTemp extends AppCompatActivity {
                 resultTextView.setText(String.valueOf(intResult));
             else
                 resultTextView.setText(String.valueOf(result));
+
+            // 소수를 분수로 변환
+            fraction = convertToFraction(new BigDecimal(String.valueOf(result)));
+            fractionLayout.setVisibility(View.VISIBLE);
+            numeratorTextView.setText(String.valueOf(fraction[0])); // 분자
+            denominatorTextView.setText(String.valueOf(fraction[1]));   // 분모
         }
     }
 
@@ -474,5 +433,93 @@ public class MainTemp extends AppCompatActivity {
                 break;
         }
         return result;
+    }
+
+    // "@"를 "÷"으로 변환
+    public String convertToDivide(ArrayList<String> oldList){
+
+        // 복제
+        ArrayList<String> tempList = new ArrayList<>();
+        for(int i = 0; i < oldList.size() ; i++)
+           tempList.add(arrayList.get(i));
+
+        // 변환
+        for(int i = 0; i < tempList.size() ; i++){
+            if(tempList.get(i).contains("@")){
+                String splitStr[] = tempList.get(i).split("@");
+                tempList.set(i, splitStr[1] + "÷" + splitStr[0]);
+            }
+        }
+
+        // tempList 를 String 으로 변환
+        String strList = "";
+        for(int i = 0; i < tempList.size() ; i++)
+            strList += tempList.get(i);
+
+        return strList;
+    }
+
+    // 사칙연산
+    public double calculate(String strList){
+
+        double newResult = 0d;
+
+        // 숫자만 골라낸다.
+        StringTokenizer tokenNumber = new StringTokenizer(strList, "＋－×÷");
+        // 연산자만 골라낸다.
+        StringTokenizer tokenOperator = new StringTokenizer(strList, "1234567890.");
+
+        // 숫자를 담을 스택
+        Stack<Double> stack = new Stack<>();
+        // 첫 번째 숫자를 스택에 넣는다.
+        stack.push(Double.parseDouble(tokenNumber.nextToken()));
+        // 곱셈과 나눗셈이 있으면 스택의 마지막 숫자를 꺼내 계산한 후 계산한 값으로 다시 스택에 넣는다.
+        // 뺄셈은 해당 숫자를 -1과 곱셈하여 다시 스택에 넣는다.
+        // 최종 스택에는 곱셈과 나눗셈, 뺄셈을 처리한 값만 존재한다.
+        while (tokenNumber.hasMoreTokens()){
+            String number = tokenNumber.nextToken();    // 피연산자
+            String operator = tokenOperator.nextToken();    // 연산자
+            Double value;   // 스택에 마지막으로 들어간 숫자
+
+            switch (operator){
+                case "×":
+                    value = stack.pop();
+                    value *= Double.parseDouble(number);
+                    stack.push(value);
+                    break;
+                case "÷":
+                    value = stack.pop();
+                    value /= Double.parseDouble(number);
+                    stack.push(value);
+                    break;
+                case "＋":
+                    stack.push(Double.parseDouble(number));
+                    break;
+                case "－":
+                    stack.push(-1 * (Double.parseDouble(number)));
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // 뺄셈, 곱셈, 나눗셈을 수행한 값들을 모두 더한다.
+        while(!stack.isEmpty()){
+            newResult += stack.pop();
+        }
+
+        return newResult;
+    }
+
+    // 소수를 분수로 변환
+    public int[] convertToFraction(BigDecimal value){
+        String[] parts = value.toString().split("\\.");
+        BigDecimal denominator = BigDecimal.TEN.pow(parts[1].length()); // 분모
+        BigDecimal numerator = (new BigDecimal(parts[0]).multiply(denominator)).add(new BigDecimal(parts[1])); // 분자
+
+        // 최대공약수
+        int gcd = BigInteger.valueOf(numerator.intValue()).gcd(BigInteger.valueOf(denominator.intValue())).intValue();
+
+        return new int[]{ numerator.intValue() / gcd, denominator.intValue() / gcd };
     }
 }
