@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.StringTokenizer;
@@ -293,6 +294,10 @@ public class MainTemp extends AppCompatActivity {
             while(!stack.isEmpty()){
                 result += stack.pop();
             }
+
+            // 소수점 이하 숫지를 0을 채우지않으며, 15자리까지만 나오게 한다.
+            DecimalFormat newFormat = new DecimalFormat("#.###############");
+            result =  Double.valueOf(newFormat.format(result));
 
             // 결과가 정수일 경우 정수형으로 변환
             intResult = (int)result;
