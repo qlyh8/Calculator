@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.fraction_layout) public LinearLayout fractionLayout; // 결과 분수 레이아웃
     @BindView(R.id.text_denominator) public TextView denominatorTextView;   // 분모 결괴값 뷰
     @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
-    //@BindView(R.id.fraction_view) public  LinearLayout fractionLine;    // 분수 선 뷰
+    @BindView(R.id.fraction_view) public View fractionLine;    // 분수 선 뷰
 
     ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
     double result;  // 결과값
@@ -261,11 +261,12 @@ public class MainActivity extends AppCompatActivity {
                     resultTextView.setText(String.valueOf(result));
 
                 // 소수를 분수로 변환
-                fraction = calcUtils.convertToFraction(new BigDecimal(String.valueOf(result)));
+                fraction = calcUtils.convertToFraction(arrayList, new BigDecimal(String.valueOf(result)));
 
-                fractionLayout.setVisibility(View.VISIBLE);
                 numeratorTextView.setText(String.valueOf(fraction[0])); // 분자
                 denominatorTextView.setText(String.valueOf(fraction[1]));   // 분모
+                viewUtils.setResultFractionLine(fractionLine, numeratorTextView, denominatorTextView);  // 분수선 조정
+                fractionLayout.setVisibility(View.VISIBLE);
             }
         }
     }

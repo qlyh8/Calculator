@@ -1,5 +1,7 @@
 package com.tistory.qlyh8.calculator.Utils;
 
+import android.util.Log;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -117,14 +119,26 @@ public class CalcUtils {
     }
 
     // 소수를 분수로 변환
-    public int[] convertToFraction(BigDecimal value){
-        String[] parts = value.toString().split("\\.");
-        BigDecimal denominator = BigDecimal.TEN.pow(parts[1].length()); // 분모
-        BigDecimal numerator = (new BigDecimal(parts[0]).multiply(denominator)).add(new BigDecimal(parts[1])); // 분자
+    public int[] convertToFraction(ArrayList<String> arrayList, BigDecimal value){
+        int[] result = new int[2];
 
-        // 최대공약수
-        int gcd = BigInteger.valueOf(numerator.intValue()).gcd(BigInteger.valueOf(denominator.intValue())).intValue();
+        // 분수 하나만 입력되었을 경우 그대로 출력한다.
+        if(arrayList.size() == 1 && arrayList.get(0).contains("@") && !arrayList.get(0).contains(".")){
+            String splitStr[] = arrayList.get(0).split("@");
+            result[0] = Integer.parseInt(splitStr[1]);  // 분자
+            result[1] = Integer.parseInt(splitStr[0]);  // 분모
+        }
+        else{
+            String[] parts = value.toString().split("\\.");
+            BigDecimal denominator = BigDecimal.TEN.pow(parts[1].length()); // 분모
+            BigDecimal numerator = (new BigDecimal(parts[0]).multiply(denominator)).add(new BigDecimal(parts[1])); // 분자
 
-        return new int[]{ numerator.intValue() / gcd, denominator.intValue() / gcd };
+            // 최대공약수
+            int gcd = BigInteger.valueOf(numerator.intValue()).gcd(BigInteger.valueOf(denominator.intValue())).intValue();
+            result[0] = numerator.intValue() / gcd; // 분자
+            result[1] = denominator.intValue() / gcd;   // 분모
+        }
+
+        return result;
     }
 }

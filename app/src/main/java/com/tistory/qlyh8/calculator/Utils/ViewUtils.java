@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -48,7 +49,7 @@ public class ViewUtils {
 
         TextView textView = new TextView(context);
         textView.setText(number);
-        textView.setTextSize(35);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
         textView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
         textView.setGravity(Gravity.CENTER);
         textView.setTag("calcTextView"+arrayList.size());
@@ -64,7 +65,7 @@ public class ViewUtils {
         // 텍스트 뷰 생성
         TextView textView = new TextView(context);
         textView.setText(symbol);
-        textView.setTextSize(25);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcOperatorTextSize));
         textView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadRed));
         textView.setGravity(Gravity.CENTER);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
@@ -86,7 +87,7 @@ public class ViewUtils {
         // 분자 텍스트 뷰 생성
         TextView TopTextView = new TextView(context);
         TopTextView.setText("");
-        TopTextView.setTextSize(35);
+        TopTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
         TopTextView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
         TopTextView.setGravity(Gravity.CENTER);
         TopTextView.setTag("calcFractionTopTextView"+arrayList.size());
@@ -96,7 +97,7 @@ public class ViewUtils {
         View line = new View(context);
         line.setBackgroundColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 3);
-        params.setMargins(5, 0, 5, 0); // pass int values for left,top,right,bottom
+        params.setMargins(5, 0, 5, 0);
         line.setLayoutParams(params);
         line.setTag("calcFractionLine"+arrayList.size());
         layout.addView(line);
@@ -104,7 +105,7 @@ public class ViewUtils {
         // 분모 텍스트 뷰 생성
         TextView BottomTextView = new TextView(context);
         BottomTextView.setText(number);
-        BottomTextView.setTextSize(35);
+        BottomTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
         BottomTextView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
         BottomTextView.setGravity(Gravity.CENTER);
         BottomTextView.setTag("calcFractionBottomTextView"+arrayList.size());
@@ -113,7 +114,7 @@ public class ViewUtils {
         // 분모 텍스트 너비에 맞게 라인 길이 변경
         BottomTextView.measure(0,0);
         LinearLayout.LayoutParams newParams = new LinearLayout.LayoutParams(BottomTextView.getMeasuredWidth(), 3);
-        newParams.setMargins(5, 0, 5, 0); // pass int values for left,top,right,bottom
+        newParams.setMargins(5,0,5,0);
         line.setLayoutParams(newParams);
     }
 
@@ -169,8 +170,28 @@ public class ViewUtils {
         else
             newParams = new LinearLayout.LayoutParams(bottomTextView.getText().length() * defaultTextWidth, 3);
 
-        newParams.setMargins(5, 0, 5, 0); // pass int values for left,top,right,bottom
+        newParams.setMargins(5,0,5,0);
         View line = rootLayout.findViewWithTag("calcFractionLine" + arrayList.size());
+        line.setLayoutParams(newParams);
+    }
+
+    // 결과 분수 선 조정
+    public void setResultFractionLine(View line, TextView topTv, TextView btmTv){
+        // 분자 너비
+        topTv.measure(0,0);
+        int topWidth = topTv.getMeasuredWidth();
+        // 분모 너비
+        btmTv.measure(0,0);
+        int btmWidth = btmTv.getMeasuredWidth();
+
+        // 분자와 분모 중 너비가 큰 것에 맞춰 라인을 조정한다.
+        LinearLayout.LayoutParams newParams;
+        if(topWidth > btmWidth)
+            newParams = new LinearLayout.LayoutParams(topWidth, 2);
+        else
+            newParams = new LinearLayout.LayoutParams(btmWidth, 2);
+
+        newParams.setMargins(5,0,5,0);
         line.setLayoutParams(newParams);
     }
 }
