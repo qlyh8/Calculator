@@ -1,319 +1,272 @@
 package com.tistory.qlyh8.calculator;
 
 import android.annotation.SuppressLint;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.tistory.qlyh8.calculator.Utils.CalcUtils;
+import com.tistory.qlyh8.calculator.Utils.ViewUtils;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.grantland.widget.AutofitHelper;
 
+/*
+ * Created by YUNHEE on 2018-01-12.
+ */
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.editText1) public EditText editText1;
-    @BindView(R.id.editText2) public EditText editText2;
-    @BindView(R.id.textResult) public TextView textResult;
+    @BindView(R.id.layout_root_calc) public LinearLayout rootLayout;    // 수식 뷰
+    @BindView(R.id.resultView) public TextView resultTextView;  // 결과값 뷰
+    @BindView(R.id.fraction_layout) public LinearLayout fractionLayout; // 결과 분수 레이아웃
+    @BindView(R.id.text_denominator) public TextView denominatorTextView;   // 분모 결괴값 뷰
+    @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
+    //@BindView(R.id.fraction_view) public  LinearLayout fractionLine;    // 분수 선 뷰
+
+    ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
+    double result;  // 결과값
+    int intResult;  // 정수형 결과값
+    int[] fraction; // 분수 결과값
+
+    ViewUtils viewUtils;
+    CalcUtils calcUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        init();
+        AutofitHelper.create(resultTextView);   // 텍스트 길이 자동 조정
+
+        arrayList = new ArrayList<>();
+        fraction = new int[2];
+        resultTextView.setText("0");
+
+        viewUtils = new ViewUtils(this, rootLayout);
+        calcUtils = new CalcUtils();
+
+        resultInit();
     }
 
     // 초기화
-    public void init(){
-        // EditText 입력 키보드 감추기
-        editText1.setInputType(InputType.TYPE_NULL);
-        editText2.setInputType(InputType.TYPE_NULL);
-
-        editText1.setText("");
-        editText2.setText("");
-        textResult.setText("");
-
-        // "C" 버튼을 길게 눌렀을 때 이벤트
-        findViewById(R.id.btnClear).setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if(editText1.isFocused())
-                    editText1.setText("");
-                else if(editText2.isFocused())
-                    editText2.setText("");
-                return true;
-            }
-        });
+    public void resultInit(){
+        result = 0d;    // 결과값 초기화
+        intResult = 0;  // 정수 결과값 초기화
+        fraction[0] = 0;    // 분수(분자) 결과값 초기화
+        fraction[1] = 0;    // 분수(분모) 결과값 초기화
+        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 값 숨김
     }
 
-    // "C" 버튼 클릭 시 이벤트
-    public void clickBtnClear(View view) {
-        String str;
-
-        if(editText1.isFocused()){
-            str = editText1.getText().toString();
-
-            if (!str.equals("")) {
-                if(str.length() == 1)
-                    editText1.setText("");
-                else
-                    editText1.setText(str.substring(0, str.length() - 1));
-            }
-        }
-        else if(editText2.isFocused()){
-            str = editText2.getText().toString();
-            if (!str.equals("")){
-                if(str.length() == 1)
-                    editText2.setText("");
-                else
-                    editText2.setText(str.substring(0, str.length() - 1));
-            }
-        }
-    }
-
-    // 위 버튼 클릭 시 이벤트
-    public void clickBtnUp(View view) {
-        editText1.requestFocus();
-        editText2.clearFocus();
-        editText1.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAqua1));
-        editText2.setBackgroundColor(ContextCompat.getColor(this, R.color.colorMediumGray1));
-    }
-
-    // 아래 버튼 클릭 시 이벤트
-    public void clickBtnDown(View view) {
-        editText1.clearFocus();
-        editText2.requestFocus();
-        editText1.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorMediumGray1));
-        editText2.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorAqua1));
-    }
-
-    // "=" 버튼 클릭 시 이벤트
+    //"0~9" 버튼 클릭
     @SuppressLint("SetTextI18n")
-    public void clickBtnResult(View view) {
-        if(editText1.getText().toString().equals("") || editText2.getText().toString().equals(""))
-            textResult.setText("");
-        else if(editText2.getText().toString().equals("0"))
-            textResult.setText("0으로 나눌 수 없습니다.");
+    public void clickBtnNumber(View view) {
+        // 수식창이 비었을 때 배열과 뷰에 텍스트를 추가한다.
+        if(arrayList.isEmpty()){
+            arrayList.add(String.valueOf(view.getTag()));
+            viewUtils.setNumTextView(arrayList, String.valueOf(view.getTag()));
+        }
         else{
-            try {
-                if(Float.parseFloat(editText1.getText().toString()) %
-                        Float.parseFloat(editText2.getText().toString()) == 0){
-                    int result = Integer.parseInt(editText1.getText().toString()) /
-                            Integer.parseInt(editText2.getText().toString());
-                    textResult.setText(""+result);
+            // 첫 수식이 0일 때 0을 지우고 해당 텍스트로 채운다.
+            if(arrayList.size() == 1 && arrayList.get(0).equals("0")){
+                arrayList.set(arrayList.size()-1, String.valueOf(view.getTag()));
+                viewUtils.changeTextView(arrayList, "calcTextView", String.valueOf(view.getTag()));
+            }
+            else {
+                String lastValue = arrayList.get(arrayList.size()-1);    // 마지막 수식
+
+                // 마지막 수식이 기호일 때 텍스트를 추가한다.
+                if(calcUtils.isSymbol(lastValue)){
+                    arrayList.add(String.valueOf(view.getTag()));
+                    viewUtils.setNumTextView(arrayList, String.valueOf(view.getTag()));
                 }
                 else{
-                    float result = Float.parseFloat(editText1.getText().toString()) /
-                        Float.parseFloat(editText2.getText().toString());
-                    textResult.setText(""+result);
+                    if(lastValue.equals("0")){
+                        // 마지막 수식이 0일 때, 0을 지우고 텍스트를 추가한다.
+                        arrayList.set(arrayList.size()-1, String.valueOf(view.getTag()));
+                        viewUtils.changeTextView(arrayList, "calcTextView", String.valueOf(view.getTag()));
+                    }
+                    else{
+                        // 배열 마지막 값을 변경하고 마지막 뷰에 텍스트를 추가한다.
+                        arrayList.set(arrayList.size()-1, lastValue + String.valueOf(view.getTag()));
+
+                        // 분자에 값을 넣는다.
+                        if(lastValue.contains("@")){
+                            viewUtils.appendTextView(arrayList, "calcFractionTopTextView", String.valueOf(view.getTag()));
+                            viewUtils.changeFractionLine(arrayList);    // 분자가 분모보다 너비가 커지면 라인을 조정한다.
+                        }
+                        else{
+                            viewUtils.appendTextView(arrayList, "calcTextView", String.valueOf(view.getTag()));
+                        }
+                    }
                 }
-            } catch (Exception e){
-                textResult.setText("");
             }
         }
     }
 
-    // "1" 버튼 클릭 시 이벤트
-    public void clickBtn1(View view) {
-        if(editText1.isFocused()){
-            if(editText1.getText().toString().equals(""))
-                editText1.setText("1");
-            else if(editText1.getText().toString().equals("0"))
-                editText1.setText("1");
-            else
-                editText1.getText().append("1");
-        }
-        else if(editText2.isFocused()){
-            if(editText2.getText().toString().equals(""))
-                editText2.setText("1");
-            else if(editText2.getText().toString().equals("0"))
-                editText2.setText("1");
-            else
-                editText2.getText().append("1");
+    // "." 버튼 클릭
+    @SuppressLint("SetTextI18n")
+    public void clickBtnPoint(View view){
+        // 배열 값이 비어있지 않아야 한다.
+        if(!arrayList.isEmpty()){
+            String lastValue = arrayList.get(arrayList.size()-1);    // 마지막 값
+            String lastStrOfLastVal = lastValue.substring(lastValue.length()-1);    // 마지막 값의 마지막 글자
+
+            // 마지막 값이 기호와 "."이 아니여야 한다.
+            if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(".") && !lastStrOfLastVal.equals("@")){
+                arrayList.set(arrayList.size()-1, lastValue + String.valueOf(view.getTag()));
+                // 마지막 수식이 분수일 때
+                if(lastValue.contains("@")){
+                    viewUtils.appendTextView(arrayList, "calcFractionTopTextView", String.valueOf(view.getTag()));
+                    viewUtils.changeFractionLine(arrayList);    // 분자가 분모보다 너비가 커지면 라인을 조정한다.
+                }
+                else{
+                    viewUtils.appendTextView(arrayList, "calcTextView", String.valueOf(view.getTag()));
+                }
+            }
         }
     }
 
-    // "2" 버튼 클릭 시 이벤트
-    public void clickBtn2(View view) {
-        if(editText1.isFocused()){
-            if(editText1.getText().toString().equals(""))
-                editText1.setText("2");
-            else if(editText1.getText().toString().equals("0"))
-                editText1.setText("2");
-            else
-                editText1.getText().append("2");
-        }
-        else if(editText2.isFocused()){
-            if(editText2.getText().toString().equals(""))
-                editText2.setText("2");
-            else if(editText2.getText().toString().equals("0"))
-                editText2.setText("2");
-            else
-                editText2.getText().append("2");
+    // "ㅡ" (분수) 버튼 클릭
+    public void clickBtnFraction(View view){
+        // 배열 값이 비어있지 않아야 한다.
+        if(!arrayList.isEmpty()){
+            // 수식이 0일 때 입력되지 않아야 한다.
+            if(!(arrayList.size() == 1 && arrayList.get(0).equals("0"))){
+
+                String lastValue = arrayList.get(arrayList.size()-1);    // 마지막 값
+                String lastStrOfLastVal = lastValue.substring(lastValue.length()-1);    // 마지막 수식의 마지막 글자
+
+                if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(".")){
+                    if(!lastValue.equals("0") && !lastValue.contains("@")){
+                        // 분수 뷰로 변경한다. (분모) @ (분자)
+                        arrayList.set(arrayList.size()-1, lastValue+"@");
+                        viewUtils.removeView(arrayList, "textView", "calcTextView");
+                        viewUtils.removeView(arrayList, "layout", "calcLayout");
+                        viewUtils.setFractionTextView(arrayList, lastValue);
+                    }
+                }
+            }
         }
     }
 
-    // "3" 버튼 클릭 시 이벤트
-    public void clickBtn3(View view) {
-        if(editText1.isFocused()){
-            if(editText1.getText().toString().equals(""))
-                editText1.setText("3");
-            else if(editText1.getText().toString().equals("0"))
-                editText1.setText("3");
-            else
-                editText1.getText().append("3");
-        }
-        else if(editText2.isFocused()){
-            if(editText2.getText().toString().equals(""))
-                editText2.setText("3");
-            else if(editText2.getText().toString().equals("0"))
-                editText2.setText("3");
-            else
-                editText2.getText().append("3");
+    // "+,－,×,÷" 버튼 클릭
+    public void clickBtnSymbol(View view) {
+        // 배열 값이 비어있을 때 기호가 들어가면 안된다.
+        if(!arrayList.isEmpty()){
+            String lastValue = arrayList.get(arrayList.size()-1);   // 마지막 값
+            String lastStrOfLastVal = lastValue.substring(lastValue.length()-1);    // 마지막 수식의 마지막 글자
+
+            // 마지막 값이 기호가 아니고 "."이 아니여야 한다.
+            if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(".") && !lastStrOfLastVal.equals("@")){
+                // 마지막 값이 분수일 때, 분수 안에는 기호가 들어가면 안된다.
+                if(lastValue.contains("@") && !lastStrOfLastVal.equals("@")){
+                    arrayList.add(String.valueOf(view.getTag()));
+                    viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
+                }
+                else {
+                    arrayList.add(String.valueOf(view.getTag()));
+                    viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
+                }
+            }
         }
     }
 
-    // "4" 버튼 클릭 시 이벤트
-    public void clickBtn4(View view) {
-        if(editText1.isFocused()){
-            if(editText1.getText().toString().equals(""))
-                editText1.setText("4");
-            else if(editText1.getText().toString().equals("0"))
-                editText1.setText("4");
-            else
-                editText1.getText().append("4");
-        }
-        else if(editText2.isFocused()){
-            if(editText2.getText().toString().equals(""))
-                editText2.setText("4");
-            else if(editText2.getText().toString().equals("0"))
-                editText2.setText("4");
-            else
-                editText2.getText().append("4");
+    // "←" 버튼 클릭
+    public void clickBtnClear(View view) {
+        // 배열 값이 비어있지 않아야 한다.
+        if(!arrayList.isEmpty()){
+            String lastValue = arrayList.get(arrayList.size()-1);   // 마지막 값
+
+            // 값의 길이가 1일 때 해당 뷰와 해당 배열 위치의 값을 제거한다.
+            if(lastValue.length() == 1){
+                viewUtils.removeView(arrayList, "textView", "calcTextView");
+                viewUtils.removeView(arrayList, "layout", "calcLayout");
+                arrayList.remove(arrayList.size()-1);
+            }
+            else{
+                // 분수일 때
+                if(lastValue.contains("@")) {
+                    String[] value;
+
+                    // 분자에 값이 없을 때 ( ex: 3 6 @ ) line 을 삭제하고 자연수로 만든다.
+                    if(lastValue.substring(lastValue.length()-1).equals("@")){
+                        value = lastValue.split("@");
+                        String bottomValue = value[0]; // 분모
+
+                        arrayList.set(arrayList.size()-1, lastValue.substring(0, lastValue.length() - 1));
+                        viewUtils.removeView(arrayList, "textView", "calcFractionTopTextView");
+                        viewUtils.removeView(arrayList, "textView", "calcFractionBottomTextView");
+                        viewUtils.removeView(arrayList, "line", "calcFractionLine");
+                        viewUtils.removeView(arrayList, "layout", "calcFractionLayout");
+                        viewUtils.setNumTextView(arrayList, bottomValue);
+                    }
+                    else{
+                        // 분모, 분자에 모두 값이 있을 때 ( ex: 3 6 @ 2 4 ) 분자를 지운다.
+                        value = lastValue.split("@");
+                        String topValue = value[1]; // 분자
+
+                        arrayList.set(arrayList.size()-1, lastValue.substring(0, lastValue.length()-1));
+                        viewUtils.changeTextView(arrayList,"calcFractionTopTextView", topValue.substring(0, topValue.length()-1));
+                        viewUtils.changeFractionLine(arrayList);
+                    }
+                }
+                else {
+                    // 배열 마지막 값과 마지막 뷰를 변경한다.
+                    arrayList.set(arrayList.size()-1, lastValue.substring(0, lastValue.length()-1));
+                    viewUtils.changeTextView(arrayList, "calcTextView", lastValue.substring(0, lastValue.length()-1));
+                }
+            }
         }
     }
 
-    // "5" 버튼 클릭 시 이벤트
-    public void clickBtn5(View view) {
-        if(editText1.isFocused()){
-            if(editText1.getText().toString().equals(""))
-                editText1.setText("5");
-            else if(editText1.getText().toString().equals("0"))
-                editText1.setText("5");
-            else
-                editText1.getText().append("5");
-        }
-        else if(editText2.isFocused()){
-            if(editText2.getText().toString().equals(""))
-                editText2.setText("5");
-            else if(editText2.getText().toString().equals("0"))
-                editText2.setText("5");
-            else
-                editText2.getText().append("5");
-        }
+    // "C" 버튼 클릭
+    public void clickBtnAllClear(View view) {
+        rootLayout.removeAllViews();    // 수식 뷰 안의 모든 뷰 삭제
+        resultTextView.setText("0");    // 결과 값을 0으로 초기화
+        arrayList.clear();  // 리스트의 모든 내용 삭제
+        resultInit(); // 결과값 초기화
     }
 
-    // "6" 버튼 클릭 시 이벤트
-    public void clickBtn6(View view) {
-        if(editText1.isFocused()){
-            if(editText1.getText().toString().equals(""))
-                editText1.setText("6");
-            else if(editText1.getText().toString().equals("0"))
-                editText1.setText("6");
-            else
-                editText1.getText().append("6");
-        }
-        else if(editText2.isFocused()){
-            if(editText2.getText().toString().equals(""))
-                editText2.setText("6");
-            else if(editText2.getText().toString().equals("0"))
-                editText2.setText("6");
-            else
-                editText2.getText().append("6");
-        }
-    }
+    // "=" 버튼 클릭
+    public void clickBtnResult(View view) {
+        // 배열 값이 비어있지 않아야 한다.
+        if(!arrayList.isEmpty()) {
+            String lastValue = arrayList.get(arrayList.size()-1);    // 마지막 수식
+            String lastStrOfLastVal = lastValue.substring(lastValue.length()-1);    // 마지막 수식의 마지막 글자
 
-    // "7" 버튼 클릭 시 이벤트
-    public void clickBtn7(View view) {
-        if(editText1.isFocused()){
-            if(editText1.getText().toString().equals(""))
-                editText1.setText("7");
-            else if(editText1.getText().toString().equals("0"))
-                editText1.setText("7");
-            else
-                editText1.getText().append("7");
-        }
-        else if(editText2.isFocused()){
-            if(editText2.getText().toString().equals(""))
-                editText2.setText("7");
-            else if(editText2.getText().toString().equals("0"))
-                editText2.setText("7");
-            else
-                editText2.getText().append("7");
-        }
-    }
+            // 마지막 수식은 숫자여야 한다.
+            if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(".") && !lastStrOfLastVal.equals("@")){
 
-    // "8" 버튼 클릭 시 이벤트
-    public void clickBtn8(View view) {
-        if(editText1.isFocused()){
-            if(editText1.getText().toString().equals(""))
-                editText1.setText("8");
-            else if(editText1.getText().toString().equals("0"))
-                editText1.setText("8");
-            else
-                editText1.getText().append("8");
-        }
-        else if(editText2.isFocused()){
-            if(editText2.getText().toString().equals(""))
-                editText2.setText("8");
-            else if(editText2.getText().toString().equals("0"))
-                editText2.setText("8");
-            else
-                editText2.getText().append("8");
-        }
-    }
+                // 초기화 ("="을 입력한 후 "C" 버튼을 누르지 않고 계속 수식을 입력할 경우를 위해)
+                resultInit();
 
-    // "9" 버튼 클릭 시 이벤트
-    public void clickBtn9(View view) {
-        if(editText1.isFocused()){
-            if(editText1.getText().toString().equals(""))
-                editText1.setText("9");
-            else if(editText1.getText().toString().equals("0"))
-                editText1.setText("9");
-            else
-                editText1.getText().append("9");
-        }
-        else if(editText2.isFocused()){
-            if(editText2.getText().toString().equals(""))
-                editText2.setText("9");
-            else if(editText2.getText().toString().equals("0"))
-                editText2.setText("9");
-            else
-                editText2.getText().append("9");
-        }
-    }
+                // "@"를 "÷"으로 변환
+                String strList = calcUtils.convertToDivide(arrayList);
 
-    // "0" 버튼 클릭 시 이벤트
-    public void clickBtn0(View view) {
-        if(editText1.isFocused()){
-            if(editText1.getText().toString().equals(""))
-                editText1.setText("0");
-            else if(editText1.getText().toString().equals("00"))
-                editText1.setText("0");
-            else
-                editText1.getText().append("0");
-        }
-        else if(editText2.isFocused()){
-            if(editText2.getText().toString().equals(""))
-                editText2.setText("0");
-            else if(editText2.getText().toString().equals("0"))
-                editText2.setText("0");
-            else
-                editText2.getText().append("0");
+                // 사칙연산
+                result = calcUtils.calculate(strList);
+
+                // 결과가 정수일 경우 정수형으로 변환
+                intResult = (int)result;
+                if(result == intResult)
+                    resultTextView.setText(String.valueOf(intResult));
+                else
+                    resultTextView.setText(String.valueOf(result));
+
+                // 소수를 분수로 변환
+                fraction = calcUtils.convertToFraction(new BigDecimal(String.valueOf(result)));
+
+                fractionLayout.setVisibility(View.VISIBLE);
+                numeratorTextView.setText(String.valueOf(fraction[0])); // 분자
+                denominatorTextView.setText(String.valueOf(fraction[1]));   // 분모
+            }
         }
     }
 }

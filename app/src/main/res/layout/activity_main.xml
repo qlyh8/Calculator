@@ -3,351 +3,560 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorKeyPad"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.tistory.qlyh8.calculator.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:orientation="vertical"
-        android:gravity="center">
-
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:padding="8dp"
-            android:gravity="center"
-            android:background="@color/colorAqua1"
-            android:text="4"
-            android:textSize="25sp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:inputType="textNoSuggestions"
-            android:maxLength="10"
-            android:singleLine="true"
-            android:cursorVisible="false"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@color/colorDarkGray2"/>
-
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
-            android:padding="8dp"
-            android:gravity="center"
-            android:background="@color/colorMediumGray1"
-            android:text="5"
-            android:textSize="25sp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:inputType="textNoSuggestions"
-            android:maxLength="10"
-            android:singleLine="true"
-            android:cursorVisible="false"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="@color/colorAqua1"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/textResult"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="0.8"
-            android:textColor="@android:color/white"
-            android:textSize="50sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:padding="16dp"
-        android:orientation="horizontal"
-        android:background="@color/colorLightGray2"
-        android:weightSum="7">
+        android:background="@color/colorKeyPad">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
+            android:id="@+id/layout_root_calc"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:gravity="end|bottom"
+            android:orientation="horizontal">
+            <!--
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="35sp"
+                                android:textColor="@color/colorKeyPadNum"
+                                android:text="1"/>
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="2dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginStart="5dp"
+                                android:background="@color/colorKeyPadNum"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="35sp"
+                                android:textColor="@color/colorKeyPadNum"
+                                android:text="10"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/colorKeyPadRed"
+                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                android:text="+"
+                                android:gravity="center"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="35sp"
+                                android:textColor="@color/colorKeyPadNum"
+                                android:text="15"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/colorKeyPadRed"
+                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                android:layout_marginLeft="3dp"
+                                android:text="x"
+                                android:gravity="center"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="35sp"
+                                android:textColor="@color/colorKeyPadNum"
+                                android:text="10"/>
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="2dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginStart="5dp"
+                                android:background="@color/colorKeyPadNum"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="35sp"
+                                android:textColor="@color/colorKeyPadNum"
+                                android:text="123"/>
+                        </LinearLayout>
+            -->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="4dp">
+            android:gravity="end|bottom"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:background="@color/colorLightGray2">
-
-                <Button
-                    android:id="@+id/btnNum1"
-                    android:layout_width="0dp"
+                android:layout_marginBottom="2dp">
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/resultView"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="4dp"
+                    android:text="123"
+                    android:textColor="#fff"
+                    android:gravity="center|end"
+                    android:textSize="50sp"
+                    android:singleLine="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fraction_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/text_numerator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:background="@android:color/white"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:singleLine="true"
+                    android:text="10"/>
+                <View
+                    android:id="@+id/fraction_view"
+                    android:layout_width="50dp"
+                    android:layout_height="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/colorKeyPadNum"/>
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/text_denominator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:singleLine="true"
+                    android:text="123"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="horizontal">
+
+        <Button
+            android:tag="@string/plus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_keypad"
+            android:text="@string/plus"
+            android:textSize="@dimen/keypadTextSize"
+            android:textColor="@color/colorKeyPadRed"
+            android:onClick="clickBtnSymbol" />
+
+        <Button
+            android:tag="@string/minus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_keypad"
+            android:text="@string/minus"
+            android:textSize="@dimen/keypadTextSize"
+            android:textColor="@color/colorKeyPadRed"
+            android:onClick="clickBtnSymbol" />
+
+        <Button
+            android:tag="@string/multiply"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_keypad"
+            android:text="@string/multiply"
+            android:textSize="@dimen/keypadTextSize"
+            android:textColor="@color/colorKeyPadRed"
+            android:onClick="clickBtnSymbol" />
+
+        <Button
+            android:tag="@string/divide"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_keypad"
+            android:text="@string/divide"
+            android:textSize="@dimen/keypadTextSize"
+            android:textColor="@color/colorKeyPadRed"
+            android:onClick="clickBtnSymbol" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorKeyPadNum"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/one"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
                     android:text="@string/one"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorDarkGray2"
-                    android:onClick="clickBtn1"/>
-
-                <Button
-                    android:id="@+id/btnNum2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:gravity="center"
-                    android:background="@android:color/white"
-                    android:text="@string/two"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorDarkGray2"
-                    android:onClick="clickBtn2"/>
-
-                <Button
-                    android:id="@+id/btnNum3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="4dp"
-                    android:gravity="center"
-                    android:background="@android:color/white"
-                    android:text="@string/three"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorDarkGray2"
-                    android:onClick="clickBtn3"/>
-
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:background="@color/colorLightGray2">
-
+                android:gravity="center">
                 <Button
-                    android:id="@+id/btnNum4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:gravity="center"
-                    android:background="@android:color/white"
-                    android:text="@string/four"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorDarkGray2"
-                    android:onClick="clickBtn4"/>
-
-                <Button
-                    android:id="@+id/btnNum5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:gravity="center"
-                    android:background="@android:color/white"
-                    android:text="@string/five"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorDarkGray2"
-                    android:onClick="clickBtn5"/>
-
-                <Button
-                    android:id="@+id/btnNum6"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="4dp"
-                    android:gravity="center"
-                    android:background="@android:color/white"
-                    android:text="@string/six"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorDarkGray2"
-                    android:onClick="clickBtn6"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:background="@color/colorLightGray2">
-
-                <Button
-                    android:id="@+id/btnNum7"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:gravity="center"
-                    android:background="@android:color/white"
-                    android:text="@string/seven"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorDarkGray2"
-                    android:onClick="clickBtn7"/>
-
-                <Button
-                    android:id="@+id/btnNum8"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:gravity="center"
-                    android:background="@android:color/white"
-                    android:text="@string/eight"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorDarkGray2"
-                    android:onClick="clickBtn8"/>
-
-                <Button
-                    android:id="@+id/btnNum9"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="4dp"
-                    android:gravity="center"
-                    android:background="@android:color/white"
-                    android:text="@string/nine"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorDarkGray2"
-                    android:onClick="clickBtn9"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/colorLightGray2">
-
-                <Button
-                    android:id="@+id/btnNum0"
+                    android:tag="@string/two"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@android:color/white"
-                    android:text="@string/zero"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorDarkGray2"
-                    android:onClick="clickBtn0"/>
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/two"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/three"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/three"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
+            </LinearLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                    <Button
+                        android:id="@+id/btn_clear"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ripple_keypad"
+                        android:onClick="clickBtnClear"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="19dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_erase"
+                    android:tint="@color/colorKeyPadRed"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/four"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/four"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/five"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/five"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/six"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/six"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/clear"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadRed"
+                    android:onClick="clickBtnAllClear" />
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            android:padding="4dp">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginBottom="4dp">
-
+                android:gravity="center">
                 <Button
-                    android:id="@+id/btnClear"
+                    android:tag="@string/seven"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorAqua2"
-                    android:gravity="center"
-                    android:text="@string/clear"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:onClick="clickBtnClear"/>
-
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/seven"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_marginBottom="4dp"
-                android:orientation="horizontal">
-
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
                 <Button
-                    android:id="@+id/btnUp"
-                    android:layout_width="0dp"
+                    android:tag="@string/eight"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="2dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorAqua2"
-                    android:gravity="center"
-                    android:text="@string/up"
-                    android:textColor="@android:color/white"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:onClick="clickBtnUp" />
-
-                <Button
-                    android:id="@+id/btnDown"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorAqua2"
-                    android:gravity="center"
-                    android:text="@string/down"
-                    android:textColor="@android:color/white"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:onClick="clickBtnDown" />
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/eight"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2">
-
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
                 <Button
-                    android:id="@+id/btnResult"
+                    android:tag="@string/nine"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorGrapeFruit1"
-                    android:gravity="center"
-                    android:text="@string/result"
-                    android:textColor="@android:color/white"
-                    android:textSize="45sp"
-                    android:textStyle="bold"
-                    android:onClick="clickBtnResult"/>
-
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/nine"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadRed" />
+            </LinearLayout>
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/point"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/point"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnPoint"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:tag="@string/zero"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/zero"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnNumber"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_keypad"
+                    android:text="@string/fraction"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNum"
+                    android:onClick="clickBtnFraction" />
+            </LinearLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ripple_keypad"
+                        android:onClick="clickBtnResult" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="49dp"
+                    android:layout_height="47dp"
+                    android:src="@drawable/result"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.51"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.555" />
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>
