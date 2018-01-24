@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ public class ViewUtils {
 
     public Context context;
     public LinearLayout rootLayout;    // 수식 뷰
+    public int defaultTextWidth = 99999;    // 디폴트 텍스트 너비
 
     public ViewUtils(Context mContext, LinearLayout mRootLayout){
         context = mContext;
@@ -150,19 +152,22 @@ public class ViewUtils {
 
     // 분수 선 조정
     public void changeFractionLine(ArrayList<String> arrayList){
-        // 분자와 분모 중 너비가 큰 것에 맞춰 라인을 조정한다.
         TextView topTextView = rootLayout.findViewWithTag("calcFractionTopTextView" + arrayList.size());
-        topTextView.measure(0,0);
-        int topValueWidth = topTextView.getMeasuredWidth();
         TextView bottomTextView = rootLayout.findViewWithTag("calcFractionBottomTextView" + arrayList.size());
-        bottomTextView.measure(0,0);
-        int bottomValueWidth = bottomTextView.getMeasuredWidth();
 
+        // 디폴트 텍스트 너비를 구한다.
+        if(topTextView.getText().length() == 1){
+            topTextView.measure(0,0);
+            if(defaultTextWidth > topTextView.getMeasuredWidth())
+               defaultTextWidth = topTextView.getMeasuredWidth();
+        }
+
+        // 분자와 분모 중 너비가 큰 것에 맞춰 라인을 조정한다.
         LinearLayout.LayoutParams newParams;
-        if(topValueWidth > bottomValueWidth)
-            newParams = new LinearLayout.LayoutParams(topValueWidth, 3);
+        if(topTextView.getText().length() > bottomTextView.getText().length())
+            newParams = new LinearLayout.LayoutParams(topTextView.getText().length() * defaultTextWidth, 3);
         else
-            newParams = new LinearLayout.LayoutParams(bottomValueWidth, 3);
+            newParams = new LinearLayout.LayoutParams(bottomTextView.getText().length() * defaultTextWidth, 3);
 
         newParams.setMargins(5, 0, 5, 0); // pass int values for left,top,right,bottom
         View line = rootLayout.findViewWithTag("calcFractionLine" + arrayList.size());
