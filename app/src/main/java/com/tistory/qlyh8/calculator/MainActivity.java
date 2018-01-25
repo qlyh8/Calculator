@@ -260,8 +260,8 @@ public class MainActivity extends AppCompatActivity {
                 else
                     resultTextView.setText(String.valueOf(result));
 
-                // 소수를 분수로 변환
-                fraction = calcUtils.convertToFraction(arrayList, new BigDecimal(String.valueOf(result)));
+                // 분수 사칙연산
+                fraction = calcUtils.fractionCalculate(arrayList);
 
                 numeratorTextView.setText(String.valueOf(fraction[0])); // 분자
                 denominatorTextView.setText(String.valueOf(fraction[1]));   // 분모
