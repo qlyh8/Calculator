@@ -3,6 +3,7 @@ package com.tistory.qlyh8.calculator;
 import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -10,7 +11,6 @@ import android.widget.TextView;
 import com.tistory.qlyh8.calculator.Utils.CalcUtils;
 import com.tistory.qlyh8.calculator.Utils.ViewUtils;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
     double result;  // 결과값
-    int intResult;  // 정수형 결과값
-    int[] fraction; // 분수 결과값
+    int intResult;  // 정수 결과값
+    int[] fractionResult; // 분수 결과값
 
     ViewUtils viewUtils;
     CalcUtils calcUtils;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         AutofitHelper.create(resultTextView);   // 텍스트 길이 자동 조정
 
         arrayList = new ArrayList<>();
-        fraction = new int[2];
+        fractionResult = new int[2];
         resultTextView.setText("0");
 
         viewUtils = new ViewUtils(this, rootLayout);
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
     public void resultInit(){
         result = 0d;    // 결과값 초기화
         intResult = 0;  // 정수 결과값 초기화
-        fraction[0] = 0;    // 분수(분자) 결과값 초기화
-        fraction[1] = 0;    // 분수(분모) 결과값 초기화
+        fractionResult[0] = 0;    // 분수(분자) 결과값 초기화
+        fractionResult[1] = 0;    // 분수(분모) 결과값 초기화
         fractionLayout.setVisibility(View.INVISIBLE);   // 분수 값 숨김
     }
 
@@ -170,7 +170,8 @@ public class MainActivity extends AppCompatActivity {
                     arrayList.add(String.valueOf(view.getTag()));
                     viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
                 }
-                else {
+                else if(!(arrayList.size() >= 3 && arrayList.get(arrayList.size()-2).equals("÷") && lastValue.equals("0"))){
+                    // 0으로 나눌 수 없다.
                     arrayList.add(String.valueOf(view.getTag()));
                     viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
                 }
@@ -241,8 +242,9 @@ public class MainActivity extends AppCompatActivity {
             String lastValue = arrayList.get(arrayList.size()-1);    // 마지막 수식
             String lastStrOfLastVal = lastValue.substring(lastValue.length()-1);    // 마지막 수식의 마지막 글자
 
-            // 마지막 수식은 숫자여야 한다.
-            if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(".") && !lastStrOfLastVal.equals("@")){
+            // 마지막 수식은 숫자여야 하고, 0으로 나눌 수 없다.
+            if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(".") && !lastStrOfLastVal.equals("@")
+                    && !(arrayList.size() >= 3 && arrayList.get(arrayList.size()-2).equals("÷") && lastValue.equals("0"))){
 
                 // 초기화 ("="을 입력한 후 "C" 버튼을 누르지 않고 계속 수식을 입력할 경우를 위해)
                 resultInit();
@@ -261,10 +263,10 @@ public class MainActivity extends AppCompatActivity {
                     resultTextView.setText(String.valueOf(result));
 
                 // 분수 사칙연산
-                fraction = calcUtils.fractionCalculate(arrayList);
+                fractionResult = calcUtils.fractionCalculate(arrayList);
 
-                numeratorTextView.setText(String.valueOf(fraction[0])); // 분자
-                denominatorTextView.setText(String.valueOf(fraction[1]));   // 분모
+                numeratorTextView.setText(String.valueOf(fractionResult[0])); // 분자
+                denominatorTextView.setText(String.valueOf(fractionResult[1]));   // 분모
                 viewUtils.setResultFractionLine(fractionLine, numeratorTextView, denominatorTextView);  // 분수선 조정
                 fractionLayout.setVisibility(View.VISIBLE);
             }
