@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.tistory.qlyh8.calculator.Utils.CalcFractionUtils;
 import com.tistory.qlyh8.calculator.Utils.CalcUtils;
 import com.tistory.qlyh8.calculator.Utils.ViewUtils;
 
@@ -32,11 +33,13 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
     double result;  // 결과값
-    int intResult;  // 정수 결과값
-    int[] fractionResult; // 분수 결과값
+    long longResult;  // 정수 결과값
+    long[] fractionResult; // 분수 결과값
+    float defaultFractionResultTextSize;    // 분수 결과값 기본 크기
 
     ViewUtils viewUtils;
     CalcUtils calcUtils;
+    CalcFractionUtils calcFractionUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +49,13 @@ public class MainActivity extends AppCompatActivity {
         AutofitHelper.create(resultTextView);   // 텍스트 길이 자동 조정
 
         arrayList = new ArrayList<>();
-        fractionResult = new int[2];
+        fractionResult = new long[2];
         resultTextView.setText("0");
+        defaultFractionResultTextSize = numeratorTextView.getTextSize();    // 기본 크기 가져오기
 
         viewUtils = new ViewUtils(this, rootLayout);
         calcUtils = new CalcUtils();
+        calcFractionUtils = new CalcFractionUtils();
 
         resultInit();
     }
@@ -58,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
     // 초기화
     public void resultInit(){
         result = 0d;    // 결과값 초기화
-        intResult = 0;  // 정수 결과값 초기화
-        fractionResult[0] = 0;    // 분수(분자) 결과값 초기화
-        fractionResult[1] = 0;    // 분수(분모) 결과값 초기화
+        longResult = 0L;  // 정수 결과값 초기화
+        fractionResult[0] = 0L;    // 분수(분자) 결과값 초기화
+        fractionResult[1] = 0L;    // 분수(분모) 결과값 초기화
         fractionLayout.setVisibility(View.INVISIBLE);   // 분수 값 숨김
     }
 
@@ -94,14 +99,23 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else{
                         // 배열 마지막 값을 변경하고 마지막 뷰에 텍스트를 추가한다.
-                        arrayList.set(arrayList.size()-1, lastValue + String.valueOf(view.getTag()));
-
                         // 분자에 값을 넣는다.
                         if(lastValue.contains("@")){
-                            viewUtils.appendTextView(arrayList, "calcFractionTopTextView", String.valueOf(view.getTag()));
+                            String lastStrOfLastVal = lastValue.substring(lastValue.length()-1);    // 마지막 수식의 마지막 글자
+                            // 마지막 수식이 0일 때, 0을 지우고 텍스트를 추가한다.
+                            if(lastStrOfLastVal.equals("0")){
+                                arrayList.set(arrayList.size()-1,
+                                        lastValue.substring(0, lastValue.length()-1) + String.valueOf(view.getTag()));
+                                viewUtils.changeTextView(arrayList, "calcFractionTopTextView" , String.valueOf(view.getTag()));
+                            }
+                            else {
+                                arrayList.set(arrayList.size()-1, lastValue + String.valueOf(view.getTag()));
+                                viewUtils.appendTextView(arrayList, "calcFractionTopTextView", String.valueOf(view.getTag()));
+                            }
                             viewUtils.changeFractionLine(arrayList);    // 분자가 분모보다 너비가 커지면 라인을 조정한다.
                         }
                         else{
+                            arrayList.set(arrayList.size()-1, lastValue + String.valueOf(view.getTag()));
                             viewUtils.appendTextView(arrayList, "calcTextView", String.valueOf(view.getTag()));
                         }
                     }
@@ -253,22 +267,37 @@ public class MainActivity extends AppCompatActivity {
                 String strList = calcUtils.convertToDivide(arrayList);
 
                 // 사칙연산
-                result = calcUtils.calculate(strList);
+                try {
+                    result = calcUtils.calculate(strList);
+                }
+                catch (Exception e){
+                    result = 0;
+                    longResult = 0L;
+                }
 
                 // 결과가 정수일 경우 정수형으로 변환
-                intResult = (int)result;
-                if(result == intResult)
-                    resultTextView.setText(String.valueOf(intResult));
+                longResult = (long)result;
+                if(result == longResult)
+                    resultTextView.setText(String.valueOf(longResult));
                 else
                     resultTextView.setText(String.valueOf(result));
 
                 // 분수 사칙연산
-                fractionResult = calcUtils.fractionCalculate(arrayList);
+                try {
+                    fractionResult = calcFractionUtils.fractionCalculate(arrayList);
 
-                numeratorTextView.setText(String.valueOf(fractionResult[0])); // 분자
-                denominatorTextView.setText(String.valueOf(fractionResult[1]));   // 분모
-                viewUtils.setResultFractionLine(fractionLine, numeratorTextView, denominatorTextView);  // 분수선 조정
-                fractionLayout.setVisibility(View.VISIBLE);
+                    numeratorTextView.setText(String.valueOf(fractionResult[0])); // 분자
+                    numeratorTextView.setTextSize(defaultFractionResultTextSize);   // 화면 크기에 맞춤
+                    denominatorTextView.setText(String.valueOf(fractionResult[1]));   // 분모
+                    denominatorTextView.setTextSize(defaultFractionResultTextSize); // 화면 크기에 맞춤
+                    viewUtils.setResultFractionLine(fractionLine, numeratorTextView, denominatorTextView);  // 분수선 조정
+                    fractionLayout.setVisibility(View.VISIBLE);
+                }
+                catch (Exception e){
+                    fractionResult[0] = 0L;
+                    fractionResult[1] = 0L;
+                    fractionLayout.setVisibility(View.INVISIBLE);
+                }
             }
         }
     }

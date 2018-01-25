@@ -21,9 +21,9 @@ import java.util.ArrayList;
 
 public class ViewUtils {
 
-    public Context context;
-    public LinearLayout rootLayout;    // 수식 뷰
-    public int defaultTextWidth = 99999;    // 디폴트 텍스트 너비
+    private Context context;
+    private LinearLayout rootLayout;    // 수식 뷰
+    private int defaultTextWidth = 99999;    // 디폴트 텍스트 너비
 
     public ViewUtils(Context mContext, LinearLayout mRootLayout){
         context = mContext;
@@ -31,7 +31,7 @@ public class ViewUtils {
     }
 
     // 리니어 레이아웃 생성
-    public LinearLayout setLinearLayout(ArrayList<String> arrayList){
+    private LinearLayout setLinearLayout(ArrayList<String> arrayList){
         LinearLayout layout = new LinearLayout(context);
         layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));
