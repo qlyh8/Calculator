@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
                 String lastValue = arrayList.get(arrayList.size()-1);    // 마지막 수식
+                String lastStrOfLastVal = lastValue.substring(lastValue.length()-1);    // 마지막 값의 마지막 글자
 
                 // 마지막 수식이 기호일 때 텍스트를 추가한다.
                 if(calcUtils.isSymbol(lastValue)){
@@ -101,9 +102,8 @@ public class MainActivity extends AppCompatActivity {
                         // 배열 마지막 값을 변경하고 마지막 뷰에 텍스트를 추가한다.
                         // 분자에 값을 넣는다.
                         if(lastValue.contains("@")){
-                            String lastStrOfLastVal = lastValue.substring(lastValue.length()-1);    // 마지막 수식의 마지막 글자
-                            // 마지막 수식이 0일 때, 0을 지우고 텍스트를 추가한다.
-                            if(lastStrOfLastVal.equals("0")){
+                            // 마지막 수식의 분자가 0일 때, 0을 지우고 텍스트를 추가한다.
+                            if(!lastStrOfLastVal.equals("@") && lastValue.split("@")[1].equals("0")){
                                 arrayList.set(arrayList.size()-1,
                                         lastValue.substring(0, lastValue.length()-1) + String.valueOf(view.getTag()));
                                 viewUtils.changeTextView(arrayList, "calcFractionTopTextView" , String.valueOf(view.getTag()));
@@ -134,14 +134,21 @@ public class MainActivity extends AppCompatActivity {
 
             // 마지막 값이 기호와 "."이 아니여야 한다.
             if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(".") && !lastStrOfLastVal.equals("@")){
-                arrayList.set(arrayList.size()-1, lastValue + String.valueOf(view.getTag()));
                 // 마지막 수식이 분수일 때
                 if(lastValue.contains("@")){
-                    viewUtils.appendTextView(arrayList, "calcFractionTopTextView", String.valueOf(view.getTag()));
-                    viewUtils.changeFractionLine(arrayList);    // 분자가 분모보다 너비가 커지면 라인을 조정한다.
+                    // "." 은 한 번만 들어가야 한다.
+                    if(!lastValue.split("@")[1].contains(".")){
+                        arrayList.set(arrayList.size()-1, lastValue + String.valueOf(view.getTag()));
+                        viewUtils.appendTextView(arrayList, "calcFractionTopTextView", String.valueOf(view.getTag()));
+                        viewUtils.changeFractionLine(arrayList);    // 분자가 분모보다 너비가 커지면 라인을 조정한다.
+                    }
                 }
                 else{
-                    viewUtils.appendTextView(arrayList, "calcTextView", String.valueOf(view.getTag()));
+                    // "." 은 한 번만 들어가야 한다.
+                    if(!lastValue.contains(".")){
+                        arrayList.set(arrayList.size()-1, lastValue + String.valueOf(view.getTag()));
+                        viewUtils.appendTextView(arrayList, "calcTextView", String.valueOf(view.getTag()));
+                    }
                 }
             }
         }
