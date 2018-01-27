@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.text_denominator) public TextView denominatorTextView;   // 분모 결괴값 뷰
     @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
     @BindView(R.id.fraction_view) public View fractionLine;    // 분수 선 뷰
+    @BindView(R.id.slide_menu) public LinearLayout slideMenu;
     private SlidingRootNav slidingRootNav;
 
     ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
@@ -77,12 +79,14 @@ public class MainActivity extends AppCompatActivity {
                 .withSavedState(savedInstanceState)
                 .withMenuLayout(R.layout.activity_nav)
                 .inject();
+        slideMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                slidingRootNav.openMenu();
+            }
+        });
 
         resultInit();
-    }
-
-    private void slidingNavInit() {
-
     }
 
     // 초기화
