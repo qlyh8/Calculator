@@ -3,7 +3,6 @@ package com.tistory.qlyh8.calculator;
 import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
@@ -13,6 +12,8 @@ import android.widget.TextView;
 import com.tistory.qlyh8.calculator.Utils.CalcFractionUtils;
 import com.tistory.qlyh8.calculator.Utils.CalcUtils;
 import com.tistory.qlyh8.calculator.Utils.ViewUtils;
+import com.yarolegovich.slidingrootnav.SlidingRootNav;
+import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.text_denominator) public TextView denominatorTextView;   // 분모 결괴값 뷰
     @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
     @BindView(R.id.fraction_view) public View fractionLine;    // 분수 선 뷰
+    private SlidingRootNav slidingRootNav;
 
     ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
     double result;  // 결과값
@@ -68,7 +70,19 @@ public class MainActivity extends AppCompatActivity {
         calcUtils = new CalcUtils();
         calcFractionUtils = new CalcFractionUtils();
 
+        slidingRootNav = new SlidingRootNavBuilder(this)
+                // .withToolbarMenuToggle(toolbar)
+                .withMenuOpened(false)
+                .withContentClickableWhenMenuOpened(false)
+                .withSavedState(savedInstanceState)
+                .withMenuLayout(R.layout.activity_nav)
+                .inject();
+
         resultInit();
+    }
+
+    private void slidingNavInit() {
+
     }
 
     // 초기화
@@ -308,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
                     numeratorTextView.setTextSize(defaultFractionResultTextSize);   // 화면 크기에 맞춤
                     denominatorTextView.setText(String.valueOf(fractionResult[1]));   // 분모
                     denominatorTextView.setTextSize(defaultFractionResultTextSize); // 화면 크기에 맞춤
-                    viewUtils.setResultFractionLine(fractionLine, numeratorTextView, denominatorTextView);  // 분수선 조정
+                    //viewUtils.setResultFractionLine(fractionLine, numeratorTextView, denominatorTextView);  // 분수선 조정
                     fractionLayout.setVisibility(View.VISIBLE);
                 }
                 catch (Exception e){
