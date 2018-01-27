@@ -16,14 +16,27 @@
         android:background="@color/colorKeyPad">
 
         <LinearLayout
-            android:id="@+id/layout_root_calc"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.2"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:gravity="end|bottom"
+            android:gravity="right"
             android:orientation="horizontal">
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/root_calc_scroll">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="end"
+                    android:id="@+id/layout_root_calc">
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
             <!--
                         <LinearLayout
                             android:layout_width="wrap_content"

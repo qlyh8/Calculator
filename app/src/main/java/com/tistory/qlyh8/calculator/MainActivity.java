@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import me.grantland.widget.AutofitHelper;
 
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R.id.root_calc_scroll) public HorizontalScrollView scrollRootView; // 스크롤 뷰
     @BindView(R.id.layout_root_calc) public LinearLayout rootLayout;    // 수식 뷰
     @BindView(R.id.resultView) public TextView resultTextView;  // 결과값 뷰
     @BindView(R.id.fraction_layout) public LinearLayout fractionLayout; // 결과 분수 레이아웃
@@ -52,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
         fractionResult = new long[2];
         resultTextView.setText("0");
         defaultFractionResultTextSize = numeratorTextView.getTextSize();    // 기본 크기 가져오기
+
+        scrollRootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+                scrollRootView.fullScroll(View.FOCUS_RIGHT);
+            }
+        });
 
         viewUtils = new ViewUtils(this, rootLayout);
         calcUtils = new CalcUtils();
