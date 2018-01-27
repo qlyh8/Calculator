@@ -15,7 +15,7 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         android:paddingStart="24dp"
-        android:text="fraction"
+        android:text="Modern"
         android:textSize="12sp" />
 
     <LinearLayout
