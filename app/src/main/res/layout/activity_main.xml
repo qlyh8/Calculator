@@ -44,100 +44,6 @@
                     </LinearLayout>
 
                 </HorizontalScrollView>
-                <!--
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:textSize="35sp"
-                                    android:textColor="@color/colorKeyPadNum"
-                                    android:text="1"/>
-                                <View
-                                    android:layout_width="50dp"
-                                    android:layout_height="2dp"
-                                    android:layout_marginEnd="5dp"
-                                    android:layout_marginStart="5dp"
-                                    android:background="@color/colorKeyPadNum"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:textSize="35sp"
-                                    android:textColor="@color/colorKeyPadNum"
-                                    android:text="10"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:textColor="@color/colorKeyPadRed"
-                                    android:textSize="25sp"
-                                    android:textStyle="bold"
-                                    android:text="+"
-                                    android:gravity="center"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:textSize="35sp"
-                                    android:textColor="@color/colorKeyPadNum"
-                                    android:text="15"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:textColor="@color/colorKeyPadRed"
-                                    android:textSize="25sp"
-                                    android:textStyle="bold"
-                                    android:layout_marginLeft="3dp"
-                                    android:text="x"
-                                    android:gravity="center"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:textSize="35sp"
-                                    android:textColor="@color/colorKeyPadNum"
-                                    android:text="10"/>
-                                <View
-                                    android:layout_width="50dp"
-                                    android:layout_height="2dp"
-                                    android:layout_marginEnd="5dp"
-                                    android:layout_marginStart="5dp"
-                                    android:background="@color/colorKeyPadNum"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:textSize="35sp"
-                                    android:textColor="@color/colorKeyPadNum"
-                                    android:text="123"/>
-                            </LinearLayout>
-                -->
             </LinearLayout>
 
             <LinearLayout
@@ -607,6 +513,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:tint="@color/colorKeyPadNum"
             android:src="@drawable/menu_text"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.tistory.qlyh8.calculator;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +13,13 @@ import android.widget.TextView;
 
 import com.tistory.qlyh8.calculator.Utils.CalcFractionUtils;
 import com.tistory.qlyh8.calculator.Utils.CalcUtils;
+import com.tistory.qlyh8.calculator.Utils.NavUtils;
 import com.tistory.qlyh8.calculator.Utils.ViewUtils;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
     @BindView(R.id.fraction_view) public View fractionLine;    // 분수 선 뷰
     @BindView(R.id.slide_menu) public LinearLayout slideMenu;
-    private SlidingRootNav slidingRootNav;
+    private NavUtils navUtils = new NavUtils();
 
     ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
     double result;  // 결과값
@@ -72,17 +75,11 @@ public class MainActivity extends AppCompatActivity {
         calcUtils = new CalcUtils();
         calcFractionUtils = new CalcFractionUtils();
 
-        slidingRootNav = new SlidingRootNavBuilder(this)
-                // .withToolbarMenuToggle(toolbar)
-                .withMenuOpened(false)
-                .withContentClickableWhenMenuOpened(false)
-                .withSavedState(savedInstanceState)
-                .withMenuLayout(R.layout.activity_nav)
-                .inject();
+        navUtils.bind(MainActivity.this,savedInstanceState);
         slideMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                slidingRootNav.openMenu();
+                navUtils.getSlidingRootNav().openMenu();
             }
         });
 
