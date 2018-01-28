@@ -49,6 +49,18 @@ public class CalcFractionUtils {
         }
     }
 
+    // long 형 나머지 예외 처리
+    private long mod (long num1, long num2) {
+        double doubleValue = (double) num1 % num2;
+        long longValue = num1 % num2;
+
+        if ((long) doubleValue != longValue) {
+            throw new ArithmeticException("long type mod overflow");
+        } else {
+            return longValue;
+        }
+    }
+
     // 소수를 분수로 변환
     private long[] convertToFraction(BigDecimal value){
         long[] result = new long[2];
@@ -170,7 +182,7 @@ public class CalcFractionUtils {
     // 분수 사칙연산
     public long[] fractionCalculate(ArrayList<String> arrayList){
 
-        long[] result = new long[2];
+        long[] result = new long[3];
 
         // arrayList 를 String 으로 변환
         String strList = "";
@@ -225,6 +237,15 @@ public class CalcFractionUtils {
         String[] strFraction = strResult.split("@");
         result[0] = Long.parseLong(strFraction[1]);   // 분자
         result[1] = Long.parseLong(strFraction[0]);   // 분모
+
+        // 분자가 분모보다 크고, 분자가 분모로 나누어 떨어지지 않을 때, 대분수 처리
+        if((Math.abs(result[0]) > Math.abs(result[1])) && (mod(result[0], result[1]) != 0)){
+            result[2] = division(result[0], result[1]); // 대분수
+            result[0] = mod(Math.abs(result[0]), Math.abs(result[1]));  // 분자
+        }
+        else{
+            result[2] = 0L;
+        }
 
         return result;
     }

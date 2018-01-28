@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,9 +34,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.layout_root_calc) public LinearLayout rootLayout;    // 수식 뷰
     @BindView(R.id.resultView) public TextView resultTextView;  // 결과값 뷰
     @BindView(R.id.fraction_layout) public LinearLayout fractionLayout; // 결과 분수 레이아웃
-    @BindView(R.id.text_denominator) public TextView denominatorTextView;   // 분모 결괴값 뷰
+    @BindView(R.id.text_denominator) public TextView denominatorTextView;   // 분모 결과값 뷰
     @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
     @BindView(R.id.fraction_view) public View fractionLine;    // 분수 선 뷰
+    @BindView(R.id.text_whole) public TextView wholeTextView;   // 대분수 결과값 뷰
     @BindView(R.id.slide_menu) public LinearLayout slideMenu;
     private NavUtils navUtils = new NavUtils();
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         AutofitHelper.create(resultTextView);   // 텍스트 길이 자동 조정
 
         arrayList = new ArrayList<>();
-        fractionResult = new long[2];
+        fractionResult = new long[3];
         resultTextView.setText("0");
         defaultFractionResultTextSize = numeratorTextView.getTextSize();    // 기본 크기 가져오기
 
@@ -92,12 +92,14 @@ public class MainActivity extends AppCompatActivity {
         longResult = 0L;  // 정수 결과값 초기화
         fractionResult[0] = 0L;    // 분수(분자) 결과값 초기화
         fractionResult[1] = 0L;    // 분수(분모) 결과값 초기화
+        fractionResult[2] = 0L;    // 분수(대분수) 결과값 초기화
         fractionLayout.setVisibility(View.INVISIBLE);   // 분수 값 숨김
     }
 
     //"0~9" 버튼 클릭
     @SuppressLint("SetTextI18n")
     public void clickBtnNumber(View view) {
+        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
         // 수식창이 비었을 때 배열과 뷰에 텍스트를 추가한다.
         if(arrayList.isEmpty()){
             arrayList.add(String.valueOf(view.getTag()));
@@ -153,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
     // "." 버튼 클릭
     @SuppressLint("SetTextI18n")
     public void clickBtnPoint(View view){
+        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
         // 배열 값이 비어있지 않아야 한다.
         if(!arrayList.isEmpty()){
             String lastValue = arrayList.get(arrayList.size()-1);    // 마지막 값
@@ -182,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
     // "ㅡ" (분수) 버튼 클릭
     public void clickBtnFraction(View view){
+        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
         // 배열 값이 비어있지 않아야 한다.
         if(!arrayList.isEmpty()){
             // 수식이 0일 때 입력되지 않아야 한다.
@@ -205,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
 
     // "+,－,×,÷" 버튼 클릭
     public void clickBtnSymbol(View view) {
+        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
         // 배열 값이 비어있을 때 기호가 들어가면 안된다.
         if(!arrayList.isEmpty()){
             String lastValue = arrayList.get(arrayList.size()-1);   // 마지막 값
@@ -228,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
     // "←" 버튼 클릭
     public void clickBtnClear(View view) {
+        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
         // 배열 값이 비어있지 않아야 한다.
         if(!arrayList.isEmpty()){
             String lastValue = arrayList.get(arrayList.size()-1);   // 마지막 값
@@ -324,11 +330,20 @@ public class MainActivity extends AppCompatActivity {
                     denominatorTextView.setText(String.valueOf(fractionResult[1]));   // 분모
                     denominatorTextView.setTextSize(defaultFractionResultTextSize); // 화면 크기에 맞춤
                     //viewUtils.setResultFractionLine(fractionLine, numeratorTextView, denominatorTextView);  // 분수선 조정
+                    if(fractionResult[2] != 0){
+                        wholeTextView.setText(String.valueOf(fractionResult[2]));   // 대분수
+                        wholeTextView.setTextSize(defaultFractionResultTextSize);   // 화면 크기에 맞춤
+                    }
+                    else{
+                        wholeTextView.setText("");   // 대분수
+                    }
+
                     fractionLayout.setVisibility(View.VISIBLE);
                 }
                 catch (Exception e){
                     fractionResult[0] = 0L;
                     fractionResult[1] = 0L;
+                    fractionResult[2] = 0L;
                     fractionLayout.setVisibility(View.INVISIBLE);
                 }
             }

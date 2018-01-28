@@ -77,7 +77,22 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/text_whole"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center|end"
+                            android:textSize="25sp"
+                            android:textColor="@color/colorKeyPadNum"
+                            android:singleLine="true"
+                            android:text="104"/>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -98,8 +113,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:gravity="center"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="5dp"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="2dp"
                             android:background="@color/colorKeyPadNum"/>
                         <me.grantland.widget.AutofitTextView
                             android:id="@+id/text_denominator"
