@@ -1,7 +1,6 @@
 package com.tistory.qlyh8.calculator;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,15 +9,14 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.tistory.qlyh8.calculator.Utils.CalcFractionUtils;
-import com.tistory.qlyh8.calculator.Utils.CalcUtils;
-import com.tistory.qlyh8.calculator.Utils.NavUtils;
-import com.tistory.qlyh8.calculator.Utils.ViewUtils;
-import com.yarolegovich.slidingrootnav.SlidingRootNav;
-import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
+import com.tistory.qlyh8.calculator.model.HistoryObejct;
+import com.tistory.qlyh8.calculator.utils.CalcFractionUtils;
+import com.tistory.qlyh8.calculator.utils.CalcUtils;
+import com.tistory.qlyh8.calculator.utils.HistoryStorageUtil;
+import com.tistory.qlyh8.calculator.utils.NavUtils;
+import com.tistory.qlyh8.calculator.utils.ViewUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -304,7 +302,6 @@ public class MainActivity extends AppCompatActivity {
 
                 // "@"를 "÷"으로 변환
                 String strList = calcUtils.convertToDivide(arrayList);
-
                 // 사칙연산
                 try {
                     result = calcUtils.calculate(strList);
@@ -316,10 +313,11 @@ public class MainActivity extends AppCompatActivity {
 
                 // 결과가 정수일 경우 정수형으로 변환
                 longResult = (long)result;
-                if(result == longResult)
+                if(result == longResult) {
                     resultTextView.setText(String.valueOf(longResult));
-                else
+                } else {
                     resultTextView.setText(String.valueOf(result));
+                }
 
                 // 분수 사칙연산
                 try {
@@ -346,7 +344,18 @@ public class MainActivity extends AppCompatActivity {
                     fractionResult[2] = 0L;
                     fractionLayout.setVisibility(View.INVISIBLE);
                 }
+                setHistoryData(arrayList, result, fractionResult);
             }
         }
+    }
+
+    public void setHistoryData(ArrayList<String> calc, double result, long[] fractionResult) {
+        HistoryObejct tempData;
+        String tempCalc = "";
+        for(String temp : calc) {
+            tempCalc += temp;
+        }
+        tempData = new HistoryObejct(tempCalc, result, fractionResult);
+        HistoryStorageUtil.historyRes.add(tempData);
     }
 }

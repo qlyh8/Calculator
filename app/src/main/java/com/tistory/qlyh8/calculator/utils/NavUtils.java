@@ -1,7 +1,6 @@
-package com.tistory.qlyh8.calculator.Utils;
+package com.tistory.qlyh8.calculator.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,13 +24,11 @@ public class NavUtils {
     public void bind(Activity activity, Bundle savedInstanceState) {
         myActivity = activity;
         slidingRootNav = new SlidingRootNavBuilder(myActivity)
-                // .withToolbarMenuToggle(toolbar)
                 .withMenuOpened(false)
                 .withContentClickableWhenMenuOpened(false)
                 .withSavedState(savedInstanceState)
                 .withMenuLayout(R.layout.activity_nav)
                 .inject();
-
         setClickEvent();
     }
 

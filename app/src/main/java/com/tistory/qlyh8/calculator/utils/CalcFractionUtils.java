@@ -1,4 +1,4 @@
-package com.tistory.qlyh8.calculator.Utils;
+package com.tistory.qlyh8.calculator.utils;
 
 /*
  * Created by YUNHEE on 2018-01-26.

@@ -1,10 +1,9 @@
-package com.tistory.qlyh8.calculator.Utils;
+package com.tistory.qlyh8.calculator.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;

@@ -1,6 +1,4 @@
-package com.tistory.qlyh8.calculator.Utils;
-
-import android.util.Log;
+package com.tistory.qlyh8.calculator.utils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
