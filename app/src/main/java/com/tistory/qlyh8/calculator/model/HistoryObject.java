@@ -1,25 +1,27 @@
 package com.tistory.qlyh8.calculator.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by cmtyx on 2018-01-28.
  */
 
-public class HistoryObejct {
-    private String calc;
+public class HistoryObject {
+    private ArrayList<String> calc;
     private double result;
     private long[] fractionResult;
 
-    public HistoryObejct(String calc, double result, long[] fractionResult) {
+    public HistoryObject(ArrayList<String> calc, double result, long[] fractionResult) {
         this.calc = calc;
         this.result = result;
         this.fractionResult = fractionResult;
     }
 
-    public String getCalc() {
+    public ArrayList<String> getCalc() {
         return calc;
     }
 
-    public void setCalc(String calc) {
+    public void setCalc(ArrayList<String> calc) {
         this.calc = calc;
     }
 

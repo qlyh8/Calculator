@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.tistory.qlyh8.calculator.R;
-import com.tistory.qlyh8.calculator.model.HistoryObejct;
+import com.tistory.qlyh8.calculator.model.HistoryObject;
 import com.tistory.qlyh8.calculator.utils.ViewUtils;
 
 import java.util.ArrayList;
@@ -24,10 +24,10 @@ import butterknife.ButterKnife;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
-    private List<HistoryObejct> res;
+    private List<HistoryObject> res;
     private LayoutInflater inflater;
 
-    public HistoryAdapter(Context context, List<HistoryObejct> res){
+    public HistoryAdapter(Context context, List<HistoryObject> res){
         inflater = LayoutInflater.from(context);
         this.res = res;
     }
@@ -35,24 +35,22 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.history_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.viewUtils = new ViewUtils(inflater.getContext(), holder.historyItem);
-        String calc = res.get(position).getCalc();
+        ArrayList<String> calc = res.get(position).getCalc();
 
         //분수 데이터 넣기 ?.?
-        for (int i = 0; i < calc.length(); i++) {
-            holder.temp.add(String.valueOf(calc.charAt(i)));
+        // setNumTextView: "calcTextView + calc.size()" 라는 태그를 가진 텍스트 뷰에 string 을 생성
+        // calc 의 size 가 변하지 않아야 해당 텍스트 뷰에 텍스트를 append 할 수 있다.
+        for (int i = 0; i < calc.size(); i++) {
             if(i==0)
-                holder.viewUtils.setNumTextView(holder.temp,String.valueOf(calc.charAt(i)));
+                holder.viewUtils.setNumTextView(calc, String.valueOf(calc.get(i)));
             else
-                holder.viewUtils.appendTextView(holder.temp, "calcTextView", String.valueOf(calc.charAt(i)));
+                holder.viewUtils.appendTextView(calc, "calcTextView", String.valueOf(calc.get(i)));
         }
-
     }
 
     @Override
@@ -63,12 +61,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.history_item) LinearLayout historyItem;
         private ViewUtils viewUtils;
-        private ArrayList<String> temp;
 
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this,view);
-            temp = new ArrayList<>();
+            viewUtils = new ViewUtils(inflater.getContext(), historyItem);
         }
     }
 }

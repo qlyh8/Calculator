@@ -9,7 +9,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.tistory.qlyh8.calculator.model.HistoryObejct;
+import com.tistory.qlyh8.calculator.model.HistoryObject;
 import com.tistory.qlyh8.calculator.utils.CalcFractionUtils;
 import com.tistory.qlyh8.calculator.utils.CalcUtils;
 import com.tistory.qlyh8.calculator.utils.HistoryStorageUtil;
@@ -350,12 +350,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setHistoryData(ArrayList<String> calc, double result, long[] fractionResult) {
-        HistoryObejct tempData;
-        String tempCalc = "";
-        for(String temp : calc) {
-            tempCalc += temp;
+        HistoryObject tempData;
+
+        // 복제
+        ArrayList<String> historyCalcList = new ArrayList<>();
+        historyCalcList.addAll(calc);
+
+        // "@"를 "÷"로 변환
+        for(int i = 0; i < historyCalcList.size() ; i++){
+            if(historyCalcList.get(i).contains("@")){
+                String splitStr[] = historyCalcList.get(i).split("@");
+                historyCalcList.set(i, "(" + splitStr[1] + "÷" + splitStr[0] + ")");
+            }
         }
-        tempData = new HistoryObejct(tempCalc, result, fractionResult);
+
+        tempData = new HistoryObject(historyCalcList, result, fractionResult);
         HistoryStorageUtil.historyRes.add(tempData);
     }
 }

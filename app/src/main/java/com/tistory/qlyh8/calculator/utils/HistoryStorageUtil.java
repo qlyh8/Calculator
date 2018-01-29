@@ -1,6 +1,6 @@
 package com.tistory.qlyh8.calculator.utils;
 
-import com.tistory.qlyh8.calculator.model.HistoryObejct;
+import com.tistory.qlyh8.calculator.model.HistoryObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,5 +10,5 @@ import java.util.List;
  */
 
 public class HistoryStorageUtil {
-    public static List<HistoryObejct> historyRes = new ArrayList<>();
+    public static List<HistoryObject> historyRes = new ArrayList<>();
 }
