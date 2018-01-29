@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.tistory.qlyh8.calculator.R;
 import com.tistory.qlyh8.calculator.model.HistoryObject;
@@ -41,16 +42,23 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ArrayList<String> calc = res.get(position).getCalc();
-
-        //분수 데이터 넣기 ?.?
+        holder.historyItemNum.setText(String.valueOf(position+1));
         // setNumTextView: "calcTextView + calc.size()" 라는 태그를 가진 텍스트 뷰에 string 을 생성
         // calc 의 size 가 변하지 않아야 해당 텍스트 뷰에 텍스트를 append 할 수 있다.
         for (int i = 0; i < calc.size(); i++) {
             if(i==0)
                 holder.viewUtils.setNumTextView(calc, String.valueOf(calc.get(i)));
-            else
-                holder.viewUtils.appendTextView(calc, "calcTextView", String.valueOf(calc.get(i)));
+            else {
+                if(calc.get(i).contains("@")){
+                    String fraction[] = calc.get(i).split("@");
+                    holder.viewUtils.setFractionHistoryTextView(i, fraction[0], fraction[1]);
+                } else {
+                    holder.viewUtils.setNumTextView(calc, String.valueOf(calc.get(i)));
+                }
+            }
         }
+        holder.viewUtils.setNumTextView(calc, "=");
+        holder.viewUtils.setNumTextView(calc, String.valueOf(res.get(position).getResult()));
     }
 
     @Override
@@ -60,6 +68,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.history_item) LinearLayout historyItem;
+        @BindView(R.id.history_item_num) TextView historyItemNum;
         private ViewUtils viewUtils;
 
         public ViewHolder(View view) {
