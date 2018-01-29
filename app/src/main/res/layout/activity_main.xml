@@ -82,7 +82,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent">
-                        <TextView
+                        <me.grantland.widget.AutofitTextView
                             android:id="@+id/text_whole"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -115,7 +115,7 @@
                             android:layout_height="2dp"
                             android:gravity="center"
                             android:background="@color/colorKeyPadNum"/>
-                        <TextView
+                        <me.grantland.widget.AutofitTextView
                             android:id="@+id/text_denominator"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
