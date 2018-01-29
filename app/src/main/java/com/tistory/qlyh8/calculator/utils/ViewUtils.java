@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -171,26 +172,6 @@ public class ViewUtils {
 
         newParams.setMargins(5,0,5,0);
         View line = rootLayout.findViewWithTag("calcFractionLine" + arrayList.size());
-        line.setLayoutParams(newParams);
-    }
-
-    // 결과 분수 선 조정
-    public void setResultFractionLine(View line, TextView topTv, TextView btmTv){
-        // 분자 너비
-        topTv.measure(0,0);
-        int topWidth = topTv.getMeasuredWidth();
-        // 분모 너비
-        btmTv.measure(0,0);
-        int btmWidth = btmTv.getMeasuredWidth();
-
-        // 분자와 분모 중 너비가 큰 것에 맞춰 라인을 조정한다.
-        LinearLayout.LayoutParams newParams;
-        if(topWidth > btmWidth)
-            newParams = new LinearLayout.LayoutParams(topWidth, 2);
-        else
-            newParams = new LinearLayout.LayoutParams(btmWidth, 2);
-
-        newParams.setMargins(5,0,5,0);
         line.setLayoutParams(newParams);
     }
 }

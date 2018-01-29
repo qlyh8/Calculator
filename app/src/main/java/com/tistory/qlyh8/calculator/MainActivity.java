@@ -3,6 +3,8 @@ package com.tistory.qlyh8.calculator;
 import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
@@ -43,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     double result;  // 결과값
     long longResult;  // 정수 결과값
     long[] fractionResult; // 분수 결과값
-    float defaultFractionResultTextSize;    // 분수 결과값 기본 크기
 
     ViewUtils viewUtils;
     CalcUtils calcUtils;
@@ -56,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // 화면 꺼짐 방지
         AutofitHelper.create(resultTextView);   // 텍스트 길이 자동 조정
+        AutofitHelper.create(numeratorTextView);
 
         arrayList = new ArrayList<>();
         fractionResult = new long[3];
         resultTextView.setText("0");
-        defaultFractionResultTextSize = numeratorTextView.getTextSize();    // 기본 크기 가져오기
 
         scrollRootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
@@ -324,17 +325,15 @@ public class MainActivity extends AppCompatActivity {
                     fractionResult = calcFractionUtils.fractionCalculate(arrayList);
 
                     numeratorTextView.setText(String.valueOf(fractionResult[0])); // 분자
-                    numeratorTextView.setTextSize(defaultFractionResultTextSize);   // 화면 크기에 맞춤
                     denominatorTextView.setText(String.valueOf(fractionResult[1]));   // 분모
-                    denominatorTextView.setTextSize(defaultFractionResultTextSize); // 화면 크기에 맞춤
-                    //viewUtils.setResultFractionLine(fractionLine, numeratorTextView, denominatorTextView);  // 분수선 조정
-                    if(fractionResult[2] != 0){
+                    if(fractionResult[2] != 0)
                         wholeTextView.setText(String.valueOf(fractionResult[2]));   // 대분수
-                        wholeTextView.setTextSize(defaultFractionResultTextSize);   // 화면 크기에 맞춤
-                    }
-                    else{
+                    else
                         wholeTextView.setText("");   // 대분수
-                    }
+
+                    // 화면에 맞게 텍스트크기 조정
+                    denominatorTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, numeratorTextView.getTextSize());
+                    wholeTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, numeratorTextView.getTextSize());
 
                     fractionLayout.setVisibility(View.VISIBLE);
                 }

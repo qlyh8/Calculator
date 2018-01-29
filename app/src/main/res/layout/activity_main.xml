@@ -82,11 +82,12 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent">
-                        <me.grantland.widget.AutofitTextView
+                        <TextView
                             android:id="@+id/text_whole"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center|end"
+                            android:paddingRight="2dp"
                             android:textSize="25sp"
                             android:textColor="@color/colorKeyPadNum"
                             android:singleLine="true"
@@ -107,16 +108,14 @@
                             android:textSize="25sp"
                             android:textColor="@color/colorKeyPadNum"
                             android:singleLine="true"
-                            android:text="10"/>
+                            android:text="1"/>
                         <View
                             android:id="@+id/fraction_view"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:gravity="center"
-                            android:layout_marginStart="2dp"
-                            android:layout_marginEnd="2dp"
                             android:background="@color/colorKeyPadNum"/>
-                        <me.grantland.widget.AutofitTextView
+                        <TextView
                             android:id="@+id/text_denominator"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
