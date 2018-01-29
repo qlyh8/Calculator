@@ -1,6 +1,7 @@
 package com.tistory.qlyh8.calculator.model;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 /**
@@ -10,9 +11,9 @@ import java.util.ArrayList;
 public class HistoryObject {
     private ArrayList<String> calc;
     private String result;
-    private long[] fractionResult;
+    private BigInteger[] fractionResult;
 
-    public HistoryObject(ArrayList<String> calc, String result, long[] fractionResult) {
+    public HistoryObject(ArrayList<String> calc, String result, BigInteger[] fractionResult) {
 
         this.calc = calc;
         this.result = result;
@@ -35,11 +36,11 @@ public class HistoryObject {
         this.calc = calc;
     }
 
-    public long[] getFractionResult() {
+    public BigInteger[] getFractionResult() {
         return fractionResult;
     }
 
-    public void setFractionResult(long[] fractionResult) {
+    public void setFractionResult(BigInteger[] fractionResult) {
         this.fractionResult = fractionResult;
     }
 }

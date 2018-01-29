@@ -1,6 +1,7 @@
 package com.tistory.qlyh8.calculator.utils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -88,7 +89,8 @@ public class CalcUtils {
                     break;
                 case "÷":
                     value = stack.pop();
-                    stack.push(value.divide(new BigDecimal(number)));
+                    // 소수 17자리에서 반올림
+                    stack.push(value.divide(new BigDecimal(number), 16, RoundingMode.HALF_EVEN).stripTrailingZeros());
                     break;
                 case "＋":
                     stack.push(new BigDecimal(number));

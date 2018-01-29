@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setHistoryData(ArrayList<String> calc, String result, long[] fractionResult) {
+    public void setHistoryData(ArrayList<String> calc, String result, BigInteger[] fractionResult) {
         HistoryObject tempData;
         ArrayList<String> historyCalcList = new ArrayList<>();
         historyCalcList.addAll(calc);

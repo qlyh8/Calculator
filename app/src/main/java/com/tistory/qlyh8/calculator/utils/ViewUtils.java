@@ -156,9 +156,16 @@ public class ViewUtils {
         BottomTextView.setTag("calcFractionBottomTextView"+key);
         layout.addView(BottomTextView);
 
-        // 분모 텍스트 너비에 맞게 라인 길이 변경
-        BottomTextView.measure(0,0);
-        LinearLayout.LayoutParams newParams = new LinearLayout.LayoutParams(BottomTextView.getMeasuredWidth(), 3);
+        // 분자와 분모 중 너비가 큰 것에 맞춰 라인을 조정한다.
+        LinearLayout.LayoutParams newParams;
+        if(TopTextView.getText().length() > BottomTextView.getText().length()){
+            TopTextView.measure(0,0);
+            newParams = new LinearLayout.LayoutParams(TopTextView.getMeasuredWidth(), 3);
+        }
+        else{
+            BottomTextView.measure(0,0);
+            newParams = new LinearLayout.LayoutParams(BottomTextView.getMeasuredWidth(), 3);
+        }
         newParams.setMargins(5,0,5,0);
         line.setLayoutParams(newParams);
     }
@@ -218,29 +225,6 @@ public class ViewUtils {
 
         newParams.setMargins(5,0,5,0);
         View line = rootLayout.findViewWithTag("calcFractionLine" + arrayList.size());
-        line.setLayoutParams(newParams);
-    }
-
-    public void changeHistoryFractionLine(int key){
-        TextView topTextView = rootLayout.findViewWithTag("calcFractionTopTextView" + key);
-        TextView bottomTextView = rootLayout.findViewWithTag("calcFractionBottomTextView" + key);
-
-        // 디폴트 텍스트 너비를 구한다.
-        if(topTextView.getText().length() == 1){
-            topTextView.measure(0,0);
-            if(defaultTextWidth > topTextView.getMeasuredWidth())
-                defaultTextWidth = topTextView.getMeasuredWidth();
-        }
-
-        // 분자와 분모 중 너비가 큰 것에 맞춰 라인을 조정한다.
-        LinearLayout.LayoutParams newParams;
-        if(topTextView.getText().length() > bottomTextView.getText().length())
-            newParams = new LinearLayout.LayoutParams(topTextView.getText().length() * defaultTextWidth, 3);
-        else
-            newParams = new LinearLayout.LayoutParams(bottomTextView.getText().length() * defaultTextWidth, 3);
-
-        newParams.setMargins(5,0,5,0);
-        View line = rootLayout.findViewWithTag("calcFractionLine" + key);
         line.setLayoutParams(newParams);
     }
 }
