@@ -338,26 +338,15 @@ public class MainActivity extends AppCompatActivity {
                     fractionResult[2] = 0L;
                     fractionLayout.setVisibility(View.INVISIBLE);
                 }
-                setHistoryData(arrayList, result, fractionResult);
+                setHistoryData(arrayList, String.valueOf(result), fractionResult);
             }
         }
     }
 
-    public void setHistoryData(ArrayList<String> calc, BigDecimal result, long[] fractionResult) {
+    public void setHistoryData(ArrayList<String> calc, String result, long[] fractionResult) {
         HistoryObject tempData;
-
-        // 복제
         ArrayList<String> historyCalcList = new ArrayList<>();
         historyCalcList.addAll(calc);
-
-        // "@"를 "÷"로 변환
-        for(int i = 0; i < historyCalcList.size() ; i++){
-            if(historyCalcList.get(i).contains("@")){
-                String splitStr[] = historyCalcList.get(i).split("@");
-                historyCalcList.set(i, "(" + splitStr[1] + "÷" + splitStr[0] + ")");
-            }
-        }
-
         tempData = new HistoryObject(historyCalcList, result, fractionResult);
         HistoryStorageUtil.historyRes.add(tempData);
     }

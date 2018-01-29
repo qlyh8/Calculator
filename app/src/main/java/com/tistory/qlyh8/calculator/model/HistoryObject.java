@@ -9,13 +9,22 @@ import java.util.ArrayList;
 
 public class HistoryObject {
     private ArrayList<String> calc;
-    private BigDecimal result;
+    private String result;
     private long[] fractionResult;
 
-    public HistoryObject(ArrayList<String> calc, BigDecimal result, long[] fractionResult) {
+    public HistoryObject(ArrayList<String> calc, String result, long[] fractionResult) {
+
         this.calc = calc;
         this.result = result;
         this.fractionResult = fractionResult;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public ArrayList<String> getCalc() {
@@ -24,14 +33,6 @@ public class HistoryObject {
 
     public void setCalc(ArrayList<String> calc) {
         this.calc = calc;
-    }
-
-    public BigDecimal getResult() {
-        return result;
-    }
-
-    public void setResult(BigDecimal result) {
-        this.result = result;
     }
 
     public long[] getFractionResult() {

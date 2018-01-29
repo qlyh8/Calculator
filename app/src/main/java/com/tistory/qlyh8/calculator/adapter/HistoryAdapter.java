@@ -48,9 +48,17 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         for (int i = 0; i < calc.size(); i++) {
             if(i==0)
                 holder.viewUtils.setNumTextView(calc, String.valueOf(calc.get(i)));
-            else
-                holder.viewUtils.appendTextView(calc, "calcTextView", String.valueOf(calc.get(i)));
+            else {
+                if(calc.get(i).contains("@")){
+                    String fraction[] = calc.get(i).split("@");
+                    holder.viewUtils.setFractionHistoryTextView(i, fraction[0], fraction[1]);
+                } else {
+                    holder.viewUtils.setNumTextView(calc, String.valueOf(calc.get(i)));
+                }
+            }
         }
+        holder.viewUtils.setNumTextView(calc, "=");
+        holder.viewUtils.setNumTextView(calc, String.valueOf(res.get(position).getResult()));
     }
 
     @Override
