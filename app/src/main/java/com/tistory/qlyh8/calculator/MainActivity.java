@@ -18,6 +18,7 @@ import com.tistory.qlyh8.calculator.utils.HistoryStorageUtil;
 import com.tistory.qlyh8.calculator.utils.NavUtils;
 import com.tistory.qlyh8.calculator.utils.ViewUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.root_calc_scroll) public HorizontalScrollView scrollRootView; // 스크롤 뷰
     @BindView(R.id.layout_root_calc) public LinearLayout rootLayout;    // 수식 뷰
     @BindView(R.id.resultView) public TextView resultTextView;  // 결과값 뷰
-    @BindView(R.id.fraction_layout) public LinearLayout fractionLayout; // 결과 분수 레이아웃
+    @BindView(R.id.fraction_layout) public LinearLayout fractionLayout; // 분수 결과값 레이아웃
     @BindView(R.id.text_denominator) public TextView denominatorTextView;   // 분모 결과값 뷰
     @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
     @BindView(R.id.fraction_view) public View fractionLine;    // 분수 선 뷰
@@ -42,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private NavUtils navUtils = new NavUtils();
 
     ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
-    double result;  // 결과값
-    long longResult;  // 정수 결과값
+    BigDecimal result;  // 결과값
     long[] fractionResult; // 분수 결과값
+    float defaultFractionTextSize;
 
     ViewUtils viewUtils;
     CalcUtils calcUtils;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
         fractionResult = new long[3];
         resultTextView.setText("0");
+        defaultFractionTextSize = numeratorTextView.getTextSize();
 
         scrollRootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
@@ -87,8 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 초기화
     public void resultInit(){
-        result = 0d;    // 결과값 초기화
-        longResult = 0L;  // 정수 결과값 초기화
+        result = BigDecimal.valueOf(0d);    // 결과값 초기화
         fractionResult[0] = 0L;    // 분수(분자) 결과값 초기화
         fractionResult[1] = 0L;    // 분수(분모) 결과값 초기화
         fractionResult[2] = 0L;    // 분수(대분수) 결과값 초기화
@@ -308,17 +309,10 @@ public class MainActivity extends AppCompatActivity {
                     result = calcUtils.calculate(strList);
                 }
                 catch (Exception e){
-                    result = 0;
-                    longResult = 0L;
+                    result = BigDecimal.valueOf(0);
                 }
+                resultTextView.setText(String.valueOf(result));
 
-                // 결과가 정수일 경우 정수형으로 변환
-                longResult = (long)result;
-                if(result == longResult) {
-                    resultTextView.setText(String.valueOf(longResult));
-                } else {
-                    resultTextView.setText(String.valueOf(result));
-                }
 
                 // 분수 사칙연산
                 try {
@@ -332,6 +326,7 @@ public class MainActivity extends AppCompatActivity {
                         wholeTextView.setText("");   // 대분수
 
                     // 화면에 맞게 텍스트크기 조정
+                    numeratorTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultFractionTextSize);
                     denominatorTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, numeratorTextView.getTextSize());
                     wholeTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, numeratorTextView.getTextSize());
 
@@ -348,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setHistoryData(ArrayList<String> calc, double result, long[] fractionResult) {
+    public void setHistoryData(ArrayList<String> calc, BigDecimal result, long[] fractionResult) {
         HistoryObject tempData;
 
         // 복제

@@ -1,5 +1,6 @@
 package com.tistory.qlyh8.calculator.utils;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -58,18 +59,10 @@ public class CalcUtils {
         return strList;
     }
 
-    // double 형 예외처리
-    private double doubleValue(double value){
-        if (Double.isInfinite(value) || Double.isNaN(value))
-            throw new ArithmeticException("double type overflow");
-        else
-            return value;
-    }
-
     // 사칙연산
-    public double calculate(String strList){
+    public BigDecimal calculate(String strList) throws Exception {
 
-        double newResult = 0d;
+        BigDecimal newResult = BigDecimal.valueOf(0);
 
         // 숫자만 골라낸다.
         StringTokenizer tokenNumber = new StringTokenizer(strList, "＋－×÷");
@@ -77,33 +70,31 @@ public class CalcUtils {
         StringTokenizer tokenOperator = new StringTokenizer(strList, "1234567890.");
 
         // 숫자를 담을 스택
-        Stack<Double> stack = new Stack<>();
+        Stack<BigDecimal> stack = new Stack<>();
         // 첫 번째 숫자를 스택에 넣는다.
-        stack.push(doubleValue(Double.parseDouble(tokenNumber.nextToken())));
+        stack.push(new BigDecimal(tokenNumber.nextToken()));
         // 곱셈과 나눗셈이 있으면 스택의 마지막 숫자를 꺼내 계산한 후 계산한 값으로 다시 스택에 넣는다.
         // 뺄셈은 해당 숫자를 -1과 곱셈하여 다시 스택에 넣는다.
         // 최종 스택에는 곱셈과 나눗셈, 뺄셈을 처리한 값만 존재한다.
         while (tokenNumber.hasMoreTokens()){
             String number = tokenNumber.nextToken();    // 피연산자
             String operator = tokenOperator.nextToken();    // 연산자
-            Double value;   // 스택에 마지막으로 들어간 숫자
+            BigDecimal value;   // 스택에 마지막으로 들어간 숫자
 
             switch (operator){
                 case "×":
                     value = stack.pop();
-                    value *= doubleValue(Double.parseDouble(number));
-                    stack.push(doubleValue(value));
+                    stack.push(value.multiply(new BigDecimal(number)));
                     break;
                 case "÷":
                     value = stack.pop();
-                    value /= doubleValue(Double.parseDouble(number));
-                    stack.push(doubleValue(value));
+                    stack.push(value.divide(new BigDecimal(number)));
                     break;
                 case "＋":
-                    stack.push(doubleValue(Double.parseDouble(number)));
+                    stack.push(new BigDecimal(number));
                     break;
                 case "－":
-                    stack.push(doubleValue(-1 * (Double.parseDouble(number))));
+                    stack.push(new BigDecimal("-1").multiply(new BigDecimal(number)));
                     break;
                 default:
                     break;
@@ -112,15 +103,8 @@ public class CalcUtils {
 
         // 뺄셈, 곱셈, 나눗셈을 수행한 값들을 모두 더한다.
         while(!stack.isEmpty()){
-            newResult += stack.pop();
-
-            if (Double.isInfinite(newResult) || Double.isNaN(newResult))
-                throw new ArithmeticException("double type overflow");
+            newResult = newResult.add(stack.pop());
         }
-
-        // 소수점 이하 숫지를 0을 채우지않으며, 14자리까지만 나오게 한다.
-        DecimalFormat newFormat = new DecimalFormat("#.##############");
-        newResult =  Double.valueOf(newFormat.format(newResult));
 
         return newResult;
     }
