@@ -71,63 +71,79 @@
                         android:singleLine="true"/>
                 </LinearLayout>
 
-                <LinearLayout
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/fraction_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="end"
+                    android:layout_gravity="end"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:id="@+id/fraction_layout_1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="end"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/fraction_layout_2">
+
                         <me.grantland.widget.AutofitTextView
                             android:id="@+id/text_whole"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center|end"
-                            android:paddingRight="2dp"
+                            android:paddingEnd="2dp"
+                            android:paddingStart="0dp"
+                            android:singleLine="true"
                             android:textSize="25sp"
                             android:textColor="@color/colorKeyPadNum"
-                            android:singleLine="true"
-                            android:text="104"/>
+                            android:text="104" />
+
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/fraction_layout_2"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/fraction_layout_1">
+
                         <me.grantland.widget.AutofitTextView
                             android:id="@+id/text_numerator"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:singleLine="true"
                             android:textSize="25sp"
                             android:textColor="@color/colorKeyPadNum"
-                            android:singleLine="true"
-                            android:text="1"/>
+                            android:text="1" />
+
                         <View
-                            android:id="@+id/fraction_view"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:gravity="center"
-                            android:background="@color/colorKeyPadNum"/>
+                            android:background="@color/colorKeyPadNum"
+                            android:gravity="center" />
+
                         <me.grantland.widget.AutofitTextView
                             android:id="@+id/text_denominator"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:singleLine="true"
                             android:textSize="25sp"
                             android:textColor="@color/colorKeyPadNum"
-                            android:singleLine="true"
-                            android:text="123"/>
+                            android:text="123" />
                     </LinearLayout>
 
-                </LinearLayout>
+                </android.support.constraint.ConstraintLayout>
 
             </LinearLayout>
 
@@ -417,8 +433,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/ripple_keypad"
+                        android:text="@string/plusMinus"
                         android:textSize="@dimen/keypadTextSize"
-                        android:textColor="@color/colorKeyPadRed" />
+                        android:textColor="@color/colorKeyPadRed"
+                        android:onClick="clickBtnPlusMinus" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -1,6 +1,7 @@
 package com.tistory.qlyh8.calculator;
 
 import android.annotation.SuppressLint;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,10 +36,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.root_calc_scroll) public HorizontalScrollView scrollRootView; // 스크롤 뷰
     @BindView(R.id.layout_root_calc) public LinearLayout rootLayout;    // 수식 뷰
     @BindView(R.id.resultView) public TextView resultTextView;  // 결과값 뷰
-    @BindView(R.id.fraction_layout) public LinearLayout fractionLayout; // 분수 결과값 레이아웃
+    @BindView(R.id.fraction_layout) public ConstraintLayout fractionLayout; // 분수 결과값 레이아웃
     @BindView(R.id.text_denominator) public TextView denominatorTextView;   // 분모 결과값 뷰
     @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
-    @BindView(R.id.fraction_view) public View fractionLine;    // 분수 선 뷰
     @BindView(R.id.text_whole) public TextView wholeTextView;   // 대분수 결과값 뷰
     @BindView(R.id.slide_menu) public LinearLayout slideMenu;
     private NavUtils navUtils = new NavUtils();
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
     BigDecimal result;  // 결과값
     BigInteger[] fractionResult; // 분수 결과값
-    float defaultFractionTextSize;
+    float defaultFractionTextSize;  // 분수 결과값 기본 텍스트 크기
 
     ViewUtils viewUtils;
     CalcUtils calcUtils;
@@ -289,6 +289,11 @@ public class MainActivity extends AppCompatActivity {
         resultTextView.setText("0");    // 결과 값을 0으로 초기화
         arrayList.clear();  // 리스트의 모든 내용 삭제
         resultInit(); // 결과값 초기화
+    }
+
+    // "＋/－" 버튼 클릭
+    public void clickBtnPlusMinus(View view) {
+
     }
 
     // "=" 버튼 클릭
