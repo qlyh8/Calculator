@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#f0e2b1</color>-->
-    <color name="colorPrimary">#1E91BD</color>
-    <!--<color name="colorPrimaryDark">#d6c58a</color>-->
-    <color name="colorPrimaryDark">#1E91BD</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
     <color name="colorMenu">#303030</color>
-    <!-- <color name="colorKeyPad">#f0e2b1</color>-->
-    <color name="colorKeyPad">#3d3d3d</color>
-    <color name="colorKeyPadNum">#7c7c7c</color>
-    <color name="colorKeyPadRed">#ff6f6f</color>
+    <color name="colorKeyPad">#3D3D3D</color>
+    <color name="colorKeyPadLightDark">#9E9E9E</color>
+    <color name="colorKeyPadNum">#7C7C7C</color>
+    <color name="colorKeyPadNumLightDark">#BEBEBE</color>
 
-    <color name="colorBlack">#000</color>
-    <color name="colorLightGray1">#F5F7FA</color>
-    <color name="colorLightGray2">#E6E9ED</color>
-    <color name="colorMediumGray1">#CCD1D9</color>
-    <color name="colorMediumGray2">#AAB2BD</color>
-    <color name="colorDarkGray1">#656D78</color>
-    <color name="colorDarkGray2">#434A54</color>
-    <color name="colorAqua1">#4FC1E9</color>
-    <color name="colorAqua2">#3BAFDA</color>
-    <color name="colorGrapeFruit1">#ED5565</color>
-    <color name="colorGrapeFruit2">#DA4453</color>
-
-    <color name="ryan">#DF9926</color>
+    <color name="colorKeyPadRed">#FF6F6F</color>
+    <color name="colorKeyPadRedLightDark">#9E5656</color>
 </resources>

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorKeyPad"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.tistory.qlyh8.calculator.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,8 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:background="@color/colorKeyPad">
+            android:paddingBottom="16dp"
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -65,7 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="123"
-                        android:textColor="#fff"
+                        android:textColor="#FFF"
                         android:gravity="center|end"
                         android:textSize="50sp"
                         android:singleLine="true"/>
@@ -89,7 +88,7 @@
                             android:gravity="center|end"
                             android:paddingRight="2dp"
                             android:textSize="25sp"
-                            android:textColor="@color/colorKeyPadNum"
+                            android:textColor="@color/colorKeyPadLightDark"
                             android:singleLine="true"
                             android:text="104"/>
                     </LinearLayout>
@@ -106,7 +105,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:textSize="25sp"
-                            android:textColor="@color/colorKeyPadNum"
+                            android:textColor="@color/colorKeyPadLightDark"
                             android:singleLine="true"
                             android:text="1"/>
                         <View
@@ -114,7 +113,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:gravity="center"
-                            android:background="@color/colorKeyPadNum"/>
+                            android:background="@color/colorKeyPadLightDark"/>
                         <me.grantland.widget.AutofitTextView
                             android:id="@+id/text_denominator"
                             android:layout_width="wrap_content"
@@ -122,7 +121,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:textSize="25sp"
-                            android:textColor="@color/colorKeyPadNum"
+                            android:textColor="@color/colorKeyPadLightDark"
                             android:singleLine="true"
                             android:text="123"/>
                     </LinearLayout>
@@ -144,10 +143,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
+                android:background="@color/colorKeyPadRed"
                 android:text="@string/add"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadRed"
+                android:textSize="14sp"
+                android:textColor="#FFF"
+                android:textStyle="bold"
                 android:onClick="clickBtnSymbol" />
 
             <Button
@@ -155,10 +155,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
+                android:background="@color/colorKeyPadRed"
                 android:text="@string/subtract"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadRed"
+                android:textSize="14sp"
+                android:textColor="#FFF"
+                android:textStyle="bold"
                 android:onClick="clickBtnSymbol" />
 
             <Button
@@ -166,10 +167,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
+                android:background="@color/colorKeyPadRed"
                 android:text="@string/multiply"
                 android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadRed"
+                android:textColor="#FFF"
                 android:onClick="clickBtnSymbol" />
 
             <Button
@@ -177,21 +178,21 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
+                android:background="@color/colorKeyPadRed"
                 android:text="@string/divide"
                 android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadRed"
+                android:textColor="#FFF"
                 android:onClick="clickBtnSymbol" />
 
         </LinearLayout>
 
-        <View
+        <!--<View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/colorKeyPadNum"/>
+            android:background="@color/colorKeyPadNum"/>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -252,7 +253,25 @@
                         android:onClick="clickBtnNumber" />
                 </LinearLayout>
 
-                <android.support.constraint.ConstraintLayout
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorKeyPadRedLightDark"
+                        android:onClick="clickBtnClear"
+                        android:tag="@string/three"
+                        android:text="←"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorKeyPadNumLightDark"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+                <!--<android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -281,7 +300,7 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-                </android.support.constraint.ConstraintLayout>
+                </android.support.constraint.ConstraintLayout>-->
 
             </LinearLayout>
 
@@ -346,10 +365,10 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ripple_keypad"
+                        android:background="@color/colorKeyPadRedLightDark"
                         android:text="@string/clear"
                         android:textSize="@dimen/keypadTextSize"
-                        android:textColor="@color/colorKeyPadRed"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnAllClear" />
                 </LinearLayout>
 
@@ -416,9 +435,11 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ripple_keypad"
-                        android:textSize="@dimen/keypadTextSize"
-                        android:textColor="@color/colorKeyPadRed" />
+                        android:background="@color/colorKeyPadRedLightDark"
+                        android:text="@string/plusMinus"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorKeyPadNumLightDark" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -427,22 +448,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center">
-                    <Button
-                        android:tag="@string/point"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/ripple_keypad"
-                        android:text="@string/point"
-                        android:textSize="@dimen/keypadTextSize"
-                        android:textColor="@color/colorKeyPadNum"
-                        android:onClick="clickBtnPoint"/>
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -466,16 +471,47 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:tag="@string/point"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ripple_keypad"
-                        android:text="@string/fraction"
+                        android:background="@color/colorKeyPadRedLightDark"
+                        android:text="@string/point"
                         android:textSize="@dimen/keypadTextSize"
-                        android:textColor="@color/colorKeyPadNum"
-                        android:onClick="clickBtnFraction" />
+                        android:textColor="@color/colorKeyPadNumLightDark"
+                        android:onClick="clickBtnPoint"/>
                 </LinearLayout>
 
-                <android.support.constraint.ConstraintLayout
+                <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorKeyPadRedLightDark"
+                    android:text="@string/fraction"
+                    android:textSize="@dimen/keypadTextSize"
+                    android:textColor="@color/colorKeyPadNumLightDark"
+                    android:onClick="clickBtnFraction" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorKeyPadRed"
+                        android:text="@string/result"
+                        android:textSize="25sp"
+                        android:textColor="#FFF"
+                        android:onClick="clickBtnResult" />
+                </LinearLayout>
+
+                <!--<android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -504,7 +540,7 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.555" />
-                </android.support.constraint.ConstraintLayout>
+                </android.support.constraint.ConstraintLayout>-->
 
             </LinearLayout>
 
