@@ -293,7 +293,12 @@ public class MainActivity extends AppCompatActivity {
 
     // "＋/－" 버튼 클릭
     public void clickBtnPlusMinus(View view) {
+        if(arrayList.isEmpty()){
 
+        }
+        else{
+
+        }
     }
 
     // "=" 버튼 클릭

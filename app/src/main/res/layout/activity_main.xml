@@ -98,7 +98,7 @@
                             android:paddingStart="0dp"
                             android:singleLine="true"
                             android:textSize="25sp"
-                            android:textColor="@color/colorKeyPadNum"
+                            android:textColor="@color/colorKeyPadNumLightDark"
                             android:text="104" />
 
                     </LinearLayout>
@@ -122,13 +122,13 @@
                             android:gravity="center"
                             android:singleLine="true"
                             android:textSize="25sp"
-                            android:textColor="@color/colorKeyPadNum"
+                            android:textColor="@color/colorKeyPadNumLightDark"
                             android:text="1" />
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/colorKeyPadNum"
+                            android:background="@color/colorKeyPadNumLightDark"
                             android:gravity="center" />
 
                         <me.grantland.widget.AutofitTextView
@@ -139,7 +139,7 @@
                             android:gravity="center"
                             android:singleLine="true"
                             android:textSize="25sp"
-                            android:textColor="@color/colorKeyPadNum"
+                            android:textColor="@color/colorKeyPadNumLightDark"
                             android:text="123" />
                     </LinearLayout>
 
@@ -433,10 +433,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/ripple_keypad"
-                        android:text="@string/plusMinus"
+                        android:text="@string/fraction"
                         android:textSize="@dimen/keypadTextSize"
                         android:textColor="@color/colorKeyPadRed"
-                        android:onClick="clickBtnPlusMinus" />
+                        android:onClick="clickBtnFraction" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -451,15 +451,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center">
+
                     <Button
-                        android:tag="@string/point"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/ripple_keypad"
-                        android:text="@string/point"
+                        android:text="@string/plusMinus"
                         android:textSize="@dimen/keypadTextSize"
                         android:textColor="@color/colorKeyPadNum"
-                        android:onClick="clickBtnPoint"/>
+                        android:onClick="clickBtnPlusMinus" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -484,13 +484,14 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:tag="@string/point"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/ripple_keypad"
-                        android:text="@string/fraction"
+                        android:text="@string/point"
                         android:textSize="@dimen/keypadTextSize"
                         android:textColor="@color/colorKeyPadNum"
-                        android:onClick="clickBtnFraction" />
+                        android:onClick="clickBtnPoint"/>
                 </LinearLayout>
 
                 <android.support.constraint.ConstraintLayout

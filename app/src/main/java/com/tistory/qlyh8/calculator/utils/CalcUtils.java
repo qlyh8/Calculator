@@ -85,7 +85,7 @@ public class CalcUtils {
             switch (operator){
                 case "×":
                     value = stack.pop();
-                    stack.push(value.multiply(new BigDecimal(number)));
+                    stack.push(value.multiply(new BigDecimal(number)).stripTrailingZeros());
                     break;
                 case "÷":
                     value = stack.pop();
@@ -96,7 +96,7 @@ public class CalcUtils {
                     stack.push(new BigDecimal(number));
                     break;
                 case "－":
-                    stack.push(new BigDecimal("-1").multiply(new BigDecimal(number)));
+                    stack.push(new BigDecimal("-1").multiply(new BigDecimal(number)).stripTrailingZeros());
                     break;
                 default:
                     break;
@@ -105,7 +105,7 @@ public class CalcUtils {
 
         // 뺄셈, 곱셈, 나눗셈을 수행한 값들을 모두 더한다.
         while(!stack.isEmpty()){
-            newResult = newResult.add(stack.pop());
+            newResult = newResult.add(stack.pop()).stripTrailingZeros();
         }
 
         return newResult;

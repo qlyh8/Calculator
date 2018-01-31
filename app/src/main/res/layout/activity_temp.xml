@@ -143,7 +143,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorKeyPadRed"
+                android:background="#504242"
                 android:text="@string/add"
                 android:textSize="14sp"
                 android:textColor="#FFF"
@@ -155,7 +155,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorKeyPadRed"
+                android:background="#504242"
                 android:text="@string/subtract"
                 android:textSize="14sp"
                 android:textColor="#FFF"
@@ -167,7 +167,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorKeyPadRed"
+                android:background="#504242"
                 android:text="@string/multiply"
                 android:textSize="@dimen/keypadTextSize"
                 android:textColor="#FFF"
@@ -178,7 +178,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorKeyPadRed"
+                android:background="#504242"
                 android:text="@string/divide"
                 android:textSize="@dimen/keypadTextSize"
                 android:textColor="#FFF"
@@ -253,23 +253,36 @@
                         android:onClick="clickBtnNumber" />
                 </LinearLayout>
 
-                <LinearLayout
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center">
-
-                    <Button
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/colorKeyPadRedLightDark"
-                        android:onClick="clickBtnClear"
-                        android:tag="@string/three"
-                        android:text="←"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorKeyPadNumLightDark"
-                        android:textSize="25sp" />
-                </LinearLayout>
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+                        <Button
+                            android:id="@+id/btn_clear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#6E4A4A"
+                            android:onClick="clickBtnClear"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="19dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_erase"
+                        android:tint="#FFF"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
 
                 <!--<android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
@@ -368,7 +381,7 @@
                         android:background="@color/colorKeyPadRedLightDark"
                         android:text="@string/clear"
                         android:textSize="@dimen/keypadTextSize"
-                        android:textColor="@color/colorKeyPadNumLightDark"
+                        android:textColor="#FFF"
                         android:onClick="clickBtnAllClear" />
                 </LinearLayout>
 
@@ -435,11 +448,11 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/colorKeyPadRedLightDark"
-                        android:text="@string/plusMinus"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorKeyPadNumLightDark" />
+                        android:background="#CE6262"
+                        android:text="@string/fraction"
+                        android:textSize="@dimen/keypadTextSize"
+                        android:textColor="#FFF"
+                        android:onClick="clickBtnFraction" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -448,6 +461,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ripple_keypad"
+                        android:text="@string/plusMinus"
+                        android:textSize="@dimen/keypadTextSize"
+                        android:textColor="@color/colorKeyPadNum"
+                        android:onClick="clickBtnPlusMinus" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -474,26 +503,11 @@
                         android:tag="@string/point"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/colorKeyPadRedLightDark"
+                        android:background="@drawable/ripple_keypad"
                         android:text="@string/point"
                         android:textSize="@dimen/keypadTextSize"
-                        android:textColor="@color/colorKeyPadNumLightDark"
+                        android:textColor="@color/colorKeyPadNum"
                         android:onClick="clickBtnPoint"/>
-                </LinearLayout>
-
-                <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorKeyPadRedLightDark"
-                    android:text="@string/fraction"
-                    android:textSize="@dimen/keypadTextSize"
-                    android:textColor="@color/colorKeyPadNumLightDark"
-                    android:onClick="clickBtnFraction" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -504,7 +518,7 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/colorKeyPadRed"
+                        android:background="#EC6A6A"
                         android:text="@string/result"
                         android:textSize="25sp"
                         android:textColor="#FFF"
