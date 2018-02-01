@@ -25,8 +25,8 @@ public class CalcUtils {
         subtract = context.getResources().getString(R.string.subtract);
         multiply = context.getResources().getString(R.string.multiply);
         divide = context.getResources().getString(R.string.divide);
+        fraction = context.getResources().getString(R.string.fractionOperator);
         plusMinus = context.getResources().getString(R.string.plusMinus);
-        fraction = "@";
     }
 
     // 숫자인지 기호인지 판별
@@ -78,7 +78,7 @@ public class CalcUtils {
     // "±"를 "－"으로 변환
     private String convertToMinus(String number){
         if(number.contains(plusMinus))
-            return number.replace(plusMinus, "-");
+            return number.replace(plusMinus, "-");  // strings.xml 에 저장된 것과 다름
         else
             return number;
     }
@@ -112,8 +112,8 @@ public class CalcUtils {
                     break;
                 case "÷":
                     value = new BigDecimal(convertToMinus(stack.pop()));
-                    // 소수 17자리에서 반올림
-                    stack.push(value.divide(new BigDecimal(number), 16,
+                    // 소수 33자리에서 반올림
+                    stack.push(value.divide(new BigDecimal(number), 32,
                             RoundingMode.HALF_EVEN).stripTrailingZeros().toPlainString());
                     break;
                 case "＋":

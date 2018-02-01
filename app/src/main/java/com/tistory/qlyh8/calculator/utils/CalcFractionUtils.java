@@ -27,13 +27,13 @@ public class CalcFractionUtils {
         divide = context.getResources().getString(R.string.divide);
         point = context.getResources().getString(R.string.point);
         plusMinus = context.getResources().getString(R.string.plusMinus);
-        fraction = "@";
+        fraction = context.getResources().getString(R.string.fractionOperator);
     }
 
     // "±"를 "－"으로 변환
     private String convertToMinus(String number){
         if(number.contains(plusMinus))
-            return number.replaceAll(plusMinus, "-");
+            return number.replaceAll(plusMinus, "-");   // strings.xml 에 저장된 것과 다름
         else
             return number;
     }

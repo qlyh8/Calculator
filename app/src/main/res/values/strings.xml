@@ -13,6 +13,7 @@
     <string name="zero">0</string>
     <string name="point">.</string>
     <string name="fraction">━</string>
+    <string name="fractionOperator">&amp;</string>
     <string name="clear">C</string>
     <string name="result">=</string>
     <string name="add">＋</string>
