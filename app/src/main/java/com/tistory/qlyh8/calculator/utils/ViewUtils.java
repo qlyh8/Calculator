@@ -23,7 +23,7 @@ public class ViewUtils {
 
     private Context context;
     private LinearLayout rootLayout;    // 수식 뷰
-    private int defaultTextWidth = 99999;    // 디폴트 텍스트 너비
+    public int defaultTextWidth;    // 디폴트 텍스트 너비
 
     public ViewUtils(Context mContext, LinearLayout mRootLayout){
         context = mContext;
@@ -183,7 +183,6 @@ public class ViewUtils {
         textView.setText(textView.getText() + str);
     }
 
-
     // 뷰 삭제
     public void removeView (ArrayList<String> arrayList, String targetType, String targetTag){
         switch (targetType){
@@ -208,13 +207,6 @@ public class ViewUtils {
     public void changeFractionLine(ArrayList<String> arrayList){
         TextView topTextView = rootLayout.findViewWithTag("calcFractionTopTextView" + arrayList.size());
         TextView bottomTextView = rootLayout.findViewWithTag("calcFractionBottomTextView" + arrayList.size());
-
-        // 디폴트 텍스트 너비를 구한다.
-        if(topTextView.getText().length() == 1){
-            topTextView.measure(0,0);
-            if(defaultTextWidth > topTextView.getMeasuredWidth())
-               defaultTextWidth = topTextView.getMeasuredWidth();
-        }
 
         // 분자와 분모 중 너비가 큰 것에 맞춰 라인을 조정한다.
         LinearLayout.LayoutParams newParams;

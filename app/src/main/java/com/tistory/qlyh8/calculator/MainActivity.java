@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         resultInit();
+        textWidthInit();
     }
 
     // 초기화
@@ -103,6 +104,15 @@ public class MainActivity extends AppCompatActivity {
         result = zero;    // 결과값 초기화
         fractionResult = new String[]{zero, zero, zero};    // 분수 결과값 초기화
         fractionLayout.setVisibility(View.INVISIBLE);   // 분수 값 숨김
+    }
+
+    // 수식 텍스트 기본 너비 구하기 (분수선 조정하기 위해 필요)
+    public void textWidthInit(){
+        viewUtils.setNumTextView(arrayList, zero);
+        TextView textView = rootLayout.findViewWithTag("calcTextView"+zero);
+        textView.measure(0,0);
+        viewUtils.defaultTextWidth = textView.getMeasuredWidth();
+        rootLayout.removeAllViews();
     }
 
     //"0~9" 버튼 클릭
