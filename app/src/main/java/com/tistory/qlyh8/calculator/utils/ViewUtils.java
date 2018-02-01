@@ -219,9 +219,9 @@ public class ViewUtils {
         // 분자와 분모 중 너비가 큰 것에 맞춰 라인을 조정한다.
         LinearLayout.LayoutParams newParams;
         if(topTextView.getText().length() > bottomTextView.getText().length())
-            newParams = new LinearLayout.LayoutParams(topTextView.getText().length() * defaultTextWidth, 3);
+            newParams = new LinearLayout.LayoutParams((topTextView.getText().length()+1) * defaultTextWidth, 3);
         else
-            newParams = new LinearLayout.LayoutParams(bottomTextView.getText().length() * defaultTextWidth, 3);
+            newParams = new LinearLayout.LayoutParams((bottomTextView.getText().length()+1) * defaultTextWidth, 3);
 
         newParams.setMargins(5,0,5,0);
         View line = rootLayout.findViewWithTag("calcFractionLine" + arrayList.size());

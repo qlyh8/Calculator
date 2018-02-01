@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class HistoryObject {
     private ArrayList<String> calc;
     private String result;
-    private BigInteger[] fractionResult;
+    private String[] fractionResult;
 
-    public HistoryObject(ArrayList<String> calc, String result, BigInteger[] fractionResult) {
+    public HistoryObject(ArrayList<String> calc, String result, String[] fractionResult) {
 
         this.calc = calc;
         this.result = result;
@@ -36,11 +36,11 @@ public class HistoryObject {
         this.calc = calc;
     }
 
-    public BigInteger[] getFractionResult() {
+    public String[] getFractionResult() {
         return fractionResult;
     }
 
-    public void setFractionResult(BigInteger[] fractionResult) {
+    public void setFractionResult(String[] fractionResult) {
         this.fractionResult = fractionResult;
     }
 }
