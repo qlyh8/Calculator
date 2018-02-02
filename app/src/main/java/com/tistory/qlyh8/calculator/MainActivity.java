@@ -280,20 +280,15 @@ public class MainActivity extends AppCompatActivity {
             lastStrOfLastVal = lastValue.substring(lastValue.length()-1);
 
         // 마지막 값이 기호가 아니고 "."이 아니여야 한다.
-        if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(point) && !lastStrOfLastVal.equals(plusMinus)){
-            // 마지막 값이 분수일 때, 분수 안에는 기호가 들어가면 안된다.
-            if(lastValue.contains(fraction) && !lastStrOfLastVal.equals(fraction)){
-                arrayList.add(String.valueOf(view.getTag()));
-                viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
-            }
-            else if(arrayList.size() >= 2 && arrayList.get(arrayList.size()-2).equals(divide)){
-                // 0으로 나눌 수 없다.
+        if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(point)
+                && !lastStrOfLastVal.equals(plusMinus) && !lastStrOfLastVal.equals(fraction)){
+           if(arrayList.size() >= 2 && arrayList.get(arrayList.size()-2).equals(divide)){
+                    // 0으로 나눌 수 없다.
                 if(!lastValue.equals(zero) && !lastValue.equals(plusMinus + zero)){
                     arrayList.add(String.valueOf(view.getTag()));
                     viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
                 }
-            }
-            else {
+            } else {
                 arrayList.add(String.valueOf(view.getTag()));
                 viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
             }
@@ -330,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
 
     // "←" 버튼 클릭
     public void clickBtnClear(View view) {
-        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
+        resultInit();   // 결과값 초기화
 
         // 배열 값이 비어있지 않아야 한다.
         if(arrayList.isEmpty())

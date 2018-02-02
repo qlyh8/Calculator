@@ -51,6 +51,9 @@ public class CalcFractionUtils {
         result[0] = (new BigInteger(""+numerator)).divide(gcd);   // 분자
         result[1] = (new BigInteger(""+denominator)).divide(gcd); // 분모
 
+        if(parts[0].contains("-"))
+            result[0] = result[0].negate();
+
         return result;
     }
 

@@ -96,7 +96,7 @@ public class ViewUtils {
         // 라인 생성
         View line = new View(context);
         line.setBackgroundColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 3);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((number.length()+1)*defaultTextWidth, 3);
         params.setMargins(5, 0, 5, 0);
         line.setLayoutParams(params);
         line.setTag("calcFractionLine"+arrayList.size());
@@ -110,12 +110,6 @@ public class ViewUtils {
         BottomTextView.setGravity(Gravity.CENTER);
         BottomTextView.setTag("calcFractionBottomTextView"+arrayList.size());
         layout.addView(BottomTextView);
-
-        // 분모 텍스트 너비에 맞게 라인 길이 변경
-        BottomTextView.measure(0,0);
-        LinearLayout.LayoutParams newParams = new LinearLayout.LayoutParams(BottomTextView.getMeasuredWidth(), 3);
-        newParams.setMargins(5,0,5,0);
-        line.setLayoutParams(newParams);
     }
 
     // 분수 텍스트 생성
