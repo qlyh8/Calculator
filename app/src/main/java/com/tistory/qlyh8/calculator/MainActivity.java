@@ -453,6 +453,6 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> historyCalcList = new ArrayList<>();
         historyCalcList.addAll(calc);
         tempData = new HistoryObject(historyCalcList, result, fractionResult);
-        HistoryStorageUtil.historyRes.add(tempData);
+        HistoryStorageUtil.historyRes.add(0,tempData);
     }
 }
