@@ -42,18 +42,17 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ArrayList<String> calc = res.get(position).getCalc();
-        holder.historyItemNum.setText(String.valueOf(position+1));
 
         for (int i = 0; i < calc.size(); i++) {
             if(calc.get(i).contains("@")){
                 String fraction[] = calc.get(i).split("@");
                 holder.viewUtils.setFractionHistoryTextView(i, fraction[0], fraction[1]);
-            } else {
+            }else {
                 holder.viewUtils.setNumTextView(calc, String.valueOf(calc.get(i)));
             }
         }
-        holder.viewUtils.setNumTextView(calc, " = ");
-        holder.viewUtils.setNumTextView(calc, String.valueOf(res.get(position).getResult()));
+        holder.historyResult.setText("= " + res.get(position).getResult());
+
     }
 
     @Override
@@ -63,7 +62,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.history_item) LinearLayout historyItem;
-        @BindView(R.id.history_item_num) TextView historyItemNum;
+        @BindView(R.id.history_result) TextView historyResult;
         private ViewUtils viewUtils;
 
         public ViewHolder(View view) {
