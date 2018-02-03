@@ -51,10 +51,11 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="end|bottom"
-                android:background="@color/colorKeyPadRed"
+                android:background="@color/colorResultRed"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:layout_marginBottom="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -99,7 +100,7 @@
                             android:paddingStart="0dp"
                             android:singleLine="true"
                             android:textSize="25sp"
-                            android:textColor="#FFF"
+                            android:textColor="@color/colorKeyPadNumLightDark"
                             android:text="104" />
 
                     </LinearLayout>
@@ -123,13 +124,13 @@
                             android:gravity="center"
                             android:singleLine="true"
                             android:textSize="25sp"
-                            android:textColor="#FFF"
+                            android:textColor="@color/colorKeyPadNumLightDark"
                             android:text="1" />
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="#FFF"
+                            android:background="@color/colorKeyPadNumLightDark"
                             android:gravity="center" />
 
                         <me.grantland.widget.AutofitTextView
@@ -140,7 +141,7 @@
                             android:gravity="center"
                             android:singleLine="true"
                             android:textSize="25sp"
-                            android:textColor="#FFF"
+                            android:textColor="@color/colorKeyPadNumLightDark"
                             android:text="123" />
                     </LinearLayout>
 
@@ -149,15 +150,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:background="@color/colorKeyPadNum"/>
 
         <LinearLayout
             android:layout_width="match_parent"

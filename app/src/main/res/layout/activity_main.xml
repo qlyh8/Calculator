@@ -247,6 +247,7 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:id="@+id/btn1"
                         android:tag="@string/one"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -262,15 +263,17 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center">
+
                     <Button
-                        android:tag="@string/two"
+                        android:id="@+id/btn2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/ripple_keypad"
+                        android:onClick="clickBtnNumber"
+                        android:tag="@string/two"
                         android:text="@string/two"
-                        android:textSize="@dimen/keypadTextSize"
                         android:textColor="@color/colorKeyPadNum"
-                        android:onClick="clickBtnNumber" />
+                        android:textSize="@dimen/keypadTextSize" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -279,6 +282,7 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:id="@+id/btn3"
                         android:tag="@string/three"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -333,6 +337,7 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:id="@+id/btn4"
                         android:tag="@string/four"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -349,6 +354,7 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:id="@+id/btn5"
                         android:tag="@string/five"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -365,6 +371,7 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:id="@+id/btn6"
                         android:tag="@string/six"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -403,6 +410,7 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:id="@+id/btn7"
                         android:tag="@string/seven"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -419,6 +427,7 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:id="@+id/btn8"
                         android:tag="@string/eight"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -435,6 +444,7 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:id="@+id/btn9"
                         android:tag="@string/nine"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -490,6 +500,7 @@
                     android:layout_weight="1"
                     android:gravity="center">
                     <Button
+                        android:id="@+id/btn0"
                         android:tag="@string/zero"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

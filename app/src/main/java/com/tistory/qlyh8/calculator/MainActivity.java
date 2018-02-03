@@ -29,7 +29,7 @@ import me.grantland.widget.AutofitHelper;
  * Created by YUNHEE on 2018-01-12.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnLongClickListener {
 
     @BindView(R.id.root_calc_scroll) public HorizontalScrollView scrollRootView; // 스크롤 뷰
     @BindView(R.id.layout_root_calc) public LinearLayout rootLayout;    // 수식 뷰
@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         resultInit();
         textWidthInit();
+        setLongClickInit();
     }
 
     // 초기화
@@ -113,6 +114,20 @@ public class MainActivity extends AppCompatActivity {
         textView.measure(0,0);
         viewUtils.defaultTextWidth = textView.getMeasuredWidth();
         rootLayout.removeAllViews();
+    }
+
+    // 롱클릭 리스너 등록
+    public void setLongClickInit(){
+        findViewById(R.id.btn0).setOnLongClickListener(this);
+        findViewById(R.id.btn1).setOnLongClickListener(this);
+        findViewById(R.id.btn2).setOnLongClickListener(this);
+        findViewById(R.id.btn3).setOnLongClickListener(this);
+        findViewById(R.id.btn4).setOnLongClickListener(this);
+        findViewById(R.id.btn5).setOnLongClickListener(this);
+        findViewById(R.id.btn6).setOnLongClickListener(this);
+        findViewById(R.id.btn7).setOnLongClickListener(this);
+        findViewById(R.id.btn8).setOnLongClickListener(this);
+        findViewById(R.id.btn9).setOnLongClickListener(this);
     }
 
     //"0~9" 버튼 클릭
@@ -454,5 +469,32 @@ public class MainActivity extends AppCompatActivity {
         historyCalcList.addAll(calc);
         tempData = new HistoryObject(historyCalcList, result, fractionResult);
         HistoryStorageUtil.historyRes.add(0,tempData);
+    }
+
+    // 롱클릭 시 수식에 대분수 추가
+    @Override
+    public boolean onLongClick(View v) {
+        if(v.getId() == R.id.btn1 || v.getId() == R.id.btn2  || v.getId() == R.id.btn3
+                || v.getId() == R.id.btn4 || v.getId() == R.id.btn5 || v.getId() == R.id.btn6
+                || v.getId() == R.id.btn7 || v.getId() == R.id.btn8 || v.getId() == R.id.btn9
+                || v.getId() == R.id.btn0){
+
+            String lastValue = "";  // 마지막 수식
+            String lastStrOfLastVal = "";    // 마지막 값의 마지막 글자
+
+            if(arrayList.size() != 0)
+                lastValue = arrayList.get(arrayList.size()-1);
+            if(lastValue.length() != 0)
+                lastStrOfLastVal = lastValue.substring(lastValue.length()-1);
+
+            // 분자 및 분모에 값이 있을 때 대분수 수식 가능
+            if(lastValue.contains(fraction) && !lastStrOfLastVal.equals(fraction)
+                    && !lastStrOfLastVal.equals(point) && !lastStrOfLastVal.equals(plusMinus)){
+                Log.d("asd", v.getTag().toString());
+            }
+            return true;
+        }
+        else
+            return false;
     }
 }
