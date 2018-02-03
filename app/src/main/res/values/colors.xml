@@ -12,4 +12,6 @@
 
     <color name="colorKeyPadRed">#FF6F6F</color>
     <color name="colorKeyPadBlue">#34444F</color>
+
+    <color name="colorResultRed">#6E4A4A</color>
 </resources>
