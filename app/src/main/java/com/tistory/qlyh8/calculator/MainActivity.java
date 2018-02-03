@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // "ㅡ" (분수) 버튼 클릭
+    // "F" (분수) 버튼 클릭
     public void clickBtnFraction(View view){
         fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
 
@@ -310,8 +310,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 마지막 수식이 연산기호, ".", "0", "-0", 분수이면 안된다.
         if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(point)
-                && !lastValue.equals(zero) && !lastValue.equals(plusMinus+zero)
-                && !lastValue.contains(fraction)) {
+                && !lastValue.equals(zero) && !lastValue.contains(fraction)
+                && !lastValue.equals(plusMinus) && !lastValue.equals(plusMinus+zero)) {
             // 분수 뷰로 변경한다. (분모) @ (분자)
             arrayList.set(arrayList.size()-1, lastValue + fraction);
             viewUtils.removeView(arrayList, "textView", "calcTextView");
@@ -403,7 +403,8 @@ public class MainActivity extends AppCompatActivity {
             lastStrOfLastVal = lastValue.substring(lastValue.length()-1);
 
         // 마지막 수식은 숫자여야 하고, 0으로 나눌 수 없다.
-        if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(point) && !lastStrOfLastVal.equals(fraction)
+        if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(point)
+                && !lastStrOfLastVal.equals(fraction)  && !lastStrOfLastVal.equals(plusMinus)
                 && !(arrayList.size() >= 2 && arrayList.get(arrayList.size()-2).equals(divide) && lastValue.equals(zero))){
 
             // 초기화 ("="을 입력한 후 "C" 버튼을 누르지 않고 계속 수식을 입력할 경우를 위해)

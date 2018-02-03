@@ -253,7 +253,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/one"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnNumber" />
                 </LinearLayout>
 
@@ -269,7 +269,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/two"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnNumber" />
                 </LinearLayout>
 
@@ -285,7 +285,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/three"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnNumber" />
                 </LinearLayout>
 
@@ -339,7 +339,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/four"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnNumber" />
                 </LinearLayout>
 
@@ -355,7 +355,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/five"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnNumber" />
                 </LinearLayout>
 
@@ -371,7 +371,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/six"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnNumber" />
                 </LinearLayout>
 
@@ -410,7 +410,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/seven"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnNumber" />
                 </LinearLayout>
 
@@ -427,7 +427,7 @@
                         android:onClick="clickBtnNumber"
                         android:tag="@string/eight"
                         android:text="@string/eight"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -443,7 +443,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/nine"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnNumber" />
                 </LinearLayout>
 
@@ -482,7 +482,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/plusMinus"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnPlusMinus" />
                 </LinearLayout>
 
@@ -498,7 +498,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/zero"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnNumber"/>
                 </LinearLayout>
 
@@ -514,7 +514,7 @@
                         android:background="@color/colorKeyPadBlue"
                         android:text="@string/point"
                         android:textSize="20sp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorKeyPadNumLightDark"
                         android:onClick="clickBtnPoint"/>
                 </LinearLayout>
 

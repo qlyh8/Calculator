@@ -41,6 +41,12 @@ public class CalcFractionUtils {
     // 소수를 분수로 변환
     private BigInteger[] convertToFraction(String value) throws Exception {
         BigInteger[] result = new BigInteger[2];
+        boolean isNegative = false;
+
+        if(value.contains("-")) {   // "-" 제거
+            isNegative = true;
+            value = value.substring(1);
+        }
 
         String[] parts = value.split("\\.");
         BigDecimal denominator = BigDecimal.TEN.pow(parts[1].length()); // 분모
@@ -51,7 +57,7 @@ public class CalcFractionUtils {
         result[0] = (new BigInteger(""+numerator)).divide(gcd);   // 분자
         result[1] = (new BigInteger(""+denominator)).divide(gcd); // 분모
 
-        if(parts[0].contains("-"))
+        if(isNegative)
             result[0] = result[0].negate();
 
         return result;
@@ -180,6 +186,9 @@ public class CalcFractionUtils {
             if(count == 1)
                 result[2] = subtract;
         }
+
+        if(result[0].equals("0"))
+            result[2] = "0";
 
         return result;
     }

@@ -52,8 +52,9 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="end|bottom"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp">
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -149,71 +150,91 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:orientation="horizontal">
-
-            <Button
-                android:tag="@string/add"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/add"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadRed"
-                android:onClick="clickBtnSymbol" />
-
-            <Button
-                android:tag="@string/subtract"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/subtract"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadRed"
-                android:onClick="clickBtnSymbol" />
-
-            <Button
-                android:tag="@string/multiply"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/multiply"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadRed"
-                android:onClick="clickBtnSymbol" />
-
-            <Button
-                android:tag="@string/divide"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/ripple_keypad"
-                android:text="@string/divide"
-                android:textSize="@dimen/keypadTextSize"
-                android:textColor="@color/colorKeyPadRed"
-                android:onClick="clickBtnSymbol" />
-
-        </LinearLayout>
-
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@color/colorKeyPadNum"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="1"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <Button
+                        android:tag="@string/add"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ripple_keypad"
+                        android:text="@string/add"
+                        android:textSize="@dimen/keypadTextSize"
+                        android:textColor="@color/colorKeyPadRed"
+                        android:onClick="clickBtnSymbol" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <Button
+                        android:tag="@string/subtract"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ripple_keypad"
+                        android:text="@string/subtract"
+                        android:textSize="@dimen/keypadTextSize"
+                        android:textColor="@color/colorKeyPadRed"
+                        android:onClick="clickBtnSymbol" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <Button
+                        android:tag="@string/multiply"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ripple_keypad"
+                        android:text="@string/multiply"
+                        android:textSize="@dimen/keypadTextSize"
+                        android:textColor="@color/colorKeyPadRed"
+                        android:onClick="clickBtnSymbol" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <Button
+                        android:tag="@string/divide"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ripple_keypad"
+                        android:text="@string/divide"
+                        android:textSize="@dimen/keypadTextSize"
+                        android:textColor="@color/colorKeyPadRed"
+                        android:onClick="clickBtnSymbol" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

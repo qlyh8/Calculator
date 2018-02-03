@@ -113,7 +113,7 @@ public class CalcUtils {
                 case "÷":
                     value = new BigDecimal(convertToMinus(stack.pop()));
                     // 소수 33자리에서 반올림
-                    stack.push(value.divide(new BigDecimal(number), 32,
+                    stack.push(value.divide(new BigDecimal(number), 16,
                             RoundingMode.HALF_EVEN).stripTrailingZeros().toPlainString());
                     break;
                 case "＋":
