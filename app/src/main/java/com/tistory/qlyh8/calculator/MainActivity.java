@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     String[] fractionResult; // 분수 결과값
     float defaultFractionTextSize;  // 분수 결과값 기본 텍스트 크기
 
-    String zero, point, minus, divide, fraction, plusMinus;
+    String zero, point, minus, divide, fraction, plusMinus, fractionWhole;
 
     ViewUtils viewUtils;
     CalcUtils calcUtils;
@@ -70,10 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         divide = getResources().getString(R.string.divide); // "÷"
         fraction = getResources().getString(R.string.fractionOperator); // "@"
         plusMinus = getResources().getString(R.string.plusMinus);   // "±"
+        fractionWhole = getResources().getString(R.string.fractionWholeOperator);   // "#"
 
         arrayList = new ArrayList<>();
         fractionResult = new String[3];
         resultTextView.setText(zero);
+        numeratorTextView.setText(zero);
+        denominatorTextView.setText("1");
+        wholeTextView.setText("");
         defaultFractionTextSize = numeratorTextView.getTextSize();
 
         scrollRootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
@@ -100,11 +104,10 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         setLongClickInit();
     }
 
-    // 초기화
+    // 결과값 초기화
     public void resultInit(){
-        result = zero;    // 결과값 초기화
-        fractionResult = new String[]{zero, zero, zero};    // 분수 결과값 초기화
-        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 값 숨김
+        result = zero;
+        fractionResult = new String[]{zero, "1", zero};
     }
 
     // 수식 텍스트 기본 너비 구하기 (분수선 조정하기 위해 필요)
@@ -128,13 +131,12 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         findViewById(R.id.btn7).setOnLongClickListener(this);
         findViewById(R.id.btn8).setOnLongClickListener(this);
         findViewById(R.id.btn9).setOnLongClickListener(this);
+        findViewById(R.id.btnPlusMinus).setOnLongClickListener(this);
     }
 
     //"0~9" 버튼 클릭
     @SuppressLint("SetTextI18n")
     public void clickBtnNumber(View view) {
-        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
-
         // 수식창이 비었을 때 배열과 뷰에 텍스트를 추가한다.
         if(arrayList.isEmpty()){
             arrayList.add(String.valueOf(view.getTag()));
@@ -146,6 +148,10 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         String lastStrOfLastVal = "";    // 마지막 값의 마지막 글자
         if(lastValue.length() != 0)
             lastStrOfLastVal = lastValue.substring(lastValue.length()-1);
+
+        // 대분수 있을 시 입력할 수 없다.
+        if(lastValue.contains(fractionWhole))
+            return;
 
         // 마지막 수식이 기호일 때 텍스트를 추가한다.
         if(calcUtils.isSymbol(lastValue)){
@@ -195,8 +201,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     // "." 버튼 클릭
     @SuppressLint("SetTextI18n")
     public void clickBtnPoint(View view){
-        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
-
         // 배열 값이 비어있지 않아야 한다.
         if(arrayList.isEmpty())
             return;
@@ -205,6 +209,10 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         String lastStrOfLastVal = "";    // 마지막 값의 마지막 글자
         if(lastValue.length() != 0)
             lastStrOfLastVal = lastValue.substring(lastValue.length()-1);
+
+        // 대분수 있을 시 입력할 수 없다.
+        if(lastValue.contains(fractionWhole))
+            return;
 
         // 마지막 값이 기호와 "."이 아니여야 하고, "."은 한 번만 들어가야 한다.
         if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(plusMinus)
@@ -226,8 +234,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     // "±" 버튼 클릭
     public void clickBtnPlusMinus(View view) {
-        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
-
         // 수식창이 비었을 때 배열과 뷰에 텍스트를 추가한다.
         if(arrayList.isEmpty()){
             arrayList.add(String.valueOf(view.getTag()));
@@ -239,6 +245,10 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         String lastStrOfLastVal = "";    // 마지막 값의 마지막 글자
         if(lastValue.length() != 0)
             lastStrOfLastVal = lastValue.substring(lastValue.length()-1);
+
+        // 대분수 있을 시 입력할 수 없다.
+        if(lastValue.contains(fractionWhole))
+            return;
 
         // 마지막 수식이 연산기호일 때
         if(calcUtils.isSymbol(lastValue)){
@@ -283,8 +293,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     // "+,－,×,÷" 버튼 클릭
     public void clickBtnSymbol(View view) {
-        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
-
         // 배열 값이 비어있지 않아야 한다.
         if(arrayList.isEmpty())
             return;
@@ -293,6 +301,13 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         String lastStrOfLastVal = "";    // 마지막 값의 마지막 글자
         if(lastValue.length() != 0)
             lastStrOfLastVal = lastValue.substring(lastValue.length()-1);
+
+        // 대분수 있을 때
+        if(lastValue.contains(fractionWhole)){
+            arrayList.add(String.valueOf(view.getTag()));
+            viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
+            return;
+        }
 
         // 마지막 값이 기호가 아니고 "."이 아니여야 한다.
         if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(point)
@@ -312,8 +327,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     // "F" (분수) 버튼 클릭
     public void clickBtnFraction(View view){
-        fractionLayout.setVisibility(View.INVISIBLE);   // 분수 결과값 숨김
-
         // 배열 값이 비어있지 않아야 한다.
         if(arrayList.isEmpty())
             return;
@@ -322,6 +335,10 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         String lastStrOfLastVal = "";    // 마지막 값의 마지막 글자
         if(lastValue.length() != 0)
             lastStrOfLastVal = lastValue.substring(lastValue.length()-1);
+
+        // 대분수 있을 시 입력할 수 없다.
+        if(lastValue.contains(fractionWhole))
+            return;
 
         // 마지막 수식이 연산기호, ".", "0", "-0", 분수이면 안된다.
         if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(point)
@@ -368,14 +385,33 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                 arrayList.set(arrayList.size()-1, lastValue.substring(0, lastValue.length() - 1));
                 viewUtils.removeView(arrayList, "textView", "calcFractionTopTextView");
                 viewUtils.removeView(arrayList, "textView", "calcFractionBottomTextView");
+                viewUtils.removeView(arrayList, "textView", "calcFractionWholeTextView");
                 viewUtils.removeView(arrayList, "line", "calcFractionLine");
                 viewUtils.removeView(arrayList, "layout", "calcFractionLayout");
+                viewUtils.removeView(arrayList, "layout", "calcWholeLayout");
+                viewUtils.removeView(arrayList, "layout", "calcLayout");
                 if(bottomValue.contains(plusMinus))
                     viewUtils.setNumTextView(arrayList, bottomValue.replace(plusMinus, minus));
                 else
                     viewUtils.setNumTextView(arrayList, bottomValue);
             }
-            else{
+            else if(lastValue.contains(fractionWhole)) {    // 대분수 값이 존재할 때
+                value = lastValue.split(fractionWhole); // 0: 대분수     1: 분자,분모
+
+                if(value[0].length() == 1){ // ( ex: 1 # 3 6 @ 2 4 )
+                    arrayList.set(arrayList.size()-1, value[1]);
+                    viewUtils.changeTextView(arrayList,"calcFractionWholeTextView", "");
+                }
+                else {  // ( ex: 1 2 # 3 6 @ 2 4 )
+                    String newWhole = value[0].substring(0, value[0].length()-1);
+                    arrayList.set(arrayList.size()-1, newWhole + fractionWhole + value[1]);
+                    if(newWhole.contains(plusMinus))
+                        viewUtils.changeTextView(arrayList,"calcFractionWholeTextView", newWhole.replace(plusMinus, minus));
+                    else
+                        viewUtils.changeTextView(arrayList,"calcFractionWholeTextView", newWhole);
+                }
+            }
+            else {
                 // 분모, 분자에 모두 값이 있을 때 ( ex: 3 6 @ 2 4 ) 분자를 지운다.
                 value = lastValue.split(fraction);
                 String topValue = value[1]; // 분자
@@ -402,6 +438,9 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     public void clickBtnAllClear(View view) {
         rootLayout.removeAllViews();    // 수식 뷰 안의 모든 뷰 삭제
         resultTextView.setText(zero);    // 결과 값을 0으로 초기화
+        numeratorTextView.setText(zero);
+        denominatorTextView.setText("1");
+        wholeTextView.setText("");
         arrayList.clear();  // 리스트의 모든 내용 삭제
         resultInit(); // 결과값 초기화
     }
@@ -420,7 +459,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         // 마지막 수식은 숫자여야 하고, 0으로 나눌 수 없다.
         if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(point)
                 && !lastStrOfLastVal.equals(fraction)  && !lastStrOfLastVal.equals(plusMinus)
-                && !(arrayList.size() >= 2 && arrayList.get(arrayList.size()-2).equals(divide) && lastValue.equals(zero))){
+                && !(arrayList.size() >= 2 && arrayList.get(arrayList.size()-2).equals(divide) && lastValue.equals(zero))
+                && !(arrayList.size() >= 2 && arrayList.get(arrayList.size()-2).equals(divide) && lastValue.equals(plusMinus+zero))){
 
             // 초기화 ("="을 입력한 후 "C" 버튼을 누르지 않고 계속 수식을 입력할 경우를 위해)
             resultInit();
@@ -439,25 +479,22 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
             // 분수 사칙연산
             try {
                 fractionResult = calcFractionUtils.fractionCalculate(arrayList);
-
-                numeratorTextView.setText(fractionResult[0]); // 분자
-                denominatorTextView.setText(fractionResult[1]);   // 분모
-                if(!fractionResult[2].equals(zero))
-                    wholeTextView.setText(fractionResult[2]);   // 대분수
-                else
-                    wholeTextView.setText("");   // 대분수
-
-                // 화면에 맞게 텍스트크기 조정
-                numeratorTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultFractionTextSize);
-                denominatorTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, numeratorTextView.getTextSize());
-                wholeTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, numeratorTextView.getTextSize());
-                fractionLayout.setVisibility(View.VISIBLE);
             }
             catch (Exception e){
-                fractionResult = new String[]{zero, zero, zero};
-                fractionLayout.setVisibility(View.INVISIBLE);
+                fractionResult = new String[]{zero, "1", zero};
                 Log.e("asd", "calcFractionUtils.fractionCalculate(): " + e);
             }
+            numeratorTextView.setText(fractionResult[0]); // 분자
+            denominatorTextView.setText(fractionResult[1]);   // 분모
+            if(!fractionResult[2].equals(zero))
+                wholeTextView.setText(fractionResult[2]);   // 대분수
+            else
+                wholeTextView.setText("");   // 대분수
+
+            // 화면에 맞게 텍스트크기 조정
+            numeratorTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultFractionTextSize);
+            denominatorTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, numeratorTextView.getTextSize());
+            wholeTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, numeratorTextView.getTextSize());
 
             setHistoryData(arrayList, result, fractionResult);
         }
@@ -477,7 +514,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         if(v.getId() == R.id.btn1 || v.getId() == R.id.btn2  || v.getId() == R.id.btn3
                 || v.getId() == R.id.btn4 || v.getId() == R.id.btn5 || v.getId() == R.id.btn6
                 || v.getId() == R.id.btn7 || v.getId() == R.id.btn8 || v.getId() == R.id.btn9
-                || v.getId() == R.id.btn0){
+                || v.getId() == R.id.btn0 || v.getId() == R.id.btnPlusMinus){
 
             if(arrayList.isEmpty())
                 return false;
@@ -486,11 +523,62 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
             String lastStrOfLastVal = "";    // 마지막 값의 마지막 글자
             if (lastValue.length() != 0)
                 lastStrOfLastVal = lastValue.substring(lastValue.length() - 1);
+            String plusMinusSymbol = lastValue.charAt(0) + "";
 
-            // 분자 및 분모에 값이 있을 때 대분수 수식 가능
-            if(lastValue.contains(fraction) && !lastStrOfLastVal.equals(fraction)
-                    && !lastStrOfLastVal.equals(point) && !lastStrOfLastVal.equals(plusMinus)){
-                Log.d("asd", v.getTag().toString());
+            // 분자 및 분모에 자연수값이 있을 때, 대분수 수식 가능
+            if(lastValue.contains(fraction) && !lastStrOfLastVal.equals(fraction) && !lastValue.contains(point)){
+                // "±" 기호는 대분수에만 존재해야 한다.
+                if(lastValue.contains(fractionWhole) && lastValue.contains(plusMinus) && !plusMinusSymbol.equals(plusMinus))
+                    return false;
+
+                // "±" 롱클릭시
+                if(v.getTag().equals(plusMinus)){
+                    if(lastValue.contains(plusMinus)){  // "±" 존재할 때
+                        String splitStr[] = lastValue.split(fractionWhole);
+                        if(splitStr[0].length() == 1){
+                            arrayList.set(arrayList.size()-1, splitStr[1]);
+                            viewUtils.changeTextView(arrayList, "calcFractionWholeTextView", "");
+                        } else {
+                            String positive = splitStr[0].substring(1);
+                            arrayList.set(arrayList.size()-1, positive + fractionWhole + splitStr[1]);
+                            viewUtils.changeTextView(arrayList, "calcFractionWholeTextView", positive);
+                        }
+                    }
+                    else {   // "±" 없을 때
+                        if(lastValue.contains(fractionWhole)){
+                            String splitStr[] = lastValue.split(fractionWhole);
+                            arrayList.set(arrayList.size()-1, plusMinus + lastValue);
+                            viewUtils.changeTextView(arrayList, "calcFractionWholeTextView", minus + splitStr[0]);
+                        }
+                        else {
+                            arrayList.set(arrayList.size()-1, plusMinus + fractionWhole + lastValue);
+                            viewUtils.changeTextView(arrayList, "calcFractionWholeTextView", minus);
+                        }
+                    }
+                    return true;
+                }
+
+                if(lastValue.contains(fractionWhole)){  // 대분수에 값이 있을 경우
+                    String splitWhole[] = lastValue.split(fractionWhole);   // 0: 대분수 1: 분자,분모
+
+                    // 0을 지우고 텍스트를 추가한다.
+                    if(splitWhole[0].equals(zero)){
+                        arrayList.set(arrayList.size()-1, v.getTag().toString() + fractionWhole + splitWhole[1]);
+                        viewUtils.changeTextView(arrayList, "calcFractionWholeTextView", v.getTag().toString());
+                    }
+                    else if(splitWhole[0].equals(plusMinus+zero)){  //  "-0"을 지우고 텍스트를 추가한다.
+                        arrayList.set(arrayList.size()-1, plusMinus + v.getTag().toString() + fractionWhole + splitWhole[1]);
+                        viewUtils.changeTextView(arrayList, "calcFractionWholeTextView", minus + v.getTag().toString());
+                    }
+                    else {
+                        arrayList.set(arrayList.size()-1, splitWhole[0] + v.getTag().toString() + fractionWhole + splitWhole[1]);
+                        viewUtils.appendTextView(arrayList, "calcFractionWholeTextView", v.getTag().toString());
+                    }
+                }
+                else {  // 대분수에 값이 없을 경우
+                    arrayList.set(arrayList.size()-1, v.getTag().toString() + fractionWhole + lastValue);
+                    viewUtils.changeTextView(arrayList, "calcFractionWholeTextView", v.getTag().toString());
+                }
             }
             return true;
         }

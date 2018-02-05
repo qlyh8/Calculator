@@ -18,7 +18,7 @@ import java.util.StringTokenizer;
 // 계산 유틸
 public class CalcUtils {
 
-    private String add, subtract, multiply, divide, fraction, plusMinus;
+    private String add, subtract, multiply, divide, fraction, plusMinus, whole;
 
     public CalcUtils(Context context){
         add = context.getResources().getString(R.string.add);
@@ -27,6 +27,7 @@ public class CalcUtils {
         divide = context.getResources().getString(R.string.divide);
         fraction = context.getResources().getString(R.string.fractionOperator);
         plusMinus = context.getResources().getString(R.string.plusMinus);
+        whole = context.getResources().getString(R.string.fractionWholeOperator);
     }
 
     // 숫자인지 기호인지 판별
@@ -62,8 +63,34 @@ public class CalcUtils {
         // 변환
         for(int i = 0; i < tempList.size() ; i++){
             if(tempList.get(i).contains(fraction)){
-                String splitStr[] = tempList.get(i).split(fraction);
-                tempList.set(i, splitStr[1] + divide + splitStr[0]);
+                if(tempList.get(i).contains(whole)){    // ex) 3 # 5 @ 1
+                    String parentSplitStr[] = tempList.get(i).split(whole);
+                    String splitStr[] = parentSplitStr[1].split(fraction);
+
+                    boolean isNegative = false; // 음수 여부 확인
+                    if(parentSplitStr[0].contains(plusMinus))
+                        isNegative = true;
+
+                    BigDecimal whole;   // 대분수
+                    if(parentSplitStr[0].equals(plusMinus))
+                        whole = new BigDecimal("0");
+                    else
+                        whole = new BigDecimal(parentSplitStr[0].replaceAll(plusMinus, "-"));
+
+                    BigDecimal denominator = new BigDecimal(splitStr[0]);   // 분모
+                    BigDecimal numerator = new BigDecimal(splitStr[1]); // 분자
+
+                    BigDecimal newNumerator = ((whole.abs()).multiply(denominator)).add(numerator);
+
+                    if(isNegative)
+                        tempList.set(i, plusMinus + newNumerator.toString() + divide + splitStr[0]);
+                    else
+                        tempList.set(i, newNumerator.toString() + divide + splitStr[0]);
+                }
+                else {
+                    String splitStr[] = tempList.get(i).split(fraction);
+                    tempList.set(i, splitStr[1] + divide + splitStr[0]);
+                }
             }
         }
 
@@ -77,10 +104,7 @@ public class CalcUtils {
 
     // "±"를 "－"으로 변환
     private String convertToMinus(String number){
-        if(number.contains(plusMinus))
-            return number.replaceAll(plusMinus, "-");  // strings.xml 에 저장된 것과 다름
-        else
-            return number;
+        return number.replaceAll(plusMinus, "-");  // strings.xml 에 저장된 것과 다름
     }
 
     // 사칙연산

@@ -4,7 +4,7 @@
     android:color="#d7d7d7">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorKeyPadGray"/>
+            <solid android:color="@color/colorKeyPadBlue"/>
         </shape>
     </item>
 </ripple>

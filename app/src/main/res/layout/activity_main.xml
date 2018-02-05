@@ -54,24 +54,7 @@
                 android:gravity="end|bottom"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:paddingBottom="16dp"
-                android:layout_marginBottom="4dp" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:paddingBottom="2dp">
-                    <me.grantland.widget.AutofitTextView
-                        android:id="@+id/resultView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="123"
-                        android:textColor="#fff"
-                        android:gravity="center|end"
-                        android:textSize="50sp"
-                        android:singleLine="true"/>
-                </LinearLayout>
+                android:paddingBottom="16dp">
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/fraction_layout"
@@ -147,9 +130,30 @@
 
                 </android.support.constraint.ConstraintLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="2dp">
+                    <me.grantland.widget.AutofitTextView
+                        android:id="@+id/resultView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="123"
+                        android:textColor="#fff"
+                        android:gravity="center|end"
+                        android:textSize="50sp"
+                        android:singleLine="true"/>
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:background="@drawable/gradient_keypad" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -476,6 +480,7 @@
                     android:gravity="center">
 
                     <Button
+                        android:id="@+id/btnPlusMinus"
                         android:tag="@string/plusMinus"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

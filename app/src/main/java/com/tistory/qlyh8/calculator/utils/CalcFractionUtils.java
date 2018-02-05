@@ -18,7 +18,7 @@ import java.util.StringTokenizer;
 // 분수 계산 유틸
 public class CalcFractionUtils {
 
-    private String add, subtract, multiply, divide, fraction, point, plusMinus;
+    private String add, subtract, multiply, divide, fraction, point, plusMinus, whole;
 
     public CalcFractionUtils(Context context){
         add = context.getResources().getString(R.string.add);
@@ -28,14 +28,39 @@ public class CalcFractionUtils {
         point = context.getResources().getString(R.string.point);
         plusMinus = context.getResources().getString(R.string.plusMinus);
         fraction = context.getResources().getString(R.string.fractionOperator);
+        whole = context.getResources().getString(R.string.fractionWholeOperator);
     }
 
     // "±"를 "－"으로 변환
     private String convertToMinus(String number){
-        if(number.contains(plusMinus))
+
+        if(number.contains(whole)){ // ex) 3 # 5 @ 1
+            String parentSplitStr[] = number.split(whole);
+            String splitStr[] = parentSplitStr[1].split(fraction);
+
+            boolean isNegative = false; // 음수 여부 확인
+            if(parentSplitStr[0].contains(plusMinus))
+                isNegative = true;
+
+            BigDecimal whole;   // 대분수
+            if(parentSplitStr[0].equals(plusMinus))
+                whole = new BigDecimal("0");
+            else
+                whole = new BigDecimal(parentSplitStr[0].replaceAll(plusMinus, "-"));
+
+            BigDecimal denominator = new BigDecimal(splitStr[0]);   // 분모
+            BigDecimal numerator = new BigDecimal(splitStr[1]); // 분자
+
+            BigDecimal newNumerator = ((whole.abs()).multiply(denominator)).add(numerator);
+
+            if(isNegative)
+                return "-" + splitStr[0] + fraction + newNumerator.toString();
+            else
+                return splitStr[0] + fraction + newNumerator.toString();
+        }
+        else {
             return number.replaceAll(plusMinus, "-");   // strings.xml 에 저장된 것과 다름
-        else
-            return number;
+        }
     }
 
     // 소수를 분수로 변환
@@ -205,7 +230,8 @@ public class CalcFractionUtils {
 
         try {
             StringTokenizer tokenNumber = new StringTokenizer(strList, add+subtract+multiply+divide); // 숫자
-            StringTokenizer tokenOperator = new StringTokenizer(strList, "1234567890"+point+fraction+plusMinus);   // 연산자
+            StringTokenizer tokenOperator = new StringTokenizer(strList,
+                    "1234567890"+point+fraction+plusMinus+whole);   // 연산자
 
             Stack<String> stack = new Stack<>();    // 숫자를 담을 스택
 

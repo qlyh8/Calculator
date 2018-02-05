@@ -45,10 +45,23 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         for (int i = 0; i < calc.size(); i++) {
             if(calc.get(i).contains("@")){
-                String fraction[] = calc.get(i).split("@");
-                holder.viewUtils.setFractionHistoryTextView(i, fraction[0], fraction[1]);
-            }else {
-                holder.viewUtils.setNumTextView(calc, String.valueOf(calc.get(i)));
+                if(calc.get(i).contains("#")){
+                    String fractionWithWhole[] = calc.get(i).split("#");    // 0: 대분수  1: 분모,분자
+                    String fraction[] = fractionWithWhole[1].split("@");    //0: 분모   1: 분자
+                    holder.viewUtils.setFractionHistoryTextView(i,
+                            fraction[0].replaceAll("±", "－"),
+                            fraction[1].replaceAll("±", "－"),
+                            fractionWithWhole[0].replaceAll("±", "－"));
+                }
+                else{
+                    String fraction[] = calc.get(i).split("@");
+                    holder.viewUtils.setFractionHistoryTextView(i,
+                            fraction[0].replaceAll("±", "－"),
+                            fraction[1].replaceAll("±", "－"), "");
+                }
+            } else {
+                holder.viewUtils.setNumTextView(calc,
+                        String.valueOf(calc.get(i)).replaceAll("±", "－"));
             }
         }
         holder.historyResult.setText("= " + res.get(position).getResult());

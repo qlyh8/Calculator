@@ -31,20 +31,20 @@ public class ViewUtils {
     }
 
     // 리니어 레이아웃 생성
-    private LinearLayout setLinearLayout(ArrayList<String> arrayList){
+    private LinearLayout setLinearLayout(ArrayList<String> arrayList, String tag){
         LinearLayout layout = new LinearLayout(context);
         layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));
         layout.setOrientation(LinearLayout.HORIZONTAL);
         layout.setGravity(Gravity.CENTER);
-        layout.setTag("calcLayout"+arrayList.size());
+        layout.setTag(tag + arrayList.size());
         return layout;
     }
 
     // 숫자 텍스트 생성
     public void setNumTextView(ArrayList<String> arrayList, String number){
         // 리니어 레이아웃 생성
-        LinearLayout layout = setLinearLayout(arrayList);
+        LinearLayout layout = setLinearLayout(arrayList, "calcLayout");
         rootLayout.addView(layout);
 
         TextView textView = new TextView(context);
@@ -59,7 +59,7 @@ public class ViewUtils {
     // 연산자 텍스트 생성
     public void setSymbolTextView(ArrayList<String> arrayList, String symbol){
         // 리니어 레이아웃 생성
-        LinearLayout layout = setLinearLayout(arrayList);
+        LinearLayout layout = setLinearLayout(arrayList, "calcLayout");
         rootLayout.addView(layout);
 
         // 텍스트 뷰 생성
@@ -76,13 +76,30 @@ public class ViewUtils {
     // 분수 텍스트 생성
     public void setFractionTextView(ArrayList<String> arrayList, String number){
         // 리니어 레이아웃 생성
+        LinearLayout parentLayout = setLinearLayout(arrayList, "calcLayout");
+        rootLayout.addView(parentLayout);
+
+        // 대분수 리니어 레이아웃 생성
+        LinearLayout wholeLayout = setLinearLayout(arrayList, "calcWholeLayout");
+        parentLayout.addView(wholeLayout);
+
+        // 대분수 텍스트 뷰 생성
+        TextView wholeTextView = new TextView(context);
+        wholeTextView.setText("");
+        wholeTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
+        wholeTextView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
+        wholeTextView.setGravity(Gravity.CENTER);
+        wholeTextView.setTag("calcFractionWholeTextView"+arrayList.size());
+        wholeLayout.addView(wholeTextView);
+
+        // 분수 리니어 레이아웃 생성
         LinearLayout layout = new LinearLayout(context);
         layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(Gravity.CENTER);
         layout.setTag("calcFractionLayout"+arrayList.size());
-        rootLayout.addView(layout);
+        parentLayout.addView(layout);
 
         // 분자 텍스트 뷰 생성
         TextView TopTextView = new TextView(context);
@@ -113,15 +130,42 @@ public class ViewUtils {
     }
 
     // 분수 텍스트 생성
-    public void setFractionHistoryTextView(int key, String bottomNum, String topNum){
+    public void setFractionHistoryTextView(int key, String bottomNum, String topNum, String wholeNum){
         // 리니어 레이아웃 생성
+        LinearLayout parentLayout = new LinearLayout(context);
+        parentLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
+        parentLayout.setOrientation(LinearLayout.HORIZONTAL);
+        parentLayout.setGravity(Gravity.CENTER);
+        parentLayout.setTag("calcLayout" + key);
+        rootLayout.addView(parentLayout);
+
+        // 대분수 리니어 레이아웃 생성
+        LinearLayout wholeLayout = new LinearLayout(context);
+        wholeLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
+        wholeLayout.setOrientation(LinearLayout.HORIZONTAL);
+        wholeLayout.setGravity(Gravity.CENTER);
+        wholeLayout.setTag("calcWholeLayout" + key);
+        parentLayout.addView(wholeLayout);
+
+        // 대분수 텍스트 뷰 생성
+        TextView wholeTextView = new TextView(context);
+        wholeTextView.setText(wholeNum);
+        wholeTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
+        wholeTextView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
+        wholeTextView.setGravity(Gravity.CENTER);
+        wholeTextView.setTag("calcFractionWholeTextView" + key);
+        wholeLayout.addView(wholeTextView);
+
+        // 분수 리니어 레이아웃 생성
         LinearLayout layout = new LinearLayout(context);
         layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(Gravity.CENTER);
-        layout.setTag("calcFractionLayout"+key);
-        rootLayout.addView(layout);
+        layout.setTag("calcFractionLayout" + key);
+        parentLayout.addView(layout);
 
         // 분자 텍스트 뷰 생성
         TextView TopTextView = new TextView(context);
@@ -129,7 +173,7 @@ public class ViewUtils {
         TopTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
         TopTextView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
         TopTextView.setGravity(Gravity.CENTER);
-        TopTextView.setTag("calcFractionTopTextView"+key);
+        TopTextView.setTag("calcFractionTopTextView" + key);
         layout.addView(TopTextView);
 
         // 라인 생성
@@ -138,7 +182,7 @@ public class ViewUtils {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 3);
         params.setMargins(5, 0, 5, 0);
         line.setLayoutParams(params);
-        line.setTag("calcFractionLine"+key);
+        line.setTag("calcFractionLine" + key);
         layout.addView(line);
 
         // 분모 텍스트 뷰 생성
@@ -147,8 +191,9 @@ public class ViewUtils {
         BottomTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
         BottomTextView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
         BottomTextView.setGravity(Gravity.CENTER);
-        BottomTextView.setTag("calcFractionBottomTextView"+key);
+        BottomTextView.setTag("calcFractionBottomTextView" + key);
         layout.addView(BottomTextView);
+
 
         // 분자와 분모 중 너비가 큰 것에 맞춰 라인을 조정한다.
         LinearLayout.LayoutParams newParams;
