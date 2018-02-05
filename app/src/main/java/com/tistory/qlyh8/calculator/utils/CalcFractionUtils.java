@@ -141,7 +141,7 @@ public class CalcFractionUtils {
                 break;
             default:
                 numerator = new BigInteger("0");
-                denominator = new BigInteger("0");
+                denominator = new BigInteger("1");
                 break;
         }
 

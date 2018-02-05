@@ -78,7 +78,7 @@ public class CalcUtils {
     // "±"를 "－"으로 변환
     private String convertToMinus(String number){
         if(number.contains(plusMinus))
-            return number.replace(plusMinus, "-");  // strings.xml 에 저장된 것과 다름
+            return number.replaceAll(plusMinus, "-");  // strings.xml 에 저장된 것과 다름
         else
             return number;
     }

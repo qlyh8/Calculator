@@ -9,9 +9,8 @@
     <color name="colorKeyPadLightDark">#9E9E9E</color>
     <color name="colorKeyPadNum">#7C7C7C</color>
     <color name="colorKeyPadNumLightDark">#BEBEBE</color>
-
     <color name="colorKeyPadRed">#FF6F6F</color>
-    <color name="colorKeyPadBlue">#34444F</color>
+    <color name="colorKeyPadGray">#4A4D49</color>
 
     <color name="colorResultRed">#6E4A4A</color>
 </resources>

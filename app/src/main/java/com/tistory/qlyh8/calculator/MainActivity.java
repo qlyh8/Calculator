@@ -261,8 +261,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                             lastValue.split(fraction)[0] + fraction + String.valueOf(view.getTag()) + numerator);
                     viewUtils.changeTextView(arrayList,"calcFractionTopTextView", minus + numerator);
                 }
-                viewUtils.changeFractionLine(arrayList);    // 분자가 분모보다 너비가 커지면 라인을 조정한다.
             }
+            viewUtils.changeFractionLine(arrayList);    // 분자가 분모보다 너비가 커지면 라인을 조정한다.
         }
         else{ // 분수가 아닐 때
             if(lastValue.contains(plusMinus)){
@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                     arrayList.set(arrayList.size()-1, lastValue.substring(1));
                     viewUtils.changeTextView(arrayList, "calcTextView", lastValue.substring(1));
                 }
-            } else{
+            } else {
                 arrayList.set(arrayList.size()-1, String.valueOf(view.getTag()) + lastValue);
                 viewUtils.changeTextView(arrayList, "calcTextView", minus + lastValue);
             }
@@ -298,15 +298,15 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         if(!calcUtils.isSymbol(lastValue) && !lastStrOfLastVal.equals(point)
                 && !lastStrOfLastVal.equals(plusMinus) && !lastStrOfLastVal.equals(fraction)){
            if(arrayList.size() >= 2 && arrayList.get(arrayList.size()-2).equals(divide)){
-                    // 0으로 나눌 수 없다.
-                if(!lastValue.equals(zero) && !lastValue.equals(plusMinus + zero)){
-                    arrayList.add(String.valueOf(view.getTag()));
-                    viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
-                }
-            } else {
+               // 0으로 나눌 수 없다.
+               if(!lastValue.equals(zero) && !lastValue.equals(plusMinus + zero)){
+                   arrayList.add(String.valueOf(view.getTag()));
+                   viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
+               }
+           } else {
                 arrayList.add(String.valueOf(view.getTag()));
                 viewUtils.setSymbolTextView(arrayList, String.valueOf(view.getTag()));
-            }
+           }
         }
     }
 
@@ -468,7 +468,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         ArrayList<String> historyCalcList = new ArrayList<>();
         historyCalcList.addAll(calc);
         tempData = new HistoryObject(historyCalcList, result, fractionResult);
-        HistoryStorageUtil.historyRes.add(tempData);
+        HistoryStorageUtil.historyRes.add(0, tempData);
     }
 
     // 롱클릭 시 수식에 대분수 추가
@@ -479,13 +479,13 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                 || v.getId() == R.id.btn7 || v.getId() == R.id.btn8 || v.getId() == R.id.btn9
                 || v.getId() == R.id.btn0){
 
-            String lastValue = "";  // 마지막 수식
-            String lastStrOfLastVal = "";    // 마지막 값의 마지막 글자
+            if(arrayList.isEmpty())
+                return false;
 
-            if(arrayList.size() != 0)
-                lastValue = arrayList.get(arrayList.size()-1);
-            if(lastValue.length() != 0)
-                lastStrOfLastVal = lastValue.substring(lastValue.length()-1);
+            String lastValue = arrayList.get(arrayList.size() - 1);  // 마지막 수식
+            String lastStrOfLastVal = "";    // 마지막 값의 마지막 글자
+            if (lastValue.length() != 0)
+                lastStrOfLastVal = lastValue.substring(lastValue.length() - 1);
 
             // 분자 및 분모에 값이 있을 때 대분수 수식 가능
             if(lastValue.contains(fraction) && !lastStrOfLastVal.equals(fraction)
