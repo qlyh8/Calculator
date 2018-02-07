@@ -54,8 +54,8 @@ public class CalcUtils {
         return result;
     }
 
-    // "@"를 "÷"으로 변환
-    public String convertToDivide(ArrayList<String> oldList){
+    // "@"를 "÷"으로 변환, 대분수를 가분수로 변환
+    private String convertToDivide(ArrayList<String> oldList){
         // 복제
         ArrayList<String> tempList = new ArrayList<>();
         tempList.addAll(oldList);
@@ -108,9 +108,12 @@ public class CalcUtils {
     }
 
     // 사칙연산
-    public String calculate(String strList) throws Exception {
+    public String calculate(ArrayList<String> arrayList) throws Exception {
 
         String newResult = "0";
+
+        // "@"를 "÷"으로 변환
+        String strList = convertToDivide(arrayList);
 
         // 숫자만 골라낸다.
         StringTokenizer tokenNumber = new StringTokenizer(strList, add + subtract + multiply + divide);

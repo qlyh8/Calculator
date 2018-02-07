@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.tistory.qlyh8.calculator.HistoryActivity;
 import com.tistory.qlyh8.calculator.MainActivity;
 import com.tistory.qlyh8.calculator.R;
+import com.tistory.qlyh8.calculator.SettingActivity;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
@@ -37,7 +37,7 @@ public class NavUtils {
     }
 
     public void setClickEvent() {
-        TextView temp2 = (TextView)myActivity.findViewById(R.id.meTemp);
+        View temp2 = myActivity.findViewById(R.id.meTemp);
         temp2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,11 +46,20 @@ public class NavUtils {
             }
         });
 
-        TextView temp = (TextView)myActivity.findViewById(R.id.myTemp);
+        View temp = myActivity.findViewById(R.id.myTemp);
         temp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(myActivity,HistoryActivity.class);
+                myActivity.startActivity(intent);
+            }
+        });
+
+        View setting = myActivity.findViewById(R.id.nav_setting);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(myActivity, SettingActivity.class);
                 myActivity.startActivity(intent);
             }
         });

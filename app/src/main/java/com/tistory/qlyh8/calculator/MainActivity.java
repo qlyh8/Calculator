@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.tistory.qlyh8.calculator.utils.CalcFractionUtils;
 import com.tistory.qlyh8.calculator.utils.CalcUtils;
 import com.tistory.qlyh8.calculator.utils.HistoryStorageUtil;
 import com.tistory.qlyh8.calculator.utils.NavUtils;
+import com.tistory.qlyh8.calculator.utils.PreferenceUtils;
 import com.tistory.qlyh8.calculator.utils.ViewUtils;
 
 import java.util.ArrayList;
@@ -39,18 +41,19 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
     @BindView(R.id.text_whole) public TextView wholeTextView;   // 대분수 결과값 뷰
     @BindView(R.id.slide_menu) public LinearLayout slideMenu;
+
+    private ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
+    private String result;  // 결과값
+    private String[] fractionResult; // 분수 결과값
+    private float defaultFractionTextSize;  // 분수 결과값 기본 텍스트 크기
+
+    private String zero, point, minus, divide, fraction, plusMinus, fractionWhole;
+
+    private ViewUtils viewUtils;
+    private CalcUtils calcUtils;
+    private CalcFractionUtils calcFractionUtils;
+    private PreferenceUtils preferenceUtils;
     private NavUtils navUtils = new NavUtils();
-
-    ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
-    String result;  // 결과값
-    String[] fractionResult; // 분수 결과값
-    float defaultFractionTextSize;  // 분수 결과값 기본 텍스트 크기
-
-    String zero, point, minus, divide, fraction, plusMinus, fractionWhole;
-
-    ViewUtils viewUtils;
-    CalcUtils calcUtils;
-    CalcFractionUtils calcFractionUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,36 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         AutofitHelper.create(denominatorTextView);
         AutofitHelper.create(wholeTextView);
 
+        scrollRootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+                scrollRootView.fullScroll(View.FOCUS_RIGHT);
+            }
+        });
+
+        viewUtils = new ViewUtils(this, rootLayout);
+        calcUtils = new CalcUtils(this);
+        calcFractionUtils = new CalcFractionUtils(this);
+        preferenceUtils = new PreferenceUtils(this);
+        preferenceUtils.getTextView(resultTextView);
+        preferenceUtils.setupSharedPreferences();
+        navUtils.bind(MainActivity.this,savedInstanceState);
+
+        slideMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navUtils.getSlidingRootNav().openMenu();
+            }
+        });
+
+        valueInit();
+        resultInit();
+        textWidthInit();
+        setLongClickInit();
+    }
+
+    // 변수 초기화
+    public void valueInit(){
         zero = getResources().getString(R.string.zero); // "0"
         point = getResources().getString(R.string.point);   // "."
         minus = getResources().getString(R.string.subtract);    // "－"
@@ -79,29 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         denominatorTextView.setText("1");
         wholeTextView.setText("");
         defaultFractionTextSize = numeratorTextView.getTextSize();
-
-        scrollRootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
-                scrollRootView.fullScroll(View.FOCUS_RIGHT);
-            }
-        });
-
-        viewUtils = new ViewUtils(this, rootLayout);
-        calcUtils = new CalcUtils(this);
-        calcFractionUtils = new CalcFractionUtils(this);
-
-        navUtils.bind(MainActivity.this,savedInstanceState);
-        slideMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navUtils.getSlidingRootNav().openMenu();
-            }
-        });
-
-        resultInit();
-        textWidthInit();
-        setLongClickInit();
     }
 
     // 결과값 초기화
@@ -137,6 +147,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     //"0~9" 버튼 클릭
     @SuppressLint("SetTextI18n")
     public void clickBtnNumber(View view) {
+        preferenceUtils.setVibration();
+
         // 수식창이 비었을 때 배열과 뷰에 텍스트를 추가한다.
         if(arrayList.isEmpty()){
             arrayList.add(String.valueOf(view.getTag()));
@@ -201,6 +213,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     // "." 버튼 클릭
     @SuppressLint("SetTextI18n")
     public void clickBtnPoint(View view){
+        preferenceUtils.setVibration();
+
         // 배열 값이 비어있지 않아야 한다.
         if(arrayList.isEmpty())
             return;
@@ -234,6 +248,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     // "±" 버튼 클릭
     public void clickBtnPlusMinus(View view) {
+        preferenceUtils.setVibration();
+
         // 수식창이 비었을 때 배열과 뷰에 텍스트를 추가한다.
         if(arrayList.isEmpty()){
             arrayList.add(String.valueOf(view.getTag()));
@@ -293,6 +309,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     // "+,－,×,÷" 버튼 클릭
     public void clickBtnSymbol(View view) {
+        preferenceUtils.setVibration();
+
         // 배열 값이 비어있지 않아야 한다.
         if(arrayList.isEmpty())
             return;
@@ -327,6 +345,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     // "F" (분수) 버튼 클릭
     public void clickBtnFraction(View view){
+        preferenceUtils.setVibration();
+
         // 배열 값이 비어있지 않아야 한다.
         if(arrayList.isEmpty())
             return;
@@ -357,6 +377,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     // "←" 버튼 클릭
     public void clickBtnClear(View view) {
+        preferenceUtils.setVibration();
         resultInit();   // 결과값 초기화
 
         // 배열 값이 비어있지 않아야 한다.
@@ -436,6 +457,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     // "C" 버튼 클릭
     public void clickBtnAllClear(View view) {
+        preferenceUtils.setVibration();
         rootLayout.removeAllViews();    // 수식 뷰 안의 모든 뷰 삭제
         resultTextView.setText(zero);    // 결과 값을 0으로 초기화
         numeratorTextView.setText(zero);
@@ -447,6 +469,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     // "=" 버튼 클릭
     public void clickBtnResult(View view) {
+        preferenceUtils.setVibration();
+
         // 배열 값이 비어있지 않아야 한다.
         if(arrayList.isEmpty())
             return;
@@ -465,10 +489,9 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
             // 초기화 ("="을 입력한 후 "C" 버튼을 누르지 않고 계속 수식을 입력할 경우를 위해)
             resultInit();
 
-            // "@"를 "÷"으로 변환
-            String strList = calcUtils.convertToDivide(arrayList);
+            // 사칙연산
             try {
-                result = calcUtils.calculate(strList);  // 사칙연산
+                result = calcUtils.calculate(arrayList);
             }
             catch (Exception e){
                 result = zero;
@@ -584,5 +607,12 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         }
         else
             return false;
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        //리스너 해지
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(preferenceUtils);
     }
 }

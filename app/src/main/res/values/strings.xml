@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Modern Calculator</string>
+    <string name="app_name_modern">MODERN</string>
+    <string name="app_name_calculator">CALCULATOR</string>
+
+    <!-- Calculator Part -->
+    <string name="calculator">Calculator</string>
 
     <string name="one">1</string>
     <string name="two">2</string>
@@ -11,15 +16,37 @@
     <string name="eight">8</string>
     <string name="nine">9</string>
     <string name="zero">0</string>
-    <string name="point">.</string>
-    <string name="fraction">F</string>
-    <string name="fractionOperator"><![CDATA["@"]]></string>
-    <string name="fractionWholeOperator"><![CDATA["#"]]></string>
-    <string name="clear">C</string>
-    <string name="result">=</string>
+
     <string name="add">＋</string>
     <string name="subtract">－</string>
     <string name="multiply">×</string>
     <string name="divide">÷</string>
+
+    <string name="clear">C</string>
+    <string name="result">=</string>
     <string name="plusMinus">±</string>
+    <string name="point">.</string>
+    <string name="fraction">F</string>
+    <string name="fractionOperator"><![CDATA["@"]]></string>
+    <string name="fractionWholeOperator"><![CDATA["#"]]></string>
+
+
+    <!-- History Part -->
+    <string name="history">History</string>
+
+
+    <!-- Setting Part -->
+    <string name="setting">Setting</string>
+
+    <string name="pref_theme_label">Theme</string>
+    <string name="pref_theme_key" translatable="false">color</string>
+    <string name="pref_theme_label_black">Black</string>
+    <string name="pref_theme_label_red">Red</string>
+    <string name="pref_theme_value_black" translatable="false">black</string>
+    <string name="pref_theme_value_red" translatable="false">red</string>
+
+    <string name="pref_vibration_label">Touch Vibration</string>
+    <string name="pref_vibration_key" translatable="false">vibration</string>
+    <string name="pref_vibration_true">Turn on</string>
+    <string name="pref_vibration_false">Turn off</string>
 </resources>

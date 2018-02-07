@@ -15,8 +15,8 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         android:paddingStart="24dp"
-        android:text="Modern"
-        android:textSize="12sp" />
+        android:text="@string/app_name_modern"
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,38 +27,119 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CALCULATOR"
+            android:text="@string/app_name_calculator"
             android:textSize="30sp" />
     </LinearLayout>
 
-    <Space
+    <!--<Space
         android:layout_width="wrap_content"
-        android:layout_height="56dp" />
+        android:layout_height="56dp" />-->
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
-        <TextView
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:orientation="horizontal"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name_calculator"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/meTemp"
-            android:text="0. Calculator"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1. History"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/nav_calculator"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="8dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="24dp"
+                android:text="@string/calculator"
+                android:textSize="23sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/myTemp"
-            android:textSize="20sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2. Theme"
-            android:textSize="20sp" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/nav_history"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="8dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="24dp"
+                android:text="@string/history"
+                android:textSize="23sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="24dp"
+                android:text="@string/setting"
+                android:textSize="23sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_setting"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/nav_setting"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="8dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="24dp"
+                android:text="@string/setting"
+                android:textSize="23sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <Space
