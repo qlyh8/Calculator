@@ -9,7 +9,9 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ import com.tistory.qlyh8.calculator.utils.CalcUtils;
 import com.tistory.qlyh8.calculator.utils.HistoryStorageUtil;
 import com.tistory.qlyh8.calculator.utils.NavUtils;
 import com.tistory.qlyh8.calculator.utils.PreferenceUtils;
+import com.tistory.qlyh8.calculator.utils.ThemeUtil;
 import com.tistory.qlyh8.calculator.utils.ViewUtils;
 
 import java.util.ArrayList;
@@ -41,6 +44,28 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
     @BindView(R.id.text_whole) public TextView wholeTextView;   // 대분수 결과값 뷰
     @BindView(R.id.slide_menu) public LinearLayout slideMenu;
+
+    //** Theme **
+    @BindView(R.id.result_pannel) public LinearLayout resultPanel;
+    @BindView(R.id.gradient_line) public View gradientLine;
+    @BindView(R.id.btn_add) public Button btnAdd;
+    @BindView(R.id.btn_substract) public Button btnSubstract;
+    @BindView(R.id.btn_multiply) public Button btnMultiply;
+    @BindView(R.id.btn_divide) public Button btnDivide;
+    @BindView(R.id.btnPlusMinus) public Button btnPlusMinus;
+    @BindView(R.id.btn_point) public Button btnPoint;
+    @BindView(R.id.btn_back) public Button btnBack;
+    @BindView(R.id.btn_clear) public Button btnClear;
+    @BindView(R.id.btn_fraction) public Button btnFraction;
+    @BindView(R.id.btn_result) public Button btnResult;
+    @BindView(R.id.slide_text) public ImageView slideText;
+    @BindView(R.id.image_back) public ImageView imageBack;
+    @BindView(R.id.result_equal) public ImageView resultEqual;
+    @BindView(R.id.result_bg) public ImageView resultBg;
+
+    @BindView(R.id.btn0) public Button btn0;@BindView(R.id.btn1) public Button btn1;@BindView(R.id.btn2) public Button btn2;@BindView(R.id.btn3) public Button btn3;
+    @BindView(R.id.btn4) public Button btn4;@BindView(R.id.btn5) public Button btn5;@BindView(R.id.btn6) public Button btn6;@BindView(R.id.btn7) public Button btn7;
+    @BindView(R.id.btn8) public Button btn8;@BindView(R.id.btn9) public Button btn9;
 
     private ArrayList<String> arrayList;    // 값을 저장할 배열 리스트
     private String result;  // 결과값
@@ -80,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         preferenceUtils = new PreferenceUtils(this);
         preferenceUtils.getTextView(resultTextView);
         preferenceUtils.setupSharedPreferences();
-        navUtils.bind(MainActivity.this,savedInstanceState);
+
 
         slideMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +118,80 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         resultInit();
         textWidthInit();
         setLongClickInit();
+        setTheme();
+
+        navUtils.bind(MainActivity.this,savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setTheme();
+    }
+
+    private void setTheme() {
+        ThemeUtil.themeBackground = R.drawable.ripple_keypad_pink;
+        int keypadTheme = R.color.colorWhite;
+        ThemeUtil.themeTextColor = R.color.colorDarkPink;
+        ThemeUtil.themeSlideMenuBg = R.drawable.menu_pink_bg;
+        ThemeUtil.themeSlideMenuText = R.color.colorWhite;
+        //Theme
+        resultPanel.setBackground(getDrawable(ThemeUtil.themeBackground));
+        gradientLine.setBackground(getDrawable(ThemeUtil.themeBackground));
+        //keyPadTheme
+        btn0.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btn1.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btn2.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btn3.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btn4.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btn5.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btn6.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btn7.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btn8.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btn9.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btnPlusMinus.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btnPoint.setBackground(getDrawable(ThemeUtil.themeBackground));
+
+        btnAdd.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btnSubstract.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btnMultiply.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btnDivide.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btnBack.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btnClear.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btnFraction.setBackground(getDrawable(ThemeUtil.themeBackground));
+        btnResult.setBackground(getDrawable(ThemeUtil.themeBackground));
+
+        //TextColorTheme
+        btn0.setTextColor(getResources().getColor(keypadTheme));
+        btn1.setTextColor(getResources().getColor(keypadTheme));
+        btn2.setTextColor(getResources().getColor(keypadTheme));
+        btn3.setTextColor(getResources().getColor(keypadTheme));
+        btn4.setTextColor(getResources().getColor(keypadTheme));
+        btn5.setTextColor(getResources().getColor(keypadTheme));
+        btn6.setTextColor(getResources().getColor(keypadTheme));
+        btn7.setTextColor(getResources().getColor(keypadTheme));
+        btn8.setTextColor(getResources().getColor(keypadTheme));
+        btn9.setTextColor(getResources().getColor(keypadTheme));
+        btnPlusMinus.setTextColor(getResources().getColor(keypadTheme));
+        btnPoint.setTextColor(getResources().getColor(keypadTheme));
+
+        btnAdd.setTextColor(getResources().getColor(ThemeUtil.themeTextColor));
+        btnSubstract.setTextColor(getResources().getColor(ThemeUtil.themeTextColor));
+        btnMultiply.setTextColor(getResources().getColor(ThemeUtil.themeTextColor));
+        btnDivide.setTextColor(getResources().getColor(ThemeUtil.themeTextColor));
+        btnClear.setTextColor(getResources().getColor(ThemeUtil.themeTextColor));
+        btnFraction.setTextColor(getResources().getColor(ThemeUtil.themeTextColor));
+        btnResult.setTextColor(getResources().getColor(ThemeUtil.themeTextColor));
+        imageBack.setColorFilter(getResources().getColor(ThemeUtil.themeTextColor));
+
+        //result
+        resultBg.setColorFilter(getResources().getColor(ThemeUtil.themeTextColor));
+        //resultEqual.setColorFilter(getResources().getColor(keypadTheme));
+
+        //Slide Menu
+        slideMenu.setBackground(getDrawable(ThemeUtil.themeSlideMenuBg));
+        slideText.setColorFilter(R.color.colorKeyPadRed);
+
     }
 
     // 변수 초기화

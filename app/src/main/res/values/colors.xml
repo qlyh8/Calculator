@@ -14,4 +14,8 @@
 
     <color name="colorResultRed">#6E4A4A</color>
     <color name="colorWhite">#FFFFFF</color>
+
+    <color name="colorWood">#fddd64</color>
+    <color name="colorPink">#f1dbdd</color>
+    <color name="colorDarkPink">#f98a8a</color>
 </resources>

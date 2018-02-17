@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.tistory.qlyh8.calculator.HistoryActivity;
 import com.tistory.qlyh8.calculator.MainActivity;
@@ -29,11 +30,17 @@ public class NavUtils {
                 .withSavedState(savedInstanceState)
                 .withMenuLayout(R.layout.activity_nav)
                 .inject();
+        setTheme();
         setClickEvent();
     }
 
     public SlidingRootNav getSlidingRootNav() {
         return slidingRootNav;
+    }
+
+    public void setTheme() {
+        LinearLayout panel = myActivity.findViewById(R.id.nav_pannel);
+        panel.setBackground(myActivity.getDrawable(ThemeUtil.themeBackground));
     }
 
     public void setClickEvent() {
