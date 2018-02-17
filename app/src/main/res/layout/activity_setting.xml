@@ -14,6 +14,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Theme"
+            android:textStyle="bold"
+            android:textSize="28sp"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginStart="30dp"
+            android:id="@+id/setting_recycler_view">
+
+        </android.support.v7.widget.RecyclerView>
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/activity_settings"

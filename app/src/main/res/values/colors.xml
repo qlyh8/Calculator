@@ -13,7 +13,7 @@
     <color name="colorKeyPadBlue">#29434E</color>
 
     <color name="colorResultRed">#6E4A4A</color>
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhite">#fff</color>
 
     <color name="colorWood">#fddd64</color>
     <color name="colorPink">#f1dbdd</color>

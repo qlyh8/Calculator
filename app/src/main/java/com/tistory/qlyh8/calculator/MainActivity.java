@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         resultInit();
         textWidthInit();
         setLongClickInit();
-        setTheme();
 
         navUtils.bind(MainActivity.this,savedInstanceState);
     }
@@ -127,14 +126,12 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     protected void onResume() {
         super.onResume();
         setTheme();
+        navUtils.setTheme();
+
     }
 
     private void setTheme() {
-        ThemeUtil.themeBackground = R.drawable.ripple_keypad_pink;
         int keypadTheme = R.color.colorWhite;
-        ThemeUtil.themeTextColor = R.color.colorDarkPink;
-        ThemeUtil.themeSlideMenuBg = R.drawable.menu_pink_bg;
-        ThemeUtil.themeSlideMenuText = R.color.colorWhite;
         //Theme
         resultPanel.setBackground(getDrawable(ThemeUtil.themeBackground));
         gradientLine.setBackground(getDrawable(ThemeUtil.themeBackground));
@@ -190,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
         //Slide Menu
         slideMenu.setBackground(getDrawable(ThemeUtil.themeSlideMenuBg));
-        slideText.setColorFilter(R.color.colorKeyPadRed);
+        slideText.setColorFilter(ThemeUtil.themeSlideMenuText);
 
     }
 

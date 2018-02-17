@@ -57,6 +57,7 @@ public class HistoryActivity extends AppCompatActivity{
     protected void onResume() {
         super.onResume();
         setTheme();
+        navUtils.setTheme();
     }
 
     private void setTheme() {
