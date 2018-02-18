@@ -27,6 +27,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     private List<HistoryObject> res;
     private LayoutInflater inflater;
+    private ViewUtils viewUtils;
 
     public HistoryAdapter(Context context, List<HistoryObject> res){
         inflater = LayoutInflater.from(context);
@@ -48,19 +49,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 if(calc.get(i).contains("#")){
                     String fractionWithWhole[] = calc.get(i).split("#");    // 0: 대분수  1: 분모,분자
                     String fraction[] = fractionWithWhole[1].split("@");    //0: 분모   1: 분자
-                    holder.viewUtils.setFractionHistoryTextView(i,
+                    viewUtils.setFractionHistoryTextView(i,
                             fraction[0].replaceAll("±", "－"),
                             fraction[1].replaceAll("±", "－"),
                             fractionWithWhole[0].replaceAll("±", "－"));
                 }
                 else{
                     String fraction[] = calc.get(i).split("@");
-                    holder.viewUtils.setFractionHistoryTextView(i,
+                    viewUtils.setFractionHistoryTextView(i,
                             fraction[0].replaceAll("±", "－"),
                             fraction[1].replaceAll("±", "－"), "");
                 }
             } else {
-                holder.viewUtils.setNumTextView(calc,
+                viewUtils.setNumTextView(calc,
                         String.valueOf(calc.get(i)).replaceAll("±", "－"));
             }
         }
@@ -73,12 +74,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         return res.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.history_item) LinearLayout historyItem;
         @BindView(R.id.history_result) TextView historyResult;
-        private ViewUtils viewUtils;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this,view);
             viewUtils = new ViewUtils(inflater.getContext(), historyItem);

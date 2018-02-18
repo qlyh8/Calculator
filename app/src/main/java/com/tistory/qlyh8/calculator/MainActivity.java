@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         super.onResume();
         setTheme();
         navUtils.setTheme();
-
     }
 
     private void setTheme() {
