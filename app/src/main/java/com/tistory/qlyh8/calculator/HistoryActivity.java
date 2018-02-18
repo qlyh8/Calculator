@@ -62,7 +62,7 @@ public class HistoryActivity extends AppCompatActivity{
 
     private void setTheme() {
         slideMenu.setBackground(getDrawable(ThemeUtil.themeSlideMenuBg));
-        slideText.setColorFilter(ThemeUtil.themeSlideMenuText);
+        //slideText.setColorFilter(ThemeUtil.themeSlideMenuText);
         historyPannel.setBackground(getDrawable(ThemeUtil.themeBackground));
     }
 

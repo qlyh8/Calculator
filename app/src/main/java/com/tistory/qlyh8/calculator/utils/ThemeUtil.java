@@ -11,6 +11,6 @@ public class ThemeUtil {
     public static int themeTextColor = R.color.colorKeyPadRed;
     public static int themeNavTextColor = R.color.colorWhite;
     public static int themeSlideMenuBg = R.drawable.menu_bg;
-    public static int themeSlideMenuText = R.color.colorKeyPad;
+    public static int themeSlideMenuText = R.color.colorWhite;
 
 }

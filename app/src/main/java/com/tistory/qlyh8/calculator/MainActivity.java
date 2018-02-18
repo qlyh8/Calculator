@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
         //Slide Menu
         slideMenu.setBackground(getDrawable(ThemeUtil.themeSlideMenuBg));
-        slideText.setColorFilter(ThemeUtil.themeSlideMenuText);
+        //slideText.setColorFilter(ThemeUtil.themeSlideMenuText);
 
     }
 

@@ -33,7 +33,7 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
 
     private ThemeAdapter adapter;
     private List<ThemeObject> res;
-    private GridLayoutManager gridLayoutManager;
+    private LinearLayoutManager linearLayoutManager;
     private NavUtils navUtils = new NavUtils();
 
     @Override
@@ -50,13 +50,18 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
             }
         });
 
+        initTheme();
+    }
+
+    private void initTheme() {
         res = new ArrayList<>();
         res.add(new ThemeObject(getDrawable(R.drawable.theme),"1. BlackTheme"));
         res.add(new ThemeObject(getDrawable(R.drawable.theme2), "2. PinkTheme"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme3), "3. PurpleTheme"));
         adapter = new ThemeAdapter(SettingActivity.this, res, this);
-        gridLayoutManager = new GridLayoutManager(this, 2);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         themeRecyclerView.setAdapter(adapter);
-        themeRecyclerView.setLayoutManager(gridLayoutManager);
+        themeRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
     @Override
@@ -67,7 +72,7 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
 
     private void setTheme() {
         slideMenu.setBackground(getDrawable(ThemeUtil.themeSlideMenuBg));
-        slideText.setColorFilter(ThemeUtil.themeSlideMenuText);
+        //slideText.setColorFilter(ThemeUtil.themeSlideMenuText);
         settingBg.setBackground(getDrawable(ThemeUtil.themeBackground));
     }
 
@@ -83,13 +88,19 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
                 ThemeUtil.themeBackground = R.drawable.ripple_keypad;
                 ThemeUtil.themeTextColor = R.color.colorKeyPadRed;
                 ThemeUtil.themeSlideMenuBg = R.drawable.menu_bg;
-                ThemeUtil.themeSlideMenuText = R.color.colorKeyPad;
+                ThemeUtil.themeSlideMenuText = R.color.colorWhite;
                 break;
             case 1 :
                 ThemeUtil.themeBackground = R.drawable.ripple_keypad_pink;
                 ThemeUtil.themeTextColor = R.color.colorDarkPink;
                 ThemeUtil.themeSlideMenuBg = R.drawable.menu_pink_bg;
-                ThemeUtil.themeSlideMenuText = R.color.colorKeyPad;
+                ThemeUtil.themeSlideMenuText = R.color.colorWhite;
+                break;
+            case 2 :
+                ThemeUtil.themeBackground = R.drawable.ripple_keypad_purple;
+                ThemeUtil.themeTextColor = R.color.colorDarkPurple;
+                ThemeUtil.themeSlideMenuBg = R.drawable.menu_purple_bg;
+                ThemeUtil.themeSlideMenuText = R.color.colorWhite;
                 break;
         }
         finish();
