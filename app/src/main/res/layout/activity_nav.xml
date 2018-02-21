@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/nav_pannel"
-    android:background="@color/colorMenu"
+    android:background="@color/colorKeyPad"
     android:orientation="vertical">
 
     <Space
@@ -47,9 +47,19 @@
             android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:paddingLeft="24dp"
             android:paddingRight="24dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name_calculator"
+                android:textSize="30sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name_calculator"
+                android:textSize="30sp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,83 +77,67 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="@color/colorMenu"
             android:orientation="horizontal"
             android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/nav_calculator"
-                android:backgroundTint="@color/colorWhite"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:paddingStart="24dp"
-                android:paddingEnd="8dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="24dp"
                 android:text="@string/calculator"
+                android:textAlignment="center"
                 android:textColor="@color/colorWhite"
-                android:textSize="23sp" />
+                android:textSize="18sp" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="4dp" />
 
         <LinearLayout
             android:id="@+id/myTemp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="@color/colorMenu"
             android:orientation="horizontal"
             android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/nav_history"
-                android:backgroundTint="@color/colorWhite"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:paddingStart="24dp"
-                android:paddingEnd="8dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="24dp"
                 android:text="@string/history"
+                android:textAlignment="center"
                 android:textColor="@color/colorWhite"
-                android:textSize="23sp" />
+                android:textSize="18sp" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="4dp" />
 
         <LinearLayout
             android:id="@+id/nav_setting"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="@color/colorMenu"
             android:orientation="horizontal"
             android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/nav_setting"
-                android:backgroundTint="@color/colorWhite"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:paddingStart="24dp"
-                android:paddingEnd="8dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="24dp"
                 android:text="@string/setting"
+                android:textAlignment="center"
                 android:textColor="@color/colorWhite"
-                android:textSize="23sp" />
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 
