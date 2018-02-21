@@ -209,7 +209,7 @@ public class CalcFractionUtils {
                 count++;
             }
             if(count == 1)
-                result[2] = subtract;
+                result[2] = "-";
         }
 
         if(result[0].equals("0"))

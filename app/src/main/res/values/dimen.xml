@@ -3,4 +3,6 @@
     <dimen name="keypadTextSize">20sp</dimen>
     <dimen name="calcNumberTextSize">35sp</dimen>
     <dimen name="calcOperatorTextSize">25sp</dimen>
+    <dimen name="historyCalcTextSize">25sp</dimen>
+    <dimen name="historyResultTextSize">20sp</dimen>
 </resources>

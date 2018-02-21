@@ -1,5 +1,6 @@
 package com.tistory.qlyh8.calculator.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,7 +28,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     private List<HistoryObject> res;
     private LayoutInflater inflater;
-    private ViewUtils viewUtils;
+    private ViewUtils viewUtils, viewUtils2;
 
     public HistoryAdapter(Context context, List<HistoryObject> res){
         inflater = LayoutInflater.from(context);
@@ -40,9 +41,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ArrayList<String> calc = res.get(position).getCalc();
+        String[] fractionResult = res.get(position).getFractionResult();
 
         for (int i = 0; i < calc.size(); i++) {
             if(calc.get(i).contains("@")){
@@ -61,12 +64,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                             fraction[1].replaceAll("±", "－"), "");
                 }
             } else {
-                viewUtils.setNumTextView(calc,
+                viewUtils.setNumHistoryTextView(calc,
                         String.valueOf(calc.get(i)).replaceAll("±", "－"));
             }
         }
-        holder.historyResult.setText("= " + res.get(position).getResult());
 
+        holder.historyResult.setText("=" + res.get(position).getResult());
+        viewUtils2.setFractionResultHistoryTextView(fractionResult[1], fractionResult[0], fractionResult[2]);
     }
 
     @Override
@@ -77,11 +81,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.history_item) LinearLayout historyItem;
         @BindView(R.id.history_result) TextView historyResult;
+        @BindView(R.id.history_result_fraction) LinearLayout historyResultFraction;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this,view);
             viewUtils = new ViewUtils(inflater.getContext(), historyItem);
+            viewUtils2 = new ViewUtils(inflater.getContext(), historyResultFraction);
         }
     }
 }
