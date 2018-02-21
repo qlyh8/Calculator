@@ -17,6 +17,7 @@
         android:paddingRight="24dp"
         android:paddingStart="24dp"
         android:text="@string/app_name_modern"
+        android:textColor="@color/colorWhite"
         android:textSize="14sp" />
 
     <LinearLayout
@@ -29,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name_calculator"
+            android:textColor="@color/colorWhite"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -53,6 +55,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/app_name_calculator"
                 android:textSize="30sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name_calculator"
+                android:textSize="30sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -66,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/nav_calculator"
+                android:backgroundTint="@color/colorWhite"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:paddingStart="24dp"
@@ -78,6 +86,7 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="24dp"
                 android:text="@string/calculator"
+                android:textColor="@color/colorWhite"
                 android:textSize="23sp" />
         </LinearLayout>
 
@@ -92,6 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/nav_history"
+                android:backgroundTint="@color/colorWhite"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:paddingStart="24dp"
@@ -104,15 +114,7 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="24dp"
                 android:text="@string/history"
-                android:textSize="23sp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="24dp"
-                android:text="@string/setting"
+                android:textColor="@color/colorWhite"
                 android:textSize="23sp" />
         </LinearLayout>
 
@@ -127,6 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/nav_setting"
+                android:backgroundTint="@color/colorWhite"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:paddingStart="24dp"
@@ -139,6 +142,7 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="24dp"
                 android:text="@string/setting"
+                android:textColor="@color/colorWhite"
                 android:textSize="23sp" />
         </LinearLayout>
     </LinearLayout>

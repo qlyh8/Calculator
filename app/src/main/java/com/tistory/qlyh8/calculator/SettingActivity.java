@@ -55,9 +55,9 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
 
     private void initTheme() {
         res = new ArrayList<>();
-        res.add(new ThemeObject(getDrawable(R.drawable.theme),"1. BlackTheme"));
-        res.add(new ThemeObject(getDrawable(R.drawable.theme2), "2. PinkTheme"));
-        res.add(new ThemeObject(getDrawable(R.drawable.theme3), "3. PurpleTheme"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme),"Black"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme2), "Pink"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme3), "Purple"));
         adapter = new ThemeAdapter(SettingActivity.this, res, this);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         themeRecyclerView.setAdapter(adapter);

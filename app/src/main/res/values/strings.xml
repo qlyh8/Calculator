@@ -37,13 +37,7 @@
 
     <!-- Setting Part -->
     <string name="setting">Setting</string>
-
-    <string name="pref_theme_label">Theme</string>
-    <string name="pref_theme_key" translatable="false">color</string>
-    <string name="pref_theme_label_black">Black</string>
-    <string name="pref_theme_label_red">Red</string>
-    <string name="pref_theme_value_black" translatable="false">black</string>
-    <string name="pref_theme_value_red" translatable="false">red</string>
+    <string name="theme">Theme</string>
 
     <string name="pref_vibration_label">Touch Vibration</string>
     <string name="pref_vibration_key" translatable="false">vibration</string>

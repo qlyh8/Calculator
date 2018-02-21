@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#3D3D3D</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="colorWhite">#FFF</color>
+
     <color name="colorMenu">#303030</color>
     <color name="colorKeyPad">#3D3D3D</color>
     <color name="colorKeyPadLightDark">#9E9E9E</color>
@@ -13,7 +15,6 @@
     <color name="colorKeyPadBlue">#29434E</color>
 
     <color name="colorResultRed">#6E4A4A</color>
-    <color name="colorWhite">#fff</color>
 
     <color name="colorWood">#fddd64</color>
     <color name="colorPink">#f1dbdd</color>

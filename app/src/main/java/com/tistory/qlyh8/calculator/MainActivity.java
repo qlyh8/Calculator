@@ -103,9 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         calcUtils = new CalcUtils(this);
         calcFractionUtils = new CalcFractionUtils(this);
         preferenceUtils = new PreferenceUtils(this);
-        preferenceUtils.getTextView(resultTextView);
         preferenceUtils.setupSharedPreferences();
-
 
         slideMenu.setOnClickListener(new View.OnClickListener() {
             @Override
