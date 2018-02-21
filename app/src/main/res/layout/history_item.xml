@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/colorKeyPadNum"
+            android:background="@color/colorCalcNum"
             android:gravity="start"
             android:layout_marginEnd="16dp">
             <TextView
@@ -52,7 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:textColor="@color/colorKeyPadNumLightDark"
+                        android:textColor="@color/colorKeyPadNum"
                         android:text="=100"/>
                 </LinearLayout>
 
@@ -66,7 +66,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="@color/colorKeyPadNumLightDark"
+                        android:textColor="@color/colorKeyPadNum"
                         android:text="="/>
                     <LinearLayout
                         android:id="@+id/history_result_fraction"
@@ -82,5 +82,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/colorKeyPadNum"/>
+        android:background="@color/colorCalcNum"/>
 </LinearLayout>

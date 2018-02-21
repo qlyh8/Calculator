@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingTop="16dp"
-        android:background="@color/colorKeyPadNum"
+        android:background="@color/colorKeyPad"
         android:id="@+id/setting_pannel"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -6,20 +6,20 @@
 
     <color name="colorWhite">#FFF</color>
 
+    <!-- Black Theme -->
     <color name="colorMenu">#303030</color>
     <color name="colorKeyPad">#3D3D3D</color>
-    <color name="colorKeyPadLightDark">#9E9E9E</color>
-    <color name="colorKeyPadNum">#7C7C7C</color>
-    <color name="colorKeyPadNumLightDark">#BEBEBE</color>
+    <color name="colorCalcNum">#7C7C7C</color>
+    <color name="colorKeyPadNum">#BEBEBE</color>
     <color name="colorKeyPadRed">#FF6F6F</color>
     <color name="colorKeyPadBlue">#29434E</color>
 
-    <color name="colorResultRed">#6E4A4A</color>
-
+    <!-- Pink Theme -->
     <color name="colorWood">#fddd64</color>
     <color name="colorPink">#f1dbdd</color>
     <color name="colorDarkPink">#f98a8a</color>
 
+    <!-- Purple Theme -->
     <color name="colorPurple">#bdb6ea</color>
     <color name="colorDarkPurple">#f98a8a</color>
 </resources>

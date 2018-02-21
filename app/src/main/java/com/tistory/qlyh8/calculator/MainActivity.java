@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
     //** Theme **
     @BindView(R.id.result_pannel) public LinearLayout resultPanel;
-    @BindView(R.id.gradient_line) public View gradientLine;
     @BindView(R.id.btn_add) public Button btnAdd;
     @BindView(R.id.btn_substract) public Button btnSubstract;
     @BindView(R.id.btn_multiply) public Button btnMultiply;
@@ -131,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         int keypadTheme = R.color.colorWhite;
         //Theme
         resultPanel.setBackground(getDrawable(ThemeUtil.themeBackground));
-        gradientLine.setBackground(getDrawable(ThemeUtil.themeBackground));
         //keyPadTheme
         btn0.setBackground(getDrawable(ThemeUtil.themeBackground));
         btn1.setBackground(getDrawable(ThemeUtil.themeBackground));
