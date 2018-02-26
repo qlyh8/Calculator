@@ -50,7 +50,7 @@ public class ViewUtils {
         TextView textView = new TextView(context);
         textView.setText(number);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
-        textView.setTextColor(ContextCompat.getColor(context, R.color.colorCalcNum));
+        textView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeCalcTextColor));
         textView.setGravity(Gravity.CENTER);
         textView.setTag("calcTextView"+arrayList.size());
         layout.addView(textView);
@@ -65,7 +65,7 @@ public class ViewUtils {
         TextView textView = new TextView(context);
         textView.setText(number);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.historyCalcTextSize));
-        textView.setTextColor(ContextCompat.getColor(context, R.color.colorWhite));
+        textView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeNumTextColor));
         textView.setGravity(Gravity.CENTER);
         textView.setTag("calcTextView"+arrayList.size());
         layout.addView(textView);
@@ -81,7 +81,7 @@ public class ViewUtils {
         TextView textView = new TextView(context);
         textView.setText(symbol);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcOperatorTextSize));
-        textView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadRed));
+        textView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeTextColor));
         textView.setGravity(Gravity.CENTER);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
         textView.setTag("calcTextView"+arrayList.size());
@@ -102,7 +102,7 @@ public class ViewUtils {
         TextView wholeTextView = new TextView(context);
         wholeTextView.setText("");
         wholeTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
-        wholeTextView.setTextColor(ContextCompat.getColor(context, R.color.colorCalcNum));
+        wholeTextView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeCalcTextColor));
         wholeTextView.setGravity(Gravity.CENTER);
         wholeTextView.setTag("calcFractionWholeTextView"+arrayList.size());
         wholeLayout.addView(wholeTextView);
@@ -120,14 +120,14 @@ public class ViewUtils {
         TextView TopTextView = new TextView(context);
         TopTextView.setText("");
         TopTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
-        TopTextView.setTextColor(ContextCompat.getColor(context, R.color.colorCalcNum));
+        TopTextView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeCalcTextColor));
         TopTextView.setGravity(Gravity.CENTER);
         TopTextView.setTag("calcFractionTopTextView"+arrayList.size());
         layout.addView(TopTextView);
 
         // 라인 생성
         View line = new View(context);
-        line.setBackgroundColor(ContextCompat.getColor(context, R.color.colorCalcNum));
+        line.setBackgroundColor(ContextCompat.getColor(context, ThemeUtil.themeCalcTextColor));
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((number.length()+1)*defaultTextWidth, 3);
         params.setMargins(5, 0, 5, 0);
         line.setLayoutParams(params);
@@ -138,7 +138,7 @@ public class ViewUtils {
         TextView BottomTextView = new TextView(context);
         BottomTextView.setText(number);
         BottomTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.calcNumberTextSize));
-        BottomTextView.setTextColor(ContextCompat.getColor(context, R.color.colorCalcNum));
+        BottomTextView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeCalcTextColor));
         BottomTextView.setGravity(Gravity.CENTER);
         BottomTextView.setTag("calcFractionBottomTextView"+arrayList.size());
         layout.addView(BottomTextView);
@@ -168,7 +168,7 @@ public class ViewUtils {
         TextView wholeTextView = new TextView(context);
         wholeTextView.setText(wholeNum);
         wholeTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.historyCalcTextSize));
-        wholeTextView.setTextColor(ContextCompat.getColor(context, R.color.colorWhite));
+        wholeTextView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeNumTextColor));
         wholeTextView.setGravity(Gravity.CENTER);
         wholeTextView.setTag("calcFractionWholeTextView" + key);
         wholeLayout.addView(wholeTextView);
@@ -186,14 +186,14 @@ public class ViewUtils {
         TextView TopTextView = new TextView(context);
         TopTextView.setText(topNum);
         TopTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.historyCalcTextSize));
-        TopTextView.setTextColor(ContextCompat.getColor(context, R.color.colorWhite));
+        TopTextView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeNumTextColor));
         TopTextView.setGravity(Gravity.CENTER);
         TopTextView.setTag("calcFractionTopTextView" + key);
         layout.addView(TopTextView);
 
         // 라인 생성
         View line = new View(context);
-        line.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite));
+        line.setBackgroundColor(ContextCompat.getColor(context, ThemeUtil.themeNumTextColor));
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 3);
         params.setMargins(5, 0, 5, 0);
         line.setLayoutParams(params);
@@ -204,7 +204,7 @@ public class ViewUtils {
         TextView BottomTextView = new TextView(context);
         BottomTextView.setText(bottomNum);
         BottomTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.historyCalcTextSize));
-        BottomTextView.setTextColor(ContextCompat.getColor(context, R.color.colorWhite));
+        BottomTextView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeNumTextColor));
         BottomTextView.setGravity(Gravity.CENTER);
         BottomTextView.setTag("calcFractionBottomTextView" + key);
         layout.addView(BottomTextView);
@@ -251,7 +251,7 @@ public class ViewUtils {
         else
             wholeTextView.setText(wholeNum);
         wholeTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.historyResultTextSize));
-        wholeTextView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
+        wholeTextView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeResultTextColor));
         wholeTextView.setGravity(Gravity.CENTER);
         wholeTextView.setTag("calcFractionWholeTextView");
         wholeLayout.addView(wholeTextView);
@@ -269,14 +269,14 @@ public class ViewUtils {
         TextView TopTextView = new TextView(context);
         TopTextView.setText(topNum);
         TopTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.historyResultTextSize));
-        TopTextView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
+        TopTextView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeResultTextColor));
         TopTextView.setGravity(Gravity.CENTER);
         TopTextView.setTag("calcFractionTopTextView");
         layout.addView(TopTextView);
 
         // 라인 생성
         View line = new View(context);
-        line.setBackgroundColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
+        line.setBackgroundColor(ContextCompat.getColor(context, ThemeUtil.themeResultTextColor));
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150, 3);
         params.setMargins(5, 0, 5, 0);
         line.setLayoutParams(params);
@@ -287,7 +287,7 @@ public class ViewUtils {
         TextView BottomTextView = new TextView(context);
         BottomTextView.setText(bottomNum);
         BottomTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.historyResultTextSize));
-        BottomTextView.setTextColor(ContextCompat.getColor(context, R.color.colorKeyPadNum));
+        BottomTextView.setTextColor(ContextCompat.getColor(context, ThemeUtil.themeResultTextColor));
         BottomTextView.setGravity(Gravity.CENTER);
         BottomTextView.setTag("calcFractionBottomTextView");
         layout.addView(BottomTextView);

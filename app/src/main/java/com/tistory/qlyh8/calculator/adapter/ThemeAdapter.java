@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.tistory.qlyh8.calculator.R;
 import com.tistory.qlyh8.calculator.model.HistoryObject;
 import com.tistory.qlyh8.calculator.model.ThemeObject;
+import com.tistory.qlyh8.calculator.utils.ThemeUtil;
 import com.tistory.qlyh8.calculator.utils.ViewUtils;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.themeImage.setImageDrawable(res.get(position).getImage());
         holder.themeText.setText(res.get(position).getText());
+        holder.themeText.setTextColor(inflater.getContext().getResources().getColor(ThemeUtil.themeNumTextColor));
         holder.themeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

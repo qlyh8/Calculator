@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     @BindView(R.id.text_denominator) public TextView denominatorTextView;   // 분모 결과값 뷰
     @BindView(R.id.text_numerator) public TextView numeratorTextView;   // 분자 결괴값 뷰
     @BindView(R.id.text_whole) public TextView wholeTextView;   // 대분수 결과값 뷰
+    @BindView(R.id.text_view) public View lineTextView;   // 분수 결과값 라인
     @BindView(R.id.slide_menu) public LinearLayout slideMenu;
 
     //** Theme **
@@ -127,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     }
 
     private void setTheme() {
-        int keypadTheme = R.color.colorWhite;
         //Theme
         resultPanel.setBackground(getDrawable(ThemeUtil.themeBackground));
         //keyPadTheme
@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         btnFraction.setBackground(getDrawable(ThemeUtil.themeBackground));
         btnResult.setBackground(getDrawable(ThemeUtil.themeBackground));
 
+        int keypadTheme = ThemeUtil.themeNumTextColor;
         //TextColorTheme
         btn0.setTextColor(getResources().getColor(keypadTheme));
         btn1.setTextColor(getResources().getColor(keypadTheme));
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         btn9.setTextColor(getResources().getColor(keypadTheme));
         btnPlusMinus.setTextColor(getResources().getColor(keypadTheme));
         btnPoint.setTextColor(getResources().getColor(keypadTheme));
+        resultTextView.setTextColor(getResources().getColor(keypadTheme));
 
         btnAdd.setTextColor(getResources().getColor(ThemeUtil.themeTextColor));
         btnSubstract.setTextColor(getResources().getColor(ThemeUtil.themeTextColor));
@@ -184,6 +186,11 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         slideMenu.setBackground(getDrawable(ThemeUtil.themeSlideMenuBg));
         //slideText.setColorFilter(ThemeUtil.themeSlideMenuText);
 
+        // 분수 결과값
+        denominatorTextView.setTextColor(getResources().getColor(ThemeUtil.themeResultTextColor));
+        numeratorTextView.setTextColor(getResources().getColor(ThemeUtil.themeResultTextColor));
+        wholeTextView.setTextColor(getResources().getColor(ThemeUtil.themeResultTextColor));
+        lineTextView.setBackground(getDrawable(ThemeUtil.themeResultTextColor));
     }
 
     // 변수 초기화

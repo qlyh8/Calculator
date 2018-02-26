@@ -1,8 +1,8 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base applicatthemeBlackheme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
+        <!-- Customize ythemeBlackheme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorKeyPad</item>
         <item name="colorAccent">@color/colorAccent</item>

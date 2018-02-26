@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.tistory.qlyh8.calculator.HistoryActivity;
 import com.tistory.qlyh8.calculator.MainActivity;
@@ -41,6 +42,18 @@ public class NavUtils {
     public void setTheme() {
         LinearLayout panel = myActivity.findViewById(R.id.nav_pannel);
         panel.setBackground(myActivity.getDrawable(ThemeUtil.themeBackground));
+
+        TextView title_modern = myActivity.findViewById(R.id.nav_title_modern);
+        title_modern.setTextColor(myActivity.getResources().getColor(ThemeUtil.themeNumTextColor));
+        TextView title_calculator = myActivity.findViewById(R.id.nav_title_calculator);
+        title_calculator.setTextColor(myActivity.getResources().getColor(ThemeUtil.themeNumTextColor));
+
+        View btn1 = myActivity.findViewById(R.id.meTemp);
+        btn1.setBackground(myActivity.getDrawable(ThemeUtil.themeSlideMenuBg));
+        View btn2 = myActivity.findViewById(R.id.myTemp);
+        btn2.setBackground(myActivity.getDrawable(ThemeUtil.themeSlideMenuBg));
+        View btn3 = myActivity.findViewById(R.id.nav_setting);
+        btn3.setBackground(myActivity.getDrawable(ThemeUtil.themeSlideMenuBg));
     }
 
     public void setClickEvent() {

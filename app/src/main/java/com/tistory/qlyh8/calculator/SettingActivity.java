@@ -1,13 +1,14 @@
 package com.tistory.qlyh8.calculator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.tistory.qlyh8.calculator.adapter.ThemeAdapter;
 import com.tistory.qlyh8.calculator.model.ThemeObject;
@@ -30,6 +31,7 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
     @BindView(R.id.slide_text) ImageView slideText;
     @BindView(R.id.setting_pannel) LinearLayout settingBg;
     @BindView(R.id.setting_recycler_view) RecyclerView themeRecyclerView;
+    @BindView(R.id.setting_text_theme) TextView themeTextView;
 
     private ThemeAdapter adapter;
     private List<ThemeObject> res;
@@ -55,9 +57,9 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
 
     private void initTheme() {
         res = new ArrayList<>();
-        res.add(new ThemeObject(getDrawable(R.drawable.theme),"Black"));
-        res.add(new ThemeObject(getDrawable(R.drawable.theme2), "Pink"));
-        res.add(new ThemeObject(getDrawable(R.drawable.theme3), "Purple"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme_black),"Black"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme_pink), "Pink"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme_purple), "Purple"));
         adapter = new ThemeAdapter(SettingActivity.this, res, this);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         themeRecyclerView.setAdapter(adapter);
@@ -74,10 +76,14 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
         slideMenu.setBackground(getDrawable(ThemeUtil.themeSlideMenuBg));
         //slideText.setColorFilter(ThemeUtil.themeSlideMenuText);
         settingBg.setBackground(getDrawable(ThemeUtil.themeBackground));
+        themeTextView.setTextColor(getResources().getColor(ThemeUtil.themeNumTextColor));
     }
 
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+        startActivity(new Intent(SettingActivity.this, MainActivity.class));
+        finish();
+    }
 
 
     @Override
@@ -86,19 +92,28 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
         switch (num) {
             case 0 :
                 ThemeUtil.themeBackground = R.drawable.ripple_keypad;
+                ThemeUtil.themeNumTextColor = R.color.colorWhite;
                 ThemeUtil.themeTextColor = R.color.colorKeyPadRed;
+                ThemeUtil.themeResultTextColor = R.color.colorKeyPadNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorCalcNum;
                 ThemeUtil.themeSlideMenuBg = R.drawable.menu_bg;
                 ThemeUtil.themeSlideMenuText = R.color.colorWhite;
                 break;
             case 1 :
                 ThemeUtil.themeBackground = R.drawable.ripple_keypad_pink;
-                ThemeUtil.themeTextColor = R.color.colorDarkPink;
+                ThemeUtil.themeNumTextColor = R.color.colorPinkKeyPadNum;
+                ThemeUtil.themeTextColor = R.color.colorPinkKeyPadSymbol;
+                ThemeUtil.themeResultTextColor = R.color.colorPinkResultNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorCalcNum;
                 ThemeUtil.themeSlideMenuBg = R.drawable.menu_pink_bg;
                 ThemeUtil.themeSlideMenuText = R.color.colorWhite;
                 break;
             case 2 :
                 ThemeUtil.themeBackground = R.drawable.ripple_keypad_purple;
-                ThemeUtil.themeTextColor = R.color.colorDarkPurple;
+                ThemeUtil.themeNumTextColor = R.color.colorPurpleKeyPadNum;
+                ThemeUtil.themeTextColor = R.color.colorPurpleKeyPadSymbol;
+                ThemeUtil.themeResultTextColor = R.color.colorPurpleResultNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorCalcNum;
                 ThemeUtil.themeSlideMenuBg = R.drawable.menu_purple_bg;
                 ThemeUtil.themeSlideMenuText = R.color.colorWhite;
                 break;

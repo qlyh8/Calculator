@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.tistory.qlyh8.calculator.R;
 import com.tistory.qlyh8.calculator.model.HistoryObject;
+import com.tistory.qlyh8.calculator.utils.ThemeUtil;
 import com.tistory.qlyh8.calculator.utils.ViewUtils;
 
 import java.util.ArrayList;
@@ -70,6 +71,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         }
 
         holder.historyResult.setText("=" + res.get(position).getResult());
+        holder.historyResult.setTextColor(inflater.getContext().getResources().getColor(ThemeUtil.themeResultTextColor));
+        holder.historyResultFractionEqual.setTextColor(inflater.getContext().getResources().getColor(ThemeUtil.themeResultTextColor));
         viewUtils2.setFractionResultHistoryTextView(fractionResult[1], fractionResult[0], fractionResult[2]);
     }
 
@@ -81,6 +84,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.history_item) LinearLayout historyItem;
         @BindView(R.id.history_result) TextView historyResult;
+        @BindView(R.id.history_result_fraction_equal) TextView historyResultFractionEqual;
         @BindView(R.id.history_result_fraction) LinearLayout historyResultFraction;
 
         ViewHolder(View view) {

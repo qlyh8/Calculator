@@ -1,5 +1,6 @@
 package com.tistory.qlyh8.calculator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -68,6 +69,7 @@ public class HistoryActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-
+        startActivity(new Intent(HistoryActivity.this, MainActivity.class));
+        finish();
     }
 }

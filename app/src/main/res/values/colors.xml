@@ -4,22 +4,27 @@
     <color name="colorPrimaryDark">#3D3D3D</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorWhite">#FFF</color>
-
     <!-- Black Theme -->
     <color name="colorMenu">#303030</color>
     <color name="colorKeyPad">#3D3D3D</color>
     <color name="colorCalcNum">#7C7C7C</color>
     <color name="colorKeyPadNum">#BEBEBE</color>
+    <color name="colorWhite">#FFF</color>
     <color name="colorKeyPadRed">#FF6F6F</color>
-    <color name="colorKeyPadBlue">#29434E</color>
 
     <!-- Pink Theme -->
-    <color name="colorWood">#fddd64</color>
-    <color name="colorPink">#f1dbdd</color>
     <color name="colorDarkPink">#f98a8a</color>
+    <color name="colorPink">#f1dbdd</color>
+    <color name="colorPinkResultNum">#636268</color>
+    <color name="colorPinkKeyPadNum">#6F504B</color>
+    <color name="colorPinkKeyPadSymbol">#E55149</color>
+    <color name="colorWood">#fddd64</color>
 
     <!-- Purple Theme -->
+    <color name="colorDarkPurple">#7E5686</color>
     <color name="colorPurple">#bdb6ea</color>
-    <color name="colorDarkPurple">#f98a8a</color>
+    <color name="colorPurpleResultNum">#908EAB</color>
+    <color name="colorPurpleKeyPadNum">#FFF</color>
+    <color name="colorPurpleKeyPadSymbol">#EC145A</color>
+
 </resources>
