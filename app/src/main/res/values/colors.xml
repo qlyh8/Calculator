@@ -27,4 +27,17 @@
     <color name="colorPurpleKeyPadNum">#FFF</color>
     <color name="colorPurpleKeyPadSymbol">#EC145A</color>
 
+    <!-- Green Theme -->
+    <color name="colorGreenMenu">#376C54</color>
+    <color name="colorGreenKeyPad">#83AF9B</color>
+    <color name="colorGreenResultNum">#C8C8A9</color>
+    <color name="colorGreenKeyPadNum">#434359</color>
+    <color name="colorGreenKeyPadSymbol">#FE4365</color>
+
+    <!-- Blue Theme -->
+    <color name="colorBlueMenu">#1E3E65</color>
+    <color name="colorBlueKeyPad">#355C7D</color>
+    <color name="colorBlueResultNum">#FFDEBB</color>
+    <color name="colorBlueKeyPadNum">#FFF</color>
+    <color name="colorBlueKeyPadSymbol">#F67280</color>
 </resources>

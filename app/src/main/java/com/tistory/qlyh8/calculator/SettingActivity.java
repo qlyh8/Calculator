@@ -60,6 +60,8 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
         res.add(new ThemeObject(getDrawable(R.drawable.theme_black),"Black"));
         res.add(new ThemeObject(getDrawable(R.drawable.theme_pink), "Pink"));
         res.add(new ThemeObject(getDrawable(R.drawable.theme_purple), "Purple"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme_green), "Green"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme_blue), "Blue"));
         adapter = new ThemeAdapter(SettingActivity.this, res, this);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         themeRecyclerView.setAdapter(adapter);
@@ -115,6 +117,24 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
                 ThemeUtil.themeResultTextColor = R.color.colorPurpleResultNum;
                 ThemeUtil.themeCalcTextColor = R.color.colorCalcNum;
                 ThemeUtil.themeSlideMenuBg = R.drawable.menu_purple_bg;
+                ThemeUtil.themeSlideMenuText = R.color.colorWhite;
+                break;
+            case 3 :
+                ThemeUtil.themeBackground = R.drawable.ripple_keypad_green;
+                ThemeUtil.themeNumTextColor = R.color.colorGreenKeyPadNum;
+                ThemeUtil.themeTextColor = R.color.colorGreenKeyPadSymbol;
+                ThemeUtil.themeResultTextColor = R.color.colorGreenResultNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorCalcNum;
+                ThemeUtil.themeSlideMenuBg = R.drawable.menu_green_bg;
+                ThemeUtil.themeSlideMenuText = R.color.colorWhite;
+                break;
+            case 4 :
+                ThemeUtil.themeBackground = R.drawable.ripple_keypad_blue;
+                ThemeUtil.themeNumTextColor = R.color.colorBlueKeyPadNum;
+                ThemeUtil.themeTextColor = R.color.colorBlueKeyPadSymbol;
+                ThemeUtil.themeResultTextColor = R.color.colorBlueResultNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorCalcNum;
+                ThemeUtil.themeSlideMenuBg = R.drawable.menu_blue_bg;
                 ThemeUtil.themeSlideMenuText = R.color.colorWhite;
                 break;
         }
