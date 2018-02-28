@@ -27,17 +27,49 @@
     <color name="colorPurpleKeyPadNum">#FFF</color>
     <color name="colorPurpleKeyPadSymbol">#EC145A</color>
 
+    <!-- Orange Theme -->
+    <color name="colorOrangeMenu">#E44E09</color>
+    <color name="colorOrangeKeyPad">#FBAA3F</color>
+    <color name="colorOrangeResultNum">#F0E7E0</color>
+    <color name="colorOrangeKeyPadNum">#FFF</color>
+    <color name="colorOrangeKeyPadSymbol">#42250F</color>
+
+    <!-- Yellow Theme -->
+    <color name="colorYellowMenu">#DDA141</color>
+    <color name="colorYellowKeyPad">#FFD33C</color>
+    <color name="colorYellowResultNum">#FCFFD8</color>
+    <color name="colorYellowKeyPadNum">#FFF</color>
+    <color name="colorYellowKeyPadSymbol">#803309</color>
+
     <!-- Green Theme -->
     <color name="colorGreenMenu">#376C54</color>
     <color name="colorGreenKeyPad">#83AF9B</color>
-    <color name="colorGreenResultNum">#C8C8A9</color>
-    <color name="colorGreenKeyPadNum">#434359</color>
+    <color name="colorGreenCalcNum">#7C7C7C</color>
+    <color name="colorGreenResultNum">#EBE7E0</color>
+    <color name="colorGreenKeyPadNum">#FFF</color>
     <color name="colorGreenKeyPadSymbol">#FE4365</color>
 
     <!-- Blue Theme -->
     <color name="colorBlueMenu">#1E3E65</color>
     <color name="colorBlueKeyPad">#355C7D</color>
+    <color name="colorBlueCalcNum">#D2CECF</color>
     <color name="colorBlueResultNum">#FFDEBB</color>
     <color name="colorBlueKeyPadNum">#FFF</color>
     <color name="colorBlueKeyPadSymbol">#F67280</color>
+
+    <!-- Gray Theme -->
+    <color name="colorGrayMenu">#6D6F7C</color>
+    <color name="colorGrayKeyPad">#8F8E94</color>
+    <color name="colorGrayCalcNum">#D2CECF</color>
+    <color name="colorGrayResultNum">#BEBEBE</color>
+    <color name="colorGrayKeyPadNum">#FFF</color>
+    <color name="colorGrayKeyPadSymbol">#7F3613</color>
+
+    <!-- Brown Theme -->
+    <color name="colorBrownMenu">#2C2417</color>
+    <color name="colorBrownKeyPad">#6C483A</color>
+    <color name="colorBrownCalcNum">#D2CECF</color>
+    <color name="colorBrownResultNum">#C9B6A7</color>
+    <color name="colorBrownKeyPadNum">#FFF</color>
+    <color name="colorBrownKeyPadSymbol">#FFC153</color>
 </resources>

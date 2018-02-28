@@ -60,8 +60,12 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
         res.add(new ThemeObject(getDrawable(R.drawable.theme_black),"Black"));
         res.add(new ThemeObject(getDrawable(R.drawable.theme_pink), "Pink"));
         res.add(new ThemeObject(getDrawable(R.drawable.theme_purple), "Purple"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme_orange), "Orange"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme_yellow), "Yellow"));
         res.add(new ThemeObject(getDrawable(R.drawable.theme_green), "Green"));
         res.add(new ThemeObject(getDrawable(R.drawable.theme_blue), "Blue"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme_gray), "Gray"));
+        res.add(new ThemeObject(getDrawable(R.drawable.theme_brown), "Brown"));
         adapter = new ThemeAdapter(SettingActivity.this, res, this);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         themeRecyclerView.setAdapter(adapter);
@@ -120,21 +124,57 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
                 ThemeUtil.themeSlideMenuText = R.color.colorWhite;
                 break;
             case 3 :
+                ThemeUtil.themeBackground = R.drawable.ripple_keypad_orange;
+                ThemeUtil.themeNumTextColor = R.color.colorOrangeKeyPadNum;
+                ThemeUtil.themeTextColor = R.color.colorOrangeKeyPadSymbol;
+                ThemeUtil.themeResultTextColor = R.color.colorOrangeResultNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorCalcNum;
+                ThemeUtil.themeSlideMenuBg = R.drawable.menu_orange_bg;
+                ThemeUtil.themeSlideMenuText = R.color.colorWhite;
+                break;
+            case 4 :
+                ThemeUtil.themeBackground = R.drawable.ripple_keypad_yellow;
+                ThemeUtil.themeNumTextColor = R.color.colorYellowKeyPadNum;
+                ThemeUtil.themeTextColor = R.color.colorYellowKeyPadSymbol;
+                ThemeUtil.themeResultTextColor = R.color.colorYellowResultNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorCalcNum;
+                ThemeUtil.themeSlideMenuBg = R.drawable.menu_yellow_bg;
+                ThemeUtil.themeSlideMenuText = R.color.colorWhite;
+                break;
+            case 5 :
                 ThemeUtil.themeBackground = R.drawable.ripple_keypad_green;
                 ThemeUtil.themeNumTextColor = R.color.colorGreenKeyPadNum;
                 ThemeUtil.themeTextColor = R.color.colorGreenKeyPadSymbol;
                 ThemeUtil.themeResultTextColor = R.color.colorGreenResultNum;
-                ThemeUtil.themeCalcTextColor = R.color.colorCalcNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorGreenCalcNum;
                 ThemeUtil.themeSlideMenuBg = R.drawable.menu_green_bg;
                 ThemeUtil.themeSlideMenuText = R.color.colorWhite;
                 break;
-            case 4 :
+            case 6 :
                 ThemeUtil.themeBackground = R.drawable.ripple_keypad_blue;
                 ThemeUtil.themeNumTextColor = R.color.colorBlueKeyPadNum;
                 ThemeUtil.themeTextColor = R.color.colorBlueKeyPadSymbol;
                 ThemeUtil.themeResultTextColor = R.color.colorBlueResultNum;
-                ThemeUtil.themeCalcTextColor = R.color.colorCalcNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorBlueCalcNum;
                 ThemeUtil.themeSlideMenuBg = R.drawable.menu_blue_bg;
+                ThemeUtil.themeSlideMenuText = R.color.colorWhite;
+                break;
+            case 7 :
+                ThemeUtil.themeBackground = R.drawable.ripple_keypad_gray;
+                ThemeUtil.themeNumTextColor = R.color.colorGrayKeyPadNum;
+                ThemeUtil.themeTextColor = R.color.colorGrayKeyPadSymbol;
+                ThemeUtil.themeResultTextColor = R.color.colorGrayResultNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorGrayCalcNum;
+                ThemeUtil.themeSlideMenuBg = R.drawable.menu_gray_bg;
+                ThemeUtil.themeSlideMenuText = R.color.colorWhite;
+                break;
+            case 8 :
+                ThemeUtil.themeBackground = R.drawable.ripple_keypad_brown;
+                ThemeUtil.themeNumTextColor = R.color.colorBrownKeyPadNum;
+                ThemeUtil.themeTextColor = R.color.colorBrownKeyPadSymbol;
+                ThemeUtil.themeResultTextColor = R.color.colorBrownResultNum;
+                ThemeUtil.themeCalcTextColor = R.color.colorBrownCalcNum;
+                ThemeUtil.themeSlideMenuBg = R.drawable.menu_brown_bg;
                 ThemeUtil.themeSlideMenuText = R.color.colorWhite;
                 break;
         }

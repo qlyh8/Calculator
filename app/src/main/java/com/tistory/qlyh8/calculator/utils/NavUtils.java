@@ -22,6 +22,7 @@ public class NavUtils {
 
     private SlidingRootNav slidingRootNav;
     private Activity myActivity;
+    private PreferenceUtils preferenceUtils;
 
     public void bind(Activity activity, Bundle savedInstanceState) {
         myActivity = activity;
@@ -33,6 +34,9 @@ public class NavUtils {
                 .inject();
         setTheme();
         setClickEvent();
+
+        preferenceUtils = new PreferenceUtils(myActivity);
+        preferenceUtils.setupSharedPreferences();
     }
 
     public SlidingRootNav getSlidingRootNav() {
@@ -61,6 +65,7 @@ public class NavUtils {
         temp2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                preferenceUtils.setVibration();
                 Intent intent = new Intent(myActivity,MainActivity.class);
                 myActivity.startActivity(intent);
             }
@@ -70,6 +75,7 @@ public class NavUtils {
         temp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                preferenceUtils.setVibration();
                 Intent intent = new Intent(myActivity,HistoryActivity.class);
                 myActivity.startActivity(intent);
             }
@@ -79,6 +85,7 @@ public class NavUtils {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                preferenceUtils.setVibration();
                 Intent intent = new Intent(myActivity, SettingActivity.class);
                 myActivity.startActivity(intent);
             }

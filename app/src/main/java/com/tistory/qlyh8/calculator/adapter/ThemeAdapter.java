@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.tistory.qlyh8.calculator.R;
 import com.tistory.qlyh8.calculator.model.HistoryObject;
 import com.tistory.qlyh8.calculator.model.ThemeObject;
+import com.tistory.qlyh8.calculator.utils.PreferenceUtils;
 import com.tistory.qlyh8.calculator.utils.ThemeUtil;
 import com.tistory.qlyh8.calculator.utils.ViewUtils;
 
@@ -34,11 +35,14 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
     private OnThemeClickListener onThemeClickListener;
     private List<ThemeObject> res;
     private LayoutInflater inflater;
+    private PreferenceUtils preferenceUtils;
 
     public ThemeAdapter(Context context, List<ThemeObject> res, OnThemeClickListener onThemeClickListener){
         inflater = LayoutInflater.from(context);
         this.res = res;
         this.onThemeClickListener = onThemeClickListener;
+        preferenceUtils = new PreferenceUtils(context);
+        preferenceUtils.setupSharedPreferences();
     }
 
     @Override
@@ -55,6 +59,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
         holder.themeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                preferenceUtils.setVibration();
                 onThemeClickListener.setThemeValue(position);
             }
         });
