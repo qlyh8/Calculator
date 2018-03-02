@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.tistory.qlyh8.calculator.adapter.ThemeAdapter;
@@ -29,6 +30,7 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
 
     @BindView(R.id.slide_menu) LinearLayout slideMenu;
     @BindView(R.id.slide_text) ImageView slideText;
+    @BindView(R.id.setting_scrollview) ScrollView scrollView;
     @BindView(R.id.setting_pannel) LinearLayout settingBg;
     @BindView(R.id.setting_recycler_view) RecyclerView themeRecyclerView;
     @BindView(R.id.setting_text_theme) TextView themeTextView;
@@ -53,6 +55,12 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
         });
 
         initTheme();
+
+        scrollView.post(new Runnable() {
+            public void run() {
+                scrollView.scrollTo(0,0);   // 스크롤 위치가 상단에 고정
+            }
+        });
     }
 
     private void initTheme() {
@@ -70,6 +78,7 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         themeRecyclerView.setAdapter(adapter);
         themeRecyclerView.setLayoutManager(linearLayoutManager);
+        themeRecyclerView.setFocusable(false);
     }
 
     @Override
@@ -82,6 +91,7 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
         slideMenu.setBackground(getDrawable(ThemeUtil.themeSlideMenuBg));
         //slideText.setColorFilter(ThemeUtil.themeSlideMenuText);
         settingBg.setBackground(getDrawable(ThemeUtil.themeBackground));
+        scrollView.setBackground(getDrawable(ThemeUtil.themeBackground));
         themeTextView.setTextColor(getResources().getColor(ThemeUtil.themeNumTextColor));
     }
 
@@ -90,7 +100,6 @@ public class SettingActivity extends AppCompatActivity implements ThemeAdapter.O
         startActivity(new Intent(SettingActivity.this, MainActivity.class));
         finish();
     }
-
 
     @Override
     public void setThemeValue(int num) {

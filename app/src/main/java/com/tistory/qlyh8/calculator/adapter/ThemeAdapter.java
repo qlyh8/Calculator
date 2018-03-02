@@ -6,17 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tistory.qlyh8.calculator.R;
-import com.tistory.qlyh8.calculator.model.HistoryObject;
 import com.tistory.qlyh8.calculator.model.ThemeObject;
 import com.tistory.qlyh8.calculator.utils.PreferenceUtils;
 import com.tistory.qlyh8.calculator.utils.ThemeUtil;
-import com.tistory.qlyh8.calculator.utils.ViewUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

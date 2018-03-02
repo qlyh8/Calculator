@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.tistory.qlyh8.calculator.HistoryActivity;
 import com.tistory.qlyh8.calculator.MainActivity;
 import com.tistory.qlyh8.calculator.R;
@@ -23,6 +25,7 @@ public class NavUtils {
     private SlidingRootNav slidingRootNav;
     private Activity myActivity;
     private PreferenceUtils preferenceUtils;
+    private AdView mAdView;
 
     public void bind(Activity activity, Bundle savedInstanceState) {
         myActivity = activity;
@@ -37,6 +40,10 @@ public class NavUtils {
 
         preferenceUtils = new PreferenceUtils(myActivity);
         preferenceUtils.setupSharedPreferences();
+
+        mAdView = myActivity.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     public SlidingRootNav getSlidingRootNav() {
