@@ -43,4 +43,10 @@
     <string name="pref_vibration_key" translatable="false">vibration</string>
     <string name="pref_vibration_true">Turn on</string>
     <string name="pref_vibration_false">Turn off</string>
+
+
+    <!-- ad ID-->
+    <string name="admob_app_id">ca-app-pub-8190322516789280~8271453833</string>
+    <string name="banner_unit_id">ca-app-pub-8190322516789280/5976462986</string>
+    <string name="interstitial_unit_id">ca-app-pub-8190322516789280/5691971074</string>
 </resources>

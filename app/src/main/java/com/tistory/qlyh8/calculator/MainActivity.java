@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         AutofitHelper.create(denominatorTextView);
         AutofitHelper.create(wholeTextView);
 
-        MobileAds.initialize(this, "ca-app-pub-8190322516789280~8271453833");
+        MobileAds.initialize(this, getResources().getString(R.string.admob_app_id));
         interstitialAd();
 
         scrollRootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     // 전면광고
     public void interstitialAd() {
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-8190322516789280/5691971074");
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_unit_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         mInterstitialAd.setAdListener(new AdListener() {
