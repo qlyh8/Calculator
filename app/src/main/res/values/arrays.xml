@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_theme_option_labels">
+        <item>@string/pref_theme_label_black</item>
+        <item>@string/pref_theme_label_pink</item>
+        <item>@string/pref_theme_label_purple</item>
+        <item>@string/pref_theme_label_orange</item>
+        <item>@string/pref_theme_label_yellow</item>
+        <item>@string/pref_theme_label_green</item>
+        <item>@string/pref_theme_label_blue</item>
+        <item>@string/pref_theme_label_gray</item>
+        <item>@string/pref_theme_label_brown</item>
+    </array>
+
+    <array name="pref_theme_option_values">
+        <item>@string/pref_theme_black_value</item>
+        <item>@string/pref_theme_pink_value</item>
+        <item>@string/pref_theme_purple_value</item>
+        <item>@string/pref_theme_orange_value</item>
+        <item>@string/pref_theme_yellow_value</item>
+        <item>@string/pref_theme_green_value</item>
+        <item>@string/pref_theme_blue_value</item>
+        <item>@string/pref_theme_gray_value</item>
+        <item>@string/pref_theme_brown_value</item>
+    </array>
+</resources>

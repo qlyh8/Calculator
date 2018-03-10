@@ -39,6 +39,27 @@
     <string name="setting">Setting</string>
     <string name="theme">Theme</string>
 
+    <string name="pref_theme_label">Theme</string>
+    <string name="pref_theme_key" translatable="false">theme</string>
+    <string name="pref_theme_label_black">Black</string>
+    <string name="pref_theme_label_pink">Pink</string>
+    <string name="pref_theme_label_purple">Purple</string>
+    <string name="pref_theme_label_orange">Orange</string>
+    <string name="pref_theme_label_yellow">Yellow</string>
+    <string name="pref_theme_label_green">Green</string>
+    <string name="pref_theme_label_blue">Blue</string>
+    <string name="pref_theme_label_gray">Gray</string>
+    <string name="pref_theme_label_brown">Brown</string>
+    <string name="pref_theme_black_value" translatable="false">Black</string>
+    <string name="pref_theme_pink_value" translatable="false">Pink</string>
+    <string name="pref_theme_purple_value" translatable="false">Purple</string>
+    <string name="pref_theme_orange_value" translatable="false">Orange</string>
+    <string name="pref_theme_yellow_value" translatable="false">Yellow</string>
+    <string name="pref_theme_green_value" translatable="false">Green</string>
+    <string name="pref_theme_blue_value" translatable="false">Blue</string>
+    <string name="pref_theme_gray_value" translatable="false">Gray</string>
+    <string name="pref_theme_brown_value" translatable="false">Brown</string>
+
     <string name="pref_vibration_label">Touch Vibration</string>
     <string name="pref_vibration_key" translatable="false">vibration</string>
     <string name="pref_vibration_true">Turn on</string>
@@ -48,5 +69,7 @@
     <!-- ad ID-->
     <string name="admob_app_id">ca-app-pub-8190322516789280~8271453833</string>
     <string name="banner_unit_id">ca-app-pub-8190322516789280/5976462986</string>
+    <!--<string name="banner_unit_id">ca-app-pub-3940256099942544/6300978111</string>--> <!-- test id -->
     <string name="interstitial_unit_id">ca-app-pub-8190322516789280/5691971074</string>
+    <!--<string name="interstitial_unit_id">ca-app-pub-3940256099942544/1033173712</string>--> <!-- test id -->
 </resources>
